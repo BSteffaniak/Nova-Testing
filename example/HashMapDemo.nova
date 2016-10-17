@@ -1,0 +1,48 @@
+package "example"
+
+import "nova/datastruct/HashMap"
+import "nova/datastruct/Pair"
+
+public class HashMapDemo
+{
+	public static main(String args[])
+	{
+		HashMap<String, String> words = new HashMap()
+
+		words["test"] = "is test"
+		words["test2"] = "is test2"
+		words["test3hey"] = "is test3hey"
+		words["test4hey"] = "is test4hey"
+		words["test5"] = "is test5"
+		words["Whoah"] = "it works"
+		
+		words.forEach({ Console.writeLine("Contains: #_") })
+		
+		Console.writeLine("\nRemoving test2: #{words.remove("test2")}\n")
+		
+		words.forEach({ Console.writeLine("Contains: #_") })
+
+		Console.writeLine("\n" + words.filter({ ((String)_.key).contains("hey") }).map({ _.value }).join(", ") + "\n")
+		
+		words.forEach({ Console.writeLine("Contains: #_") })
+		
+		/*Int[] nums = [0, 1, 2, 3, 4, 5]
+		
+		words[nums.data[0]] = "Zero"
+		words[nums.data[1]] = "One"
+		words[nums.data[2]] = "Two"
+		words[nums.data[3]] = "Three"
+		words[nums.data[4]] = "Four"
+		words[nums.data[5]] = "Five"
+		words[nums.data[5]] = null
+		*/
+		/*for (Int i = 0; i <= 5; i++)
+		{
+			Int index = nums[Math.random(6)]
+			
+			Console.writeLine("Getting value at index " + index + " " + words.get(index))
+		}*/
+		
+		Console.waitForEnter()
+	}
+}

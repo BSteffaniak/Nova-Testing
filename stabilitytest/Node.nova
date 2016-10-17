@@ -1,0 +1,7 @@
+package "stabilitytest"
+
+class Node {
+	public Node child
+	
+	public Int value
+}
