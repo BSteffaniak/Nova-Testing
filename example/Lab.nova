@@ -163,6 +163,12 @@ class Lab
 		
 		Console.writeLine("Determinant of\n#matrix3\nis #matrix3.determinant()")
 		
+		Matrix.identity(4).data[0][0] = 5
+		
+		Console.writeLine("4x4 Identity:\n#Matrix.identity(4)")
+		Console.writeLine("12x12 Identity:\n#Matrix.identity(12)")
+		Console.writeLine("8x8 Identity:\n#Matrix.identity(8)")
+		
 		Lab l = new Lab()
 		
 		l.chainable().chainable()
