@@ -16,14 +16,11 @@ var novaConstructors = {
 	newBinaryTree: function() {},
 	newBounds0: function() {},
 	newBounds1: function() {},
-	newHashMap0: function() {},
-	newHashMap1: function() {},
+	newHashMap: function() {},
 	newHashSet0: function() {},
 	newHashSet1: function() {},
 	newPair: function() {},
 	newReversibleHashMap: function() {},
-	newVector: function() {},
-	newVector2D: function() {},
 	newArray0: function() {},
 	newArray1: function() {},
 	newArray2: function() {},
@@ -225,6 +222,7 @@ var novaConstructors = {
 	newFileStability: function() {},
 	newLambdaStability: function() {},
 	newNetworkStability: function() {},
+	newNode: function() {},
 	newPolymorphicSuperClass: function() {},
 	newPolymorphicSubClass: function() {},
 	newPolymorphismStability: function() {},
@@ -450,9 +448,9 @@ NovaString.prototype.indexOf = function (search, start, direction, defaultReturn
 };
 
 NovaString.prototype.lastIndexOf = function (search, start, defaultReturnValue) {
+	start = typeof start == 'undefined' ? this.count - 1 : start;
 	defaultReturnValue = typeof defaultReturnValue == 'undefined' ? -1 : defaultReturnValue;
 	return this.indexOf(search, start, -1, defaultReturnValue);
-	start = typeof start == 'undefined' ? this.count - 1 : start;
 	
 };
 
@@ -530,11 +528,7 @@ NovaString.prototype.getStringBetween = function (before, after, start) {
 
 NovaString.prototype.surroundWith = function (str, symmetrical) {
 	symmetrical = typeof symmetrical == 'undefined' ? false : symmetrical;
-	if (symmetrical) {
-		return str.concat(this.concat(new novaConstructors.newString2(str.chars.reverse())));
-	} else {
-		return str.concat(this.concat(str));
-	}
+	return (str).concat(new novaConstructors.newString1("").concat((this).concat(new novaConstructors.newString1("").concat((symmetrical ? new novaConstructors.newString2(str.chars.reverse()) : str).concat(new novaConstructors.newString1(""))))));
 	
 };
 
@@ -933,7 +927,7 @@ NovaNode.prototype.preorder0 = function () {
 NovaNode.prototype.preorder1 = function (array) {
 	var self = this;
 	
-	var contextArg28;
+	var contextArg26;
 	array.add0(this.data);
 	this.children.filter0(NovaNode.notNull).forEach0(function (_1, _2, _3) {
 			_1.preorder1(array);
@@ -953,8 +947,8 @@ NovaNode.prototype.inorder1 = function (array) {
 	var self = this;
 	
 	var half;
-	var contextArg29;
-	var contextArg30;
+	var contextArg27;
+	var contextArg28;
 	half = NovaMath.ceil(this.children.count / 2.0);
 	this.children.take(half).filter0(NovaNode.notNull).forEach0(function (_1, _2, _3) {
 			_1.inorder1(array);
@@ -979,7 +973,7 @@ NovaNode.prototype.postorder0 = function () {
 NovaNode.prototype.postorder1 = function (array) {
 	var self = this;
 	
-	var contextArg31;
+	var contextArg29;
 	this.children.filter0(NovaNode.notNull).forEach0(function (_1, _2, _3) {
 			_1.postorder1(array);
 			
@@ -1003,7 +997,7 @@ NovaNode.prototype.levelorder1 = function (array) {
 	queue = new novaConstructors.newQueue1(this.generated10());
 	while (!queue.accessor_empty()) {
 		var current;
-		var contextArg32;
+		var contextArg30;
 		current = queue.dequeue();
 		array.add0(current.data);
 		current.children.filter0(NovaNode.notNull).forEach0(function (_1, _2, _3) {
@@ -1450,7 +1444,7 @@ List.prototype.toArray = function () {
 List.prototype.contains0 = function (value) {
 	var self = this;
 	
-	var contextArg34;
+	var contextArg33;
 	return this.any0(function (_1) {
 			return _1 == value;
 			
@@ -1468,6 +1462,7 @@ List.prototype.forEach0 = function (func) {
 		value = nova_local_0.accessor_next();
 		func(value, i++, this);
 	}
+	return this;
 	
 };
 
@@ -1614,24 +1609,30 @@ List.prototype.zip = function (other, zipper) {
 	
 };
 
-List.prototype.join = function (delimiter) {
-	var str;
-	var passed;
+List.prototype.reduce = function (func, initialValue) {
+	var value;
+	var i;
 	var nova_local_0;
 	var element;
-	str = new novaConstructors.newString1("");
-	passed = false;
+	value = initialValue;
+	i = 0;
 	nova_local_0 = (this).accessor_iterator();
 	while (nova_local_0.accessor_hasNext()) {
 		element = nova_local_0.accessor_next();
-		if (passed) {
-			str = str.concat(delimiter);
-		} else {
-			passed = true;
-		}
-		str = str.concat(element.toString());
+		value = func(value, element, i++, this);
 	}
-	return str;
+	return value;
+	
+};
+
+List.prototype.join = function (delimiter) {
+	var self = this;
+	
+	var contextArg5;
+	return this.reduce(function (str, e, i, _4) {
+			return str.toString().concat((i > 0 ? delimiter : new novaConstructors.newString1("")).concat(e.toString()));
+			
+		}, new novaConstructors.newString1(""));
 	
 };
 
@@ -1671,21 +1672,19 @@ HashMap.prototype.firstWhere0 = List.prototype.firstWhere0;
 HashMap.prototype.firstNonNull = List.prototype.firstNonNull;
 HashMap.prototype.zip = List.prototype.zip;
 HashMap.prototype.reverse = List.prototype.reverse;
+HashMap.prototype.reduce = List.prototype.reduce;
 HashMap.prototype.join = List.prototype.join;
 
 HashMap.prototype.destroy = function () {
 	
 };
 
-HashMap.init = function () {
-	HashMap.init0.call(this, 5, 5);
-	
-};
-
-HashMap.init0 = function (bucketCount, bucketSize) {
+HashMap.init = function (bucketCount, bucketSize) {
 	var self = this;
 	
-	var contextArg22;
+	var contextArg20;
+	bucketCount = typeof bucketCount == 'undefined' ? 5 : bucketCount;
+	bucketSize = typeof bucketSize == 'undefined' ? 5 : bucketSize;
 	this.buckets = new novaConstructors.newArray1(bucketCount).map0(function (_1, _2, _3) {
 			return new novaConstructors.newArray1(bucketSize);
 			
@@ -1697,7 +1696,7 @@ HashMap.init0 = function (bucketCount, bucketSize) {
 HashMap.prototype.toArray = function () {
 	var self = this;
 	
-	var contextArg17;
+	var contextArg1;
 	return this.map0(function (_1, _2, _3) {
 			return _1;
 			
@@ -1839,7 +1838,7 @@ HashMap.prototype.join = function (delimiter) {
 HashMap.prototype.skip = function (num) {
 	var self = this;
 	
-	var contextArg18;
+	var contextArg2;
 	return this.map0(function (_1, _2, _3) {
 			return _1;
 			
@@ -1850,7 +1849,7 @@ HashMap.prototype.skip = function (num) {
 HashMap.prototype.take = function (num) {
 	var self = this;
 	
-	var contextArg19;
+	var contextArg3;
 	return this.map0(function (_1, _2, _3) {
 			return _1;
 			
@@ -1861,7 +1860,7 @@ HashMap.prototype.take = function (num) {
 HashMap.prototype.reverse = function () {
 	var self = this;
 	
-	var contextArg20;
+	var contextArg4;
 	return this.map0(function (_1, _2, _3) {
 			return _1;
 			
@@ -1909,6 +1908,7 @@ HashMap.prototype.forEach0 = function (func) {
 			}
 		}
 	}
+	return this;
 	
 };
 
@@ -1920,7 +1920,7 @@ HashMap.prototype.getBucket = function (key) {
 HashMap.prototype.getPair = function (key) {
 	var self = this;
 	
-	var contextArg21;
+	var contextArg19;
 	return this.getBucket(key).filter0(function (x, _2, _3) {
 			return x != 0 && x != null && x.key.equals(key);
 			
@@ -1964,9 +1964,7 @@ HashMap.prototype.get = function (key) {
 };
 
 HashMap.prototype.set = function (key, value) {
-	var bucket;
-	bucket = this.getBucket(key);
-	bucket.add0(new novaConstructors.newPair(key, value));
+	this.getBucket(key).add0(new novaConstructors.newPair(key, value));
 	return this;
 	return value;
 	
@@ -1976,21 +1974,12 @@ HashMap.prototype.super = function () {
 	
 };
 
-novaConstructors.newHashMap0 = function () {
+novaConstructors.newHashMap = function (bucketCount, bucketSize) {
 	NovaObject.call(this);
 	HashMap.call(this);
 	this.__proto__ = HashMap.prototype;
 	
-	HashMap.init.call(this);
-	
-};
-
-novaConstructors.newHashMap1 = function (bucketCount, bucketSize) {
-	NovaObject.call(this);
-	HashMap.call(this);
-	this.__proto__ = HashMap.prototype;
-	
-	HashMap.init0.call(this, bucketCount, bucketSize);
+	HashMap.init.call(this, bucketCount, bucketSize);
 	
 };
 
@@ -2021,6 +2010,7 @@ HashSet.prototype.firstWhere0 = List.prototype.firstWhere0;
 HashSet.prototype.firstNonNull = List.prototype.firstNonNull;
 HashSet.prototype.zip = List.prototype.zip;
 HashSet.prototype.reverse = List.prototype.reverse;
+HashSet.prototype.reduce = List.prototype.reduce;
 HashSet.prototype.join = List.prototype.join;
 
 HashSet.prototype.destroy = function () {
@@ -2035,7 +2025,7 @@ HashSet.init = function () {
 HashSet.init0 = function (bucketCount, bucketSize) {
 	var self = this;
 	
-	var contextArg27;
+	var contextArg25;
 	this.buckets = new novaConstructors.newArray1(bucketCount).map0(function (_1, _2, _3) {
 			return new novaConstructors.newArray1(bucketSize);
 			
@@ -2047,7 +2037,7 @@ HashSet.init0 = function (bucketCount, bucketSize) {
 HashSet.prototype.toArray = function () {
 	var self = this;
 	
-	var contextArg23;
+	var contextArg21;
 	return this.map0(function (_1, _2, _3) {
 			return _1;
 			
@@ -2179,7 +2169,7 @@ HashSet.prototype.join = function (delimiter) {
 HashSet.prototype.skip = function (num) {
 	var self = this;
 	
-	var contextArg24;
+	var contextArg22;
 	return this.map0(function (_1, _2, _3) {
 			return _1;
 			
@@ -2190,7 +2180,7 @@ HashSet.prototype.skip = function (num) {
 HashSet.prototype.take = function (num) {
 	var self = this;
 	
-	var contextArg25;
+	var contextArg23;
 	return this.map0(function (_1, _2, _3) {
 			return _1;
 			
@@ -2201,7 +2191,7 @@ HashSet.prototype.take = function (num) {
 HashSet.prototype.reverse = function () {
 	var self = this;
 	
-	var contextArg26;
+	var contextArg24;
 	return this.map0(function (_1, _2, _3) {
 			return _1;
 			
@@ -2249,6 +2239,7 @@ HashSet.prototype.forEach0 = function (func) {
 			}
 		}
 	}
+	return this;
 	
 };
 
@@ -2405,7 +2396,7 @@ ReversibleHashMap.prototype.destroy = function () {
 };
 
 ReversibleHashMap.init = function () {
-	this.rev = new novaConstructors.newHashMap0();
+	this.rev = new novaConstructors.newHashMap();
 	
 };
 
@@ -2433,72 +2424,6 @@ novaConstructors.newReversibleHashMap = function () {
 	this.__proto__ = ReversibleHashMap.prototype;
 	
 	ReversibleHashMap.init.call(this);
-	
-};
-
-var Vector = function () {
-	
-	
-};
-
-Vector.prototype = Object.create(NovaObject.prototype);
-Vector.prototype.constructor = Vector;
-
-Vector.prototype.equals_baseNovaObject = NovaObject.prototype.equals;
-Vector.prototype.toString_baseNovaObject = NovaObject.prototype.toString;
-
-
-Vector.prototype.destroy = function () {
-	
-};
-
-Vector.init = function () {
-	
-};
-
-Vector.prototype.super = function () {
-	
-};
-
-novaConstructors.newVector = function () {
-	NovaObject.call(this);
-	Vector.call(this);
-	this.__proto__ = Vector.prototype;
-	
-	Vector.init.call(this);
-	
-};
-
-var Vector2D = function () {
-	
-	
-};
-
-Vector2D.prototype = Object.create(NovaObject.prototype);
-Vector2D.prototype.constructor = Vector2D;
-
-Vector2D.prototype.equals_baseNovaObject = NovaObject.prototype.equals;
-Vector2D.prototype.toString_baseNovaObject = NovaObject.prototype.toString;
-
-
-Vector2D.prototype.destroy = function () {
-	
-};
-
-Vector2D.init = function () {
-	
-};
-
-Vector2D.prototype.super = function () {
-	
-};
-
-novaConstructors.newVector2D = function () {
-	NovaObject.call(this);
-	Vector2D.call(this);
-	this.__proto__ = Vector2D.prototype;
-	
-	Vector2D.init.call(this);
 	
 };
 
@@ -2530,6 +2455,7 @@ NovaArray.prototype.firstWhere0 = List.prototype.firstWhere0;
 NovaArray.prototype.firstNonNull = List.prototype.firstNonNull;
 NovaArray.prototype.zip = List.prototype.zip;
 NovaArray.prototype.reverse = List.prototype.reverse;
+NovaArray.prototype.reduce = List.prototype.reduce;
 NovaArray.prototype.join = List.prototype.join;
 
 NovaArray.prototype.destroy = function () {
@@ -2722,6 +2648,7 @@ NovaArray.prototype.forEach0 = function (func) {
 	for (; i < this.count; i++) {
 		func(this.data[i], i, this);
 	}
+	return this;
 	
 };
 
@@ -3039,19 +2966,30 @@ CharArray.prototype.sum = function (func) {
 	
 };
 
-CharArray.prototype.recurse = function (func) {
+CharArray.prototype.reduce = function (func, initialValue) {
 	var value;
 	var i;
 	var nova_local_0;
 	var element;
-	value = 0;
+	value = initialValue;
 	i = 0;
 	nova_local_0 = (this).accessor_iterator();
 	while (nova_local_0.accessor_hasNext()) {
 		element = nova_local_0.accessor_next();
-		value = func(element, i++, this, value);
+		value = func(value, element, i++, this);
 	}
 	return value;
+	
+};
+
+CharArray.prototype.contains0 = function (value) {
+	var self = this;
+	
+	var contextArg31;
+	return this.any0(function (_1) {
+			return _1 == value;
+			
+	});
 	
 };
 
@@ -3077,6 +3015,7 @@ CharArray.prototype.forEach0 = function (func) {
 	for (; i < this.count; i++) {
 		func(this.get_baseNovaArray(i), i, this);
 	}
+	return this;
 	
 };
 
@@ -3224,11 +3163,11 @@ CharArray.prototype.mutator_last = function () {
 CharArray.prototype.accessor_hashCodeLong = function () {
 	var self = this;
 	
-	var contextArg1;
-	return this.recurse(function (c, i, a, v) {
+	var contextArg6;
+	return this.reduce(function (v, c, i, a) {
 			return 31 * v + c.charCodeAt(0);
 			
-	});
+	}, 0);
 	
 };
 
@@ -3459,6 +3398,7 @@ DoubleArray.prototype.forEach0 = function (func) {
 	for (; i < this.count; i++) {
 		func(this.get(i), i, this);
 	}
+	return this;
 	
 };
 
@@ -3937,6 +3877,7 @@ IntArray.prototype.forEach0 = function (func) {
 	for (; i < this.count; i++) {
 		func(this.get(i), i, this);
 	}
+	return this;
 	
 };
 
@@ -4226,6 +4167,7 @@ IntRange.prototype.firstWhere0 = List.prototype.firstWhere0;
 IntRange.prototype.firstNonNull = List.prototype.firstNonNull;
 IntRange.prototype.zip = List.prototype.zip;
 IntRange.prototype.reverse = List.prototype.reverse;
+IntRange.prototype.reduce = List.prototype.reduce;
 IntRange.prototype.join = List.prototype.join;
 
 IntRange.prototype.destroy = function () {
@@ -4243,7 +4185,7 @@ IntRange.init0 = function (start, end) {
 	
 };
 
-IntRange.prototype.contains0 = function (value) {
+IntRange.prototype.contains = function (value) {
 	return value >= this.start && value < this.end;
 	
 };
@@ -4260,7 +4202,7 @@ IntRange.prototype.toArray = function () {
 	
 };
 
-IntRange.prototype.forEach0 = function (func) {
+IntRange.prototype.forEach = function (func) {
 	var i;
 	var nova_local_0;
 	var value;
@@ -4556,6 +4498,7 @@ LinkedList.prototype.firstWhere0 = List.prototype.firstWhere0;
 LinkedList.prototype.firstNonNull = List.prototype.firstNonNull;
 LinkedList.prototype.zip = List.prototype.zip;
 LinkedList.prototype.reverse = List.prototype.reverse;
+LinkedList.prototype.reduce = List.prototype.reduce;
 LinkedList.prototype.join = List.prototype.join;
 
 LinkedList.prototype.destroy = function () {
@@ -4613,7 +4556,7 @@ LinkedList.prototype.remove = function (data) {
 LinkedList.prototype.contains0 = function (value) {
 	var self = this;
 	
-	var contextArg33;
+	var contextArg32;
 	return this.any0(function (_1) {
 			return _1 == value;
 			
@@ -4663,6 +4606,7 @@ LinkedList.prototype.forEach0 = function (func) {
 		element = nova_local_0.accessor_next();
 		func(element, i++, this);
 	}
+	return this;
 	
 };
 
@@ -4996,7 +4940,7 @@ Queue.prototype.toString = function () {
 		if (i < this.accessor_size() - 1) {
 			s = s.concat(new novaConstructors.newString1(", "));
 		}
-		s = s.concat(this.data.get(i--).toString());
+		s = s.concat(this.data.toString());
 	}
 	return s;
 	
@@ -5116,7 +5060,8 @@ StringCharArray.prototype = Object.create(CharArray.prototype);
 StringCharArray.prototype.constructor = StringCharArray;
 
 StringCharArray.prototype.sum_baseCharArray = CharArray.prototype.sum;
-StringCharArray.prototype.recurse_baseCharArray = CharArray.prototype.recurse;
+StringCharArray.prototype.reduce_baseCharArray = CharArray.prototype.reduce;
+StringCharArray.prototype.contains0_baseCharArray = CharArray.prototype.contains0;
 StringCharArray.prototype.map0_baseCharArray = CharArray.prototype.map0;
 StringCharArray.prototype.forEach0_baseCharArray = CharArray.prototype.forEach0;
 StringCharArray.prototype.any0_baseCharArray = CharArray.prototype.any0;
@@ -5241,7 +5186,7 @@ ExceptionData.prototype.getDataByCode = function (code) {
 	var data;
 	data = this;
 	for (;;) {
-		var contextArg35;
+		var contextArg34;
 		if (data.codes.any0(function (_1) {
 					return _1 == code;
 					
@@ -6295,7 +6240,7 @@ Matrix.prototype.destroy = function () {
 Matrix.init0 = function (rows, cols) {
 	var self = this;
 	
-	var contextArg41;
+	var contextArg39;
 	if (rows <= 0 || cols <= 0) {
 		throw new novaConstructors.newInvalidArgumentException(new novaConstructors.newString1("Invalid matrix size ").concat(NovaInt.toString((rows)).concat(new novaConstructors.newString1("x").concat(NovaInt.toString((cols)).concat(new novaConstructors.newString1(". The number of rows and columns must both be positive."))))));
 	}
@@ -6318,8 +6263,8 @@ Matrix.prototype.add = function (other, allowUnequalDimensions) {
 	var result;
 	var row;
 	allowUnequalDimensions = typeof allowUnequalDimensions == 'undefined' ? false : allowUnequalDimensions;
-	if (!allowUnequalDimensions && (this.accessor_rows() != other.accessor_rows() || this.accessor_cols() != other.accessor_cols())) {
-		throw new novaConstructors.newInvalidArgumentException(new novaConstructors.newString1("The matrices' sizes must be equal to perform this operation"));
+	if (!allowUnequalDimensions) {
+		this.checkUnequalDimensions(other);
 	}
 	result = new novaConstructors.newMatrix0(this.accessor_rows(), this.accessor_cols());
 	row = 0;
@@ -6338,8 +6283,8 @@ Matrix.prototype.subtract = function (other, allowUnequalDimensions) {
 	var result;
 	var row;
 	allowUnequalDimensions = typeof allowUnequalDimensions == 'undefined' ? false : allowUnequalDimensions;
-	if (!allowUnequalDimensions && (this.accessor_rows() != other.accessor_rows() || this.accessor_cols() != other.accessor_cols())) {
-		throw new novaConstructors.newInvalidArgumentException(new novaConstructors.newString1("The matrices' sizes must be equal to perform this operation"));
+	if (!allowUnequalDimensions) {
+		this.checkUnequalDimensions(other);
 	}
 	result = new novaConstructors.newMatrix0(this.accessor_rows(), this.accessor_cols());
 	row = 0;
@@ -6354,17 +6299,24 @@ Matrix.prototype.subtract = function (other, allowUnequalDimensions) {
 	
 };
 
+Matrix.prototype.checkUnequalDimensions = function (other) {
+	if (this.accessor_rows() != other.accessor_rows() || this.accessor_cols() != other.accessor_cols()) {
+		throw new novaConstructors.newInvalidArgumentException(new novaConstructors.newString1("The matrices' sizes must be equal to perform this operation"));
+	}
+	
+};
+
 Matrix.prototype.multiply0 = function (other) {
 	var self = this;
 	
 	var result;
-	var contextArg37;
+	var contextArg36;
 	if (this.accessor_cols() != other.accessor_rows()) {
 		throw new novaConstructors.newInvalidArgumentException(new novaConstructors.newString1("Matrix with dimensions ").concat(NovaInt.toString((this.accessor_rows())).concat(new novaConstructors.newString1("x").concat(NovaInt.toString((this.accessor_cols())).concat(new novaConstructors.newString1(" cannot be multiplied with matrix with dimensions ").concat(NovaInt.toString((other.accessor_rows())).concat(new novaConstructors.newString1("x").concat(NovaInt.toString((other.accessor_cols())).concat(new novaConstructors.newString1(". ").concat(NovaInt.toString((this.accessor_cols())).concat(new novaConstructors.newString1(" != ").concat(NovaInt.toString((other.accessor_rows())).concat(new novaConstructors.newString1(""))))))))))))));
 	}
 	result = new novaConstructors.newMatrix0(this.accessor_rows(), other.accessor_cols());
 	result.data.forEach0(function (outRow, outR, _3) {
-			var contextArg36;
+			var contextArg35;
 			self.data.forEach0(function (row, r, _3) {
 					var c;
 					c = 0;
@@ -6383,7 +6335,7 @@ Matrix.prototype.transpose = function () {
 	var self = this;
 	
 	var result;
-	var contextArg38;
+	var contextArg37;
 	result = new novaConstructors.newMatrix0(this.accessor_cols(), this.accessor_rows());
 	this.data.forEach0(function (row, r, _3) {
 			var c;
@@ -6422,7 +6374,7 @@ Matrix.determinant = function (data) {
 		j1 = 0;
 		for (; j1 < order; j1++) {
 			var m;
-			var contextArg39;
+			var contextArg38;
 			var i;
 			m = new novaConstructors.newArray1(order - 1).map0(function (_1, _2, _3) {
 					return new novaConstructors.newDoubleArray2(order - 1);
@@ -6450,7 +6402,7 @@ Matrix.determinant = function (data) {
 Matrix.prototype.toString = function () {
 	var self = this;
 	
-	var contextArg40;
+	var contextArg7;
 	return this.data.map0(function (_1, _2, _3) {
 			return new novaConstructors.newString1("[ ").concat((_1.join(new novaConstructors.newString1("\t"))).concat(new novaConstructors.newString1(" ]")));
 			
@@ -6587,7 +6539,7 @@ NumericOperation.init = function (operation) {
 	type2 = NumericOperation.getType0(op);
 	if (type2 != this.OPERATOR) {
 		if (type1 == this.OPERATOR) {
-			throw new novaConstructors.newInvalidNumericStatementException(new novaConstructors.newString1("Missing left hand operand in operation '").concat(operation.concat(new novaConstructors.newString1("'"))));
+			throw new novaConstructors.newInvalidNumericStatementException(new novaConstructors.newString1("Missing left hand operand in operation '").concat((operation).concat(new novaConstructors.newString1("'"))));
 		}
 		rh = op;
 		op = new novaConstructors.newString1("*");
@@ -6608,9 +6560,9 @@ NumericOperation.init0 = function (left, operator, right) {
 	leftOperator = this.decodeOperand(left);
 	rightOperator = this.decodeOperand(right);
 	if (left == null) {
-		throw new novaConstructors.newException1(new novaConstructors.newString1("Left operand '").concat(left.concat(new novaConstructors.newString1("' is invalid"))));
+		throw new novaConstructors.newException1(new novaConstructors.newString1("Left operand '").concat((left).concat(new novaConstructors.newString1("' is invalid"))));
 	} else if (right == null) {
-		throw new novaConstructors.newException1(new novaConstructors.newString1("Right operand '").concat(right.concat(new novaConstructors.newString1("' is invalid"))));
+		throw new novaConstructors.newException1(new novaConstructors.newString1("Right operand '").concat((right).concat(new novaConstructors.newString1("' is invalid"))));
 	}
 	NumericOperation.init1.call(this, this.leftOperand, operator, this.rightOperand);
 	
@@ -6632,7 +6584,7 @@ NumericOperation.getType0 = function (s) {
 	if (s.count <= 0) {
 		return 0;
 	}
-	return NumericOperation.getType1(s.chars.get(0));
+	return NumericOperation.getType1(s.chars.accessor_first());
 	
 };
 
@@ -6643,7 +6595,7 @@ NumericOperation.getType1 = function (c) {
 	if (NumericOperation.isOperator(c)) {
 		return this.OPERATOR;
 	}
-	if (NumericOperation.contains(this.INVALID_OPERATORS, c)) {
+	if (this.INVALID_OPERATORS.contains0(c)) {
 		return 0;
 	}
 	return this.VARIABLE;
@@ -6738,34 +6690,22 @@ NumericOperation.getOperatorRank = function (operator) {
 	};
 	
 	NumericOperation.isNumeric = function (c) {
-		return NumericOperation.contains(this.NUMERIC_CHARS, c);
+		return this.NUMERIC_CHARS.contains0(c);
 		
 	};
 	
 	NumericOperation.isOperator = function (c) {
-		return NumericOperation.contains(this.VALID_OPERATORS, c);
+		return this.VALID_OPERATORS.contains0(c);
 		
 	};
 	
 	NumericOperation.isWhitespace = function (c) {
-		return NumericOperation.contains(this.WHITESPACE_CHARS, c);
-		
-	};
-	
-	NumericOperation.contains = function (array, c) {
-		var i;
-		i = 0;
-		for (; i < array.count; i++) {
-			if (c == array.get(i)) {
-				return true;
-			}
-		}
-		return false;
+		return this.WHITESPACE_CHARS.contains0(c);
 		
 	};
 	
 	NumericOperation.prototype.toString = function () {
-		return this.leftOperand.toString().concat(this.operator.concat(this.rightOperand.toString()));
+		return (this.leftOperand).toString().concat(new novaConstructors.newString1("").concat((this.operator).concat(new novaConstructors.newString1("").concat((this.rightOperand).toString().concat(new novaConstructors.newString1(""))))));
 		
 	};
 	
@@ -7031,24 +6971,12 @@ NumericOperation.getOperatorRank = function (operator) {
 	};
 	
 	Polynomial.isSymbol = function (c) {
-		return Polynomial.contains(this.SYMBOLS_CHARS, c);
+		return this.SYMBOLS_CHARS.contains0(c);
 		
 	};
 	
 	Polynomial.isWhitespace = function (c) {
-		return Polynomial.contains(this.WHITESPACE_CHARS, c);
-		
-	};
-	
-	Polynomial.contains = function (array, c) {
-		var i;
-		i = 0;
-		for (; i < array.count; i++) {
-			if (c == array.data[i]) {
-				return true;
-			}
-		}
-		return false;
+		return this.WHITESPACE_CHARS.contains0(c);
 		
 	};
 	
@@ -7210,8 +7138,7 @@ NumericOperation.getOperatorRank = function (operator) {
 	Vector.prototype.dotProduct = function (other) {
 		var self = this;
 		
-		var contextArg2;
-		var contextArg3;
+		var contextArg8;
 		return this.data.sum(function (x, i, _3) {
 				return x * other.data.get(i);
 				
@@ -7227,8 +7154,8 @@ NumericOperation.getOperatorRank = function (operator) {
 	Vector.prototype.scale = function (scalar) {
 		var self = this;
 		
-		var contextArg4;
-		this.data.forEach0(function (n, i, d) {
+		var contextArg9;
+		return this.data.forEach0(function (n, i, d) {
 				d.set(i, n * scalar);
 				
 		});
@@ -7238,8 +7165,8 @@ NumericOperation.getOperatorRank = function (operator) {
 	Vector.prototype.normalize = function () {
 		var self = this;
 		
-		var contextArg5;
-		this.data.forEach0(function (n, i, d) {
+		var contextArg10;
+		return this.data.forEach0(function (n, i, d) {
 				var nova_zero_check1;
 				var nova_zero_check2;
 				nova_zero_check1 = self.accessor_magnitude();
@@ -7264,7 +7191,7 @@ NumericOperation.getOperatorRank = function (operator) {
 	Vector.prototype.accessor_magnitude = function () {
 		var self = this;
 		
-		var contextArg6;
+		var contextArg11;
 		return NovaMath.sqrt(this.data.sum(function (n, _2, _3) {
 					return n * n;
 					
@@ -8506,7 +8433,7 @@ Bool.init = function (value) {
 	
 };
 
-Bool.prototype.compareTo0 = function (other) {
+Bool.prototype.compareTo = function (other) {
 	return this.value == other;
 	
 };
@@ -8871,7 +8798,7 @@ NovaDouble.parseDouble = function (str) {
 	
 };
 
-NovaDouble.prototype.compareTo0 = function (other) {
+NovaDouble.prototype.compareTo = function (other) {
 	return this.value - other;
 	
 };
@@ -8921,7 +8848,7 @@ NovaFloat.init = function (value) {
 	
 };
 
-NovaFloat.prototype.compareTo0 = function (other) {
+NovaFloat.prototype.compareTo = function (other) {
 	return this.value - other;
 	
 };
@@ -9077,7 +9004,7 @@ NovaLong.toCharArray = function (value) {
 	
 };
 
-NovaLong.prototype.compareTo0 = function (other) {
+NovaLong.prototype.compareTo = function (other) {
 	return this.value - other;
 	
 };
@@ -10825,11 +10752,11 @@ Node.prototype.destroy = function () {
 };
 
 Node.prototype.getAdjacentNode = function (offset) {
-	if (this.accessor_parent() != null) {
+	if (this.parent != null) {
 		var index;
 		index = this.accessor_index() + offset;
-		if (index >= 0 && index < this.accessor_parent().children.count) {
-			return this.accessor_parent().children.get(index);
+		if (index >= 0 && index < this.parent.children.count) {
+			return this.parent.children.get(index);
 		}
 	}
 	return null;
@@ -10844,7 +10771,8 @@ Node.init = function (parent, location) {
 };
 
 Node.prototype.addAnnotation = function (annotation) {
-	this.annotations = this.annotations != null ? this.annotations : new novaConstructors.newArray0();
+	var nova_local_0;
+	this.annotations = (nova_local_0 = this.annotations) != null ? nova_local_0 : new novaConstructors.newArray0();
 	this.annotations.add0(annotation);
 	annotation.mutator_parent(this);
 	
@@ -10855,16 +10783,19 @@ Node.prototype.detach0 = function () {
 	if (this.accessor_isDecoding()) {
 		return;
 	}
-	from = this.accessor_parent();
-	if (this.accessor_parent().children.count > 0 && !this.accessor_parent().containsChild(this) && this.accessor_parent().accessor_containsScope()) {
-		from = this.accessor_parent().accessor_scope();
+	from = this.parent;
+	if (this.parent.children.count > 0 && !this.parent.containsChild(this) && this.parent.accessor_containsScope()) {
+		from = this.parent.accessor_scope();
 	}
 	this.detach1(from);
 	
 };
 
 Node.prototype.detach1 = function (fromNode) {
-	fromNode.children.remove1(this);
+	var nova_local_0;
+	if ((nova_local_0 = fromNode) != null) {
+		nova_local_0.children.remove1(this);
+	}
 	this.mutator_parent(null);
 	this.onRemoved(fromNode);
 	
@@ -10873,13 +10804,12 @@ Node.prototype.detach1 = function (fromNode) {
 Node.prototype.containsChild = function (child, recursive) {
 	var self = this;
 	
-	var contextArg7;
-	var contextArg8;
+	var contextArg12;
+	recursive = typeof recursive == 'undefined' ? false : recursive;
 	return this.children.contains0(child) || (recursive && this.children.any0(function (_1) {
 				return _1.containsChild(child, true);
 				
 	}));
-	recursive = typeof recursive == 'undefined' ? false : recursive;
 	
 };
 
@@ -10910,13 +10840,13 @@ Node.prototype.addChild = function (node, index, toNode, detach) {
 Node.prototype.inheritChildren = function (oldParent, clone) {
 	var self = this;
 	
-	var contextArg9;
-	oldParent.children.forEach0(function (child, _2, _3) {
+	var contextArg13;
+	clone = typeof clone == 'undefined' ? false : clone;
+	return oldParent.children.forEach0(function (child, _2, _3) {
 			self.addChild(clone ? child.clone(this, child.location, true) : child);
 			self.addChild(clone ? child.clone(this, child.location, true) : child);
 			
 	});
-	clone = typeof clone == 'undefined' ? false : clone;
 	
 };
 
@@ -10937,7 +10867,7 @@ Node.prototype.removeChild1 = function (index) {
 };
 
 Node.prototype.replaceWith = function (replacement) {
-	this.accessor_parent().replace(this, replacement);
+	this.parent.replace(this, replacement);
 	
 };
 
@@ -10959,8 +10889,8 @@ Node.prototype.replace = function (old, replacement, detach) {
 Node.prototype.slaughterChildren = function () {
 	var self = this;
 	
-	var contextArg10;
-	this.children.forEach0(function (head, _2, _3) {
+	var contextArg14;
+	return this.children.forEach0(function (head, _2, _3) {
 			head.detach0();
 			
 	});
@@ -10970,8 +10900,7 @@ Node.prototype.slaughterChildren = function () {
 Node.prototype.onAfterDecoded = function () {
 	var self = this;
 	
-	var contextArg11;
-	var contextArg12;
+	var contextArg15;
 	return this.children.all0(function (_1) {
 			return _1.onAfterDecoded();
 			
@@ -10982,8 +10911,8 @@ Node.prototype.onAfterDecoded = function () {
 Node.prototype.onStackPopped = function () {
 	var self = this;
 	
-	var contextArg13;
-	this.children.forEach0(function (_1, _2, _3) {
+	var contextArg16;
+	return this.children.forEach0(function (_1, _2, _3) {
 			_1.onStackPopped();
 			
 	});
@@ -10993,8 +10922,7 @@ Node.prototype.onStackPopped = function () {
 Node.prototype.onNextStatementDecoded = function (next) {
 	var self = this;
 	
-	var contextArg14;
-	var contextArg15;
+	var contextArg17;
 	return this.children.all0(function (_1) {
 			return _1.onNextStatementDecoded(next);
 			
@@ -11017,25 +10945,23 @@ Node.prototype.onReplaced = function (parent, replacement) {
 Node.prototype.validate = function (phase) {
 	var self = this;
 	
-	var result;
-	if (this.annotations != null) {
-		var contextArg42;
-		result = this.annotations.reverse().firstNonNull(function (_1) {
-				var result;
-				result = _1.validate(phase);
-				return result.accessor_skipValidation() ? result : null;
-				
-		});
-	}
-	return result != null ? result : new novaConstructors.newValidationResult(this);
+	var contextArg40;
+	var nova_local_0;
+	var nova_local_1;
+	return (nova_local_0 = (nova_local_1 = this.annotations) != null ? (nova_local_1.reverse().firstNonNull(function (_1) {
+					var result;
+					result = _1.validate(phase);
+					return result.accessor_skipValidation() ? result : null;
+					
+	})) : null) != null ? nova_local_0 : new novaConstructors.newValidationResult(this);
 	
 };
 
 Node.prototype.rollback = function () {
 	var self = this;
 	
-	var contextArg16;
-	this.children.forEach0(function (_1, _2, _3) {
+	var contextArg18;
+	return this.children.forEach0(function (_1, _2, _3) {
 			_1.rollback();
 			
 	});
@@ -11075,7 +11001,10 @@ Node.prototype.mutator_locationInfo = function () {
 };
 
 Node.prototype.mutator_index = function (value) {
-	this.accessor_parent().children.swap(this.accessor_index(), value);
+	var nova_local_0;
+	if ((nova_local_0 = this.parent) != null) {
+		nova_local_0.children.swap(this.accessor_index(), value);
+	}
 	return value;
 	
 };
@@ -11086,13 +11015,8 @@ Node.prototype.mutator_scope = function (value) {
 	
 };
 
-Node.prototype.accessor_parent = function () {
-	return this.parent;
-	
-};
-
 Node.prototype.accessor_isDecoding = function () {
-	return this.accessor_parent() == null || !this.accessor_parent().containsChild(this);
+	return this.parent == null || !this.parent.containsChild(this);
 	
 };
 
@@ -11101,7 +11025,7 @@ Node.prototype.mutator_isDecoding = function () {
 };
 
 Node.prototype.accessor_isValid = function () {
-	return this.accessor_parent() != null;
+	return this.parent != null;
 	
 };
 
@@ -11137,7 +11061,8 @@ Node.prototype.mutator_isWithinStaticContext = function () {
 };
 
 Node.prototype.accessor_isWithinExternalContext = function () {
-	return this.accessor_parent() != null && !this.accessor_parent().isWithinExternalContext;
+	var nova_local_0;
+	return (nova_local_0 = this.parent) != null ? (nova_local_0.isWithinExternalContext) : false;
 	
 };
 
@@ -11146,7 +11071,8 @@ Node.prototype.mutator_isWithinExternalContext = function () {
 };
 
 Node.prototype.accessor_program = function () {
-	return this.accessor_parent().program;
+	var nova_local_0;
+	return (nova_local_0 = this.parent) != null ? (nova_local_0.program) : null;
 	
 };
 
@@ -11155,7 +11081,8 @@ Node.prototype.mutator_program = function () {
 };
 
 Node.prototype.accessor_parentFile = function () {
-	return this.accessor_parent().parentFile;
+	var nova_local_0;
+	return (nova_local_0 = this.parent) != null ? (nova_local_0.parentFile) : null;
 	
 };
 
@@ -11173,7 +11100,8 @@ Node.prototype.mutator_isWithinFile = function () {
 };
 
 Node.prototype.accessor_parentFunction = function () {
-	return this.accessor_parent().parentFunction;
+	var nova_local_0;
+	return (nova_local_0 = this.parent) != null ? (nova_local_0.parentFunction) : null;
 	
 };
 
@@ -11191,7 +11119,8 @@ Node.prototype.mutator_isWithinFunction = function () {
 };
 
 Node.prototype.accessor_parentTry = function () {
-	return this.accessor_parent().parentTry;
+	var nova_local_0;
+	return (nova_local_0 = this.parent) != null ? (nova_local_0.parentTry) : null;
 	
 };
 
@@ -11209,7 +11138,8 @@ Node.prototype.mutator_isWithinTry = function () {
 };
 
 Node.prototype.accessor_parentClass = function () {
-	return this.accessor_parent().parentClass;
+	var nova_local_0;
+	return (nova_local_0 = this.parent) != null ? (nova_local_0.parentClass) : null;
 	
 };
 
@@ -11245,7 +11175,8 @@ Node.prototype.mutator_previous = function () {
 };
 
 Node.prototype.accessor_index = function () {
-	return this.accessor_parent().children.indexOf(this);
+	var nova_local_0;
+	return (nova_local_0 = this.parent) != null ? (nova_local_0.children.indexOf(this)) : 0;
 	
 };
 
@@ -11336,11 +11267,12 @@ Import.prototype.tryParse = function (input, parent, location, node) {
 	location = typeof location == 'undefined' ? Location.INVALID : location;
 	node = typeof node == 'undefined' ? null : node;
 	if (true) {
+		var nova_local_0;
 		var quoteStart;
 		var quoteEnd;
 		var importLocation;
 		var alias;
-		node = node != null ? node : new novaConstructors.newImport(input, parent, location);
+		node = (nova_local_0 = node) != null ? nova_local_0 : new novaConstructors.newImport(input, parent, location);
 		quoteStart = 0;
 		if (quoteStart < 0 || input.chars.get(quoteStart) != '"') {
 			return null;
@@ -12704,19 +12636,19 @@ ArrayDemo.main = function (args) {
 		list.add0(new novaConstructors.newSpider());
 		i = 0;
 		for (; i < list.count; i++) {
-			NovaConsole.writeLine1(new novaConstructors.newString1("Contains: ").concat(list.get(i).toString()));
+			NovaConsole.writeLine1(new novaConstructors.newString1("Contains: ").concat(list.toString()));
 		}
 		animal = list.remove0(2);
 		NovaConsole.writeLine1(new novaConstructors.newString1("--------- Removed: ").concat(animal.toString().concat(new novaConstructors.newString1(" ----------"))));
 		i2 = 0;
 		for (; i2 < list.count; i2++) {
-			NovaConsole.writeLine1(new novaConstructors.newString1("Contains: ").concat(list.get(i2).toString()));
+			NovaConsole.writeLine1(new novaConstructors.newString1("Contains: ").concat(list.toString()));
 		}
 		list.add1(1, new novaConstructors.newSpider());
 		NovaConsole.writeLine1(new novaConstructors.newString1("--------- Added a new spider at index 1 ----------"));
 		i3 = 0;
 		for (; i3 < list.count; i3++) {
-			NovaConsole.writeLine1(new novaConstructors.newString1("Contains: ").concat(list.get(i3).toString()));
+			NovaConsole.writeLine1(new novaConstructors.newString1("Contains: ").concat(list.toString()));
 		}
 		NovaConsole.write0(new novaConstructors.newString1("Run again? (Y/N)"));
 		c = NovaConsole.readChar();
@@ -13138,12 +13070,12 @@ HashMapDemo.main = function (args) {
 	var self = this;
 	
 	var words;
+	var contextArg41;
+	var contextArg42;
 	var contextArg43;
 	var contextArg44;
 	var contextArg45;
-	var contextArg46;
-	var contextArg47;
-	words = new novaConstructors.newHashMap0();
+	words = new novaConstructors.newHashMap();
 	words.set(new novaConstructors.newString1("test"), new novaConstructors.newString1("is test"));
 	words.set(new novaConstructors.newString1("test2"), new novaConstructors.newString1("is test2"));
 	words.set(new novaConstructors.newString1("test3hey"), new novaConstructors.newString1("is test3hey"));
@@ -13215,30 +13147,12 @@ HashSetDemo.main = function (args) {
 	var addTime;
 	var nova_zero_check4;
 	var nova_zero_check5;
+	var getTime;
 	var nova_zero_check6;
 	var nova_zero_check7;
+	var newStringTime;
 	var nova_zero_check8;
 	var nova_zero_check9;
-	var nova_zero_check10;
-	var nova_zero_check11;
-	var getTime;
-	var nova_zero_check12;
-	var nova_zero_check13;
-	var nova_zero_check14;
-	var nova_zero_check15;
-	var nova_zero_check16;
-	var nova_zero_check17;
-	var nova_zero_check18;
-	var nova_zero_check19;
-	var newStringTime;
-	var nova_zero_check20;
-	var nova_zero_check21;
-	var nova_zero_check22;
-	var nova_zero_check23;
-	var nova_zero_check24;
-	var nova_zero_check25;
-	var nova_zero_check26;
-	var nova_zero_check27;
 	var i;
 	var i;
 	var i;
@@ -13271,7 +13185,14 @@ HashSetDemo.main = function (args) {
 	if (nova_zero_check5 == 0) {
 		throw new novaConstructors.newDivideByZeroException();
 	}
-	nova_zero_check6 = nova_zero_check5;
+	NovaConsole.writeLine1(new novaConstructors.newString1("Took ").concat(NovaLong.toString((addTime)).concat(new novaConstructors.newString1("ms to call add ").concat(NovaInt.toString((count)).concat(new novaConstructors.newString1(" times ").concat(NovaLong.toString(((addTime - stringTime) * (~~100 / nova_zero_check4))).concat(new novaConstructors.newString1("% overhead"))))))));
+	timer.start();
+	i = 0;
+	for (; i < count; i++) {
+		set.get(new novaConstructors.newString1("my string").concat(NovaInt.toString((i)).concat(new novaConstructors.newString1(""))));
+	}
+	getTime = timer.stop().accessor_duration();
+	nova_zero_check6 = stringTime;
 	if (nova_zero_check6 == 0) {
 		throw new novaConstructors.newDivideByZeroException();
 	}
@@ -13279,7 +13200,14 @@ HashSetDemo.main = function (args) {
 	if (nova_zero_check7 == 0) {
 		throw new novaConstructors.newDivideByZeroException();
 	}
-	nova_zero_check8 = nova_zero_check7;
+	NovaConsole.writeLine1(new novaConstructors.newString1("Took ").concat(NovaLong.toString((getTime)).concat(new novaConstructors.newString1("ms to call get ").concat(NovaInt.toString((count)).concat(new novaConstructors.newString1(" times ").concat(NovaLong.toString(((getTime - stringTime) * (~~100 / nova_zero_check6))).concat(new novaConstructors.newString1("% overhead"))))))));
+	timer.start();
+	i = 0;
+	for (; i < count; i++) {
+		new novaConstructors.newString1("my string").concat(NovaInt.toString((i)).concat(new novaConstructors.newString1("")));
+	}
+	newStringTime = timer.stop().accessor_duration();
+	nova_zero_check8 = stringTime;
 	if (nova_zero_check8 == 0) {
 		throw new novaConstructors.newDivideByZeroException();
 	}
@@ -13287,93 +13215,7 @@ HashSetDemo.main = function (args) {
 	if (nova_zero_check9 == 0) {
 		throw new novaConstructors.newDivideByZeroException();
 	}
-	nova_zero_check10 = nova_zero_check9;
-	if (nova_zero_check10 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check11 = nova_zero_check10;
-	if (nova_zero_check11 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	NovaConsole.writeLine1(new novaConstructors.newString1("Took ").concat(NovaLong.toString((addTime)).concat(new novaConstructors.newString1("ms to call add ").concat(NovaInt.toString((count)).concat(new novaConstructors.newString1(" times ").concat(NovaLong.toString(((addTime - stringTime) * (~~100 / nova_zero_check11))).concat(new novaConstructors.newString1("% overhead"))))))));
-	timer.start();
-	i = 0;
-	for (; i < count; i++) {
-		set.get(new novaConstructors.newString1("my string").concat(NovaInt.toString((i)).concat(new novaConstructors.newString1(""))));
-	}
-	getTime = timer.stop().accessor_duration();
-	nova_zero_check12 = stringTime;
-	if (nova_zero_check12 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check13 = nova_zero_check12;
-	if (nova_zero_check13 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check14 = nova_zero_check13;
-	if (nova_zero_check14 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check15 = nova_zero_check14;
-	if (nova_zero_check15 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check16 = nova_zero_check15;
-	if (nova_zero_check16 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check17 = nova_zero_check16;
-	if (nova_zero_check17 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check18 = nova_zero_check17;
-	if (nova_zero_check18 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check19 = nova_zero_check18;
-	if (nova_zero_check19 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	NovaConsole.writeLine1(new novaConstructors.newString1("Took ").concat(NovaLong.toString((getTime)).concat(new novaConstructors.newString1("ms to call get ").concat(NovaInt.toString((count)).concat(new novaConstructors.newString1(" times ").concat(NovaLong.toString(((getTime - stringTime) * (~~100 / nova_zero_check19))).concat(new novaConstructors.newString1("% overhead"))))))));
-	timer.start();
-	i = 0;
-	for (; i < count; i++) {
-		new novaConstructors.newString1("my string").concat(NovaInt.toString((i)).concat(new novaConstructors.newString1("")));
-	}
-	newStringTime = timer.stop().accessor_duration();
-	nova_zero_check20 = stringTime;
-	if (nova_zero_check20 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check21 = nova_zero_check20;
-	if (nova_zero_check21 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check22 = nova_zero_check21;
-	if (nova_zero_check22 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check23 = nova_zero_check22;
-	if (nova_zero_check23 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check24 = nova_zero_check23;
-	if (nova_zero_check24 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check25 = nova_zero_check24;
-	if (nova_zero_check25 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check26 = nova_zero_check25;
-	if (nova_zero_check26 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	nova_zero_check27 = nova_zero_check26;
-	if (nova_zero_check27 == 0) {
-		throw new novaConstructors.newDivideByZeroException();
-	}
-	NovaConsole.writeLine1(new novaConstructors.newString1("Took ").concat(NovaLong.toString((newStringTime)).concat(new novaConstructors.newString1("ms to create ").concat(NovaInt.toString((count)).concat(new novaConstructors.newString1(" strings ").concat(NovaLong.toString(((newStringTime - stringTime) * (~~100 / nova_zero_check27))).concat(new novaConstructors.newString1("% overhead"))))))));
+	NovaConsole.writeLine1(new novaConstructors.newString1("Took ").concat(NovaLong.toString((newStringTime)).concat(new novaConstructors.newString1("ms to create ").concat(NovaInt.toString((count)).concat(new novaConstructors.newString1(" strings ").concat(NovaLong.toString(((newStringTime - stringTime) * (~~100 / nova_zero_check8))).concat(new novaConstructors.newString1("% overhead"))))))));
 	NovaConsole.waitForEnter();
 	
 };
@@ -13473,16 +13315,18 @@ Lab.main = function (args) {
 	var num2;
 	var str;
 	var str2;
+	var nova_local_0;
+	var nova_local_1;
 	var list;
 	var list2;
-	var contextArg48;
+	var contextArg46;
 	var multi;
+	var contextArg47;
+	var contextArg48;
 	var contextArg49;
 	var contextArg50;
 	var contextArg51;
 	var contextArg52;
-	var contextArg53;
-	var contextArg54;
 	var linked;
 	var x;
 	var sq;
@@ -13505,8 +13349,8 @@ Lab.main = function (args) {
 	str2 = null;
 	NovaConsole.writeLine1(new novaConstructors.newString1("Normal: ").concat((new novaConstructors.newString1("hello").surroundWith(new novaConstructors.newString1("hey "))).concat(new novaConstructors.newString1(""))));
 	NovaConsole.writeLine1(new novaConstructors.newString1("Symmetrical: ").concat((new novaConstructors.newString1("hello").surroundWith(new novaConstructors.newString1("hey "), true)).concat(new novaConstructors.newString1(""))));
-	NovaConsole.writeLine1(new novaConstructors.newString1("Elvis not null: ").concat((str != null ? str : new novaConstructors.newString1("wtf")).concat(new novaConstructors.newString1(""))));
-	NovaConsole.writeLine1(new novaConstructors.newString1("Elvis null: ").concat((str2 != null ? str2 : new novaConstructors.newString1("this is null")).toString().concat(new novaConstructors.newString1(""))));
+	NovaConsole.writeLine1(new novaConstructors.newString1("Elvis not null: ").concat(((nova_local_0 = str) != null ? nova_local_0 : new novaConstructors.newString1("wtf")).concat(new novaConstructors.newString1(""))));
+	NovaConsole.writeLine1(new novaConstructors.newString1("Elvis null: ").concat(((nova_local_1 = str2) != null ? nova_local_1 : new novaConstructors.newString1("this is null")).toString().concat(new novaConstructors.newString1(""))));
 	new novaConstructors.newString1("test").substring(0);
 	NovaConsole.writeLine1((new novaConstructors.newIntRange1(2, 8)).toString().concat(new novaConstructors.newString1(": ").concat(((new novaConstructors.newIntRange1(2, 8)).join(new novaConstructors.newString1(", "))).concat(new novaConstructors.newString1("")))));
 	list = Lab.generated13();
@@ -13615,7 +13459,7 @@ Lab.takesString = function (s) {
 Lab.doSomething = function (list) {
 	var self = this;
 	
-	var contextArg55;
+	var contextArg53;
 	list.map0(function (_1, _2, _3) {
 			return (_1).toString().concat(new novaConstructors.newString1("!!!"));
 			
@@ -14096,12 +13940,12 @@ SvgFractal.main = function (args) {
 	i = 0;
 	for (; i < numVerts; i++) {
 		var rad;
-		var nova_zero_check28;
-		nova_zero_check28 = (numVerts * 1.0);
-		if (nova_zero_check28 == 0) {
+		var nova_zero_check10;
+		nova_zero_check10 = (numVerts * 1.0);
+		if (nova_zero_check10 == 0) {
 			throw new novaConstructors.newDivideByZeroException();
 		}
-		rad = pi2 * (i / nova_zero_check28) + offset;
+		rad = pi2 * (i / nova_zero_check10) + offset;
 		points.set(i * 2 + 0, radius * NovaMath.cos(rad) + radius + 10);
 		points.set(i * 2 + 1, radius * NovaMath.sin(rad) + radius + 10);
 	}
@@ -14524,7 +14368,7 @@ DatabaseDemo.main = function (args) {
 		NovaConsole.write0(new novaConstructors.newString1("Found (").concat(NovaInt.toString((row)).concat(new novaConstructors.newString1("): ").concat((result.rows.get(row).get(0)).toString().concat(new novaConstructors.newString1(""))))));
 		col = 1;
 		for (; col < result.numCols; col++) {
-			NovaConsole.write0(new novaConstructors.newString1(", ").concat(result.rows.get(row).get(col).toString()));
+			NovaConsole.write0(new novaConstructors.newString1(", ").concat(result.toString()));
 		}
 		NovaConsole.writeLine1(new novaConstructors.newString1(""));
 	}
@@ -15197,13 +15041,13 @@ ExceptionStability.prototype.testException = function () {
 		try {
 			var den;
 			var i;
-			var nova_zero_check29;
+			var nova_zero_check11;
 			den = 0;
-			nova_zero_check29 = den;
-			if (nova_zero_check29 == 0) {
+			nova_zero_check11 = den;
+			if (nova_zero_check11 == 0) {
 				throw new novaConstructors.newDivideByZeroException();
 			}
-			i = (~~43 / nova_zero_check29);
+			i = (~~43 / nova_zero_check11);
 		} catch (e) {
 			worked = true;
 			NovaConsole.writeLine1(new novaConstructors.newString1("OK"));
@@ -15366,12 +15210,12 @@ LambdaStability.prototype.test = function () {
 	var list;
 	var list2;
 	var mappedOutput;
-	var contextArg56;
-	var contextArg57;
+	var contextArg54;
+	var contextArg55;
 	var mappedExpected;
 	var linked;
 	var repeated;
-	var contextArg58;
+	var contextArg56;
 	var nova_local_0;
 	var item;
 	NovaConsole.write0(new novaConstructors.newString1("Checking lambdas... "));
@@ -15531,6 +15375,41 @@ novaConstructors.newNetworkStability = function (program) {
 	
 };
 
+var Node = function () {
+	this.child = nova_null;
+	this.value = 0;
+	
+	
+};
+
+Node.prototype = Object.create(NovaObject.prototype);
+Node.prototype.constructor = Node;
+
+Node.prototype.equals_baseNovaObject = NovaObject.prototype.equals;
+Node.prototype.toString_baseNovaObject = NovaObject.prototype.toString;
+
+
+Node.prototype.destroy = function () {
+	
+};
+
+Node.init = function () {
+	
+};
+
+Node.prototype.super = function () {
+	
+};
+
+novaConstructors.newNode = function () {
+	NovaObject.call(this);
+	Node.call(this);
+	this.__proto__ = Node.prototype;
+	
+	Node.init.call(this);
+	
+};
+
 var PolymorphicSuperClass = function () {
 	this.child = nova_null;
 	
@@ -15686,7 +15565,7 @@ PolymorphismStability.prototype.testClosure = function () {
 		this.program.fail1(new novaConstructors.newString1("Did not call sub class method as closure"));
 	}
 	obj.giveBirth();
-	child = obj.child.toString().concat(new novaConstructors.newString1("!"));
+	child = obj.toString().concat(new novaConstructors.newString1("!"));
 	if (!PolymorphismStability.callPolymorphicClosure(function () { var self = obj.child; return self.toString.call(self); })) {
 		this.program.fail1(new novaConstructors.newString1("Did not call sub class method as closure"));
 	}
@@ -15902,6 +15781,7 @@ SyntaxStability.prototype.test = function () {
 	this.checkRepeat();
 	this.checkNamedArguments();
 	this.checkZipper();
+	this.checkSafeNavigation();
 	
 };
 
@@ -16285,15 +16165,17 @@ SyntaxStability.prototype.checkElvis = function () {
 	var str;
 	var str2;
 	var result1;
+	var nova_local_0;
 	var result2;
+	var nova_local_1;
 	NovaConsole.write0(new novaConstructors.newString1("Checking elvis functionality... "));
 	str = new novaConstructors.newString1("this isnt null");
 	str2 = null;
-	result1 = str != null ? str : new novaConstructors.newString1("wtf");
+	result1 = (nova_local_0 = str) != null ? nova_local_0 : new novaConstructors.newString1("wtf");
 	if (result1.equals(new novaConstructors.newString1("wtf"))) {
 		this.program.fail1(new novaConstructors.newString1("Failed first elvis test"));
 	}
-	result2 = str2 != null ? str2 : new novaConstructors.newString1("this is null");
+	result2 = (nova_local_1 = str2) != null ? nova_local_1 : new novaConstructors.newString1("this is null");
 	if (!result2.equals(new novaConstructors.newString1("this is null"))) {
 		this.program.fail1(new novaConstructors.newString1("Failed second elvis test"));
 	}
@@ -16394,7 +16276,7 @@ SyntaxStability.prototype.checkZipper = function () {
 	var array1;
 	var array2;
 	var zipped;
-	var contextArg59;
+	var contextArg57;
 	NovaConsole.write0(new novaConstructors.newString1("Checking zip function... "));
 	array1 = this.generated21();
 	array2 = this.generated22();
@@ -16404,6 +16286,76 @@ SyntaxStability.prototype.checkZipper = function () {
 	});
 	NovaConsole.write0(new novaConstructors.newString1("Zipped: ").concat((zipped).toString().concat(new novaConstructors.newString1(" "))));
 	NovaConsole.writeLine1(new novaConstructors.newString1("OK"));
+	
+};
+
+SyntaxStability.prototype.checkSafeNavigation = function () {
+	var node;
+	var nova_local_13;
+	var nova_local_14;
+	var nova_local_15;
+	var nova_local_16;
+	var nova_local_17;
+	var nova_local_18;
+	NovaConsole.write0(new novaConstructors.newString1("Checking safe navigation operator... "));
+	node = new novaConstructors.newNode();
+	node.value = 1;
+	node.child = new novaConstructors.newNode();
+	node.child.value = 2;
+	node.child.child = new novaConstructors.newNode();
+	node.child.child.value = 3;
+	NovaConsole.write0(new novaConstructors.newString1("if statement... "));
+	if ((nova_local_13 = node) != null ? ((nova_local_14 = nova_local_13.child) != null ? ((nova_local_15 = nova_local_14.child) != null ? (nova_local_15.value) : 0) : 0) : 0 == 3 && (nova_local_16 = node) != null ? ((nova_local_17 = nova_local_16.child) != null ? (nova_local_17.value) : 0) : 0 == 2 && (nova_local_18 = node) != null ? (nova_local_18.value) : 0 == 1) {
+		var array;
+		var nova_local_0;
+		var nova_local_2;
+		var nova_local_3;
+		var nova_local_4;
+		var nova_local_5;
+		var nova_local_6;
+		var nova_local_7;
+		var nova_local_8;
+		var nova_local_9;
+		var nova_local_10;
+		var nova_local_11;
+		var nova_local_12;
+		NovaConsole.write0(new novaConstructors.newString1("assignment... "));
+		if ((nova_local_0 = node) != null) {
+			var nova_local_1;
+			if ((nova_local_1 = nova_local_0.child) != null) {
+				nova_local_1.child.value = 5;
+			}
+		}
+		if ((nova_local_2 = node) != null ? ((nova_local_3 = nova_local_2.child) != null ? (nova_local_3.child.value) : 0) : 0 != 5) {
+			this.program.fail1(new novaConstructors.newString1("Failed to set node value while safely navigating it"));
+		}
+		node.child.child = null;
+		if ((nova_local_4 = node) != null ? ((nova_local_5 = nova_local_4.child) != null ? ((nova_local_6 = nova_local_5.child) != null ? (nova_local_6.value) : 0) : 0) : 0 == 3) {
+			this.program.fail1(new novaConstructors.newString1("Failed to skip null child"));
+		}
+		node.child.child = new novaConstructors.newNode();
+		node.child.child.child = new novaConstructors.newNode();
+		node.child.child.child.child = new novaConstructors.newNode();
+		node.child.child.child.child.value = 91;
+		NovaConsole.write0(new novaConstructors.newString1("function call... "));
+		this.callMeWithNode((nova_local_7 = node) != null ? ((nova_local_8 = nova_local_7.child) != null ? ((nova_local_9 = nova_local_8.child) != null ? ((nova_local_10 = nova_local_9.child) != null ? (nova_local_10.child) : null) : null) : null) : null);
+		array = this.generated23();
+		NovaConsole.write0(new novaConstructors.newString1("array access... "));
+		array.set((nova_local_11 = node) != null ? ((nova_local_12 = nova_local_11.child) != null ? (nova_local_12.value) : 0) : 0, new novaConstructors.newString1("hello"));
+		if (!array.get(2).equals(new novaConstructors.newString1("hello"))) {
+			this.program.fail1(new novaConstructors.newString1("Failed to set correct array index with correct value using the safe navigation operator"));
+		}
+	} else {
+		this.program.fail1(new novaConstructors.newString1("Failed to safely navigate valid children"));
+	}
+	NovaConsole.writeLine1(new novaConstructors.newString1("OK"));
+	
+};
+
+SyntaxStability.prototype.callMeWithNode = function (n) {
+	if (n.value != 91) {
+		this.program.fail1(new novaConstructors.newString1("Failed to call method with correct safely navigated node"));
+	}
 	
 };
 
@@ -16440,6 +16392,18 @@ SyntaxStability.prototype.generated22 = function () {
 	temp[2] = new novaConstructors.newString1("three");
 	temp[3] = new novaConstructors.newString1("four");
 	return new novaConstructors.newArray2(temp, 4);
+	
+};
+
+SyntaxStability.prototype.generated23 = function () {
+	var temp;
+	temp = [];
+	temp[0] = new novaConstructors.newString1("1");
+	temp[1] = new novaConstructors.newString1("2");
+	temp[2] = new novaConstructors.newString1("3");
+	temp[3] = new novaConstructors.newString1("4");
+	temp[4] = new novaConstructors.newString1("5");
+	return new novaConstructors.newArray2(temp, 5);
 	
 };
 
