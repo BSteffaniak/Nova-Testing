@@ -13,13 +13,13 @@ class IntegerTest {
         while (c == 'y' || c == 'Y') {
             Timer timer = new Timer().start()
             
-            for (i in 0..999999) {
+            for (i in 0..999_999) {
                 Long.toString(i)
             }
             
             timer.stop()
             
-            Console.writeLine("Time taken: " + timer.duration + "ms")
+            Console.writeLine("Time taken: #{timer.duration}ms")
             
             Console.write("Run again? (Y/N) ")
             

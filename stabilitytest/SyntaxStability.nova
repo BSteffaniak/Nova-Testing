@@ -19,6 +19,7 @@ class SyntaxStability extends StabilityTestCase {
         checkNamedArguments()
         checkZipper()
         checkSafeNavigation()
+        checkSnakeCaseNumbers()
     }
 
     checkMatchStatements() {
@@ -547,5 +548,23 @@ class SyntaxStability extends StabilityTestCase {
         if (n.value != 91) {
             program.fail("Failed to call method with correct safely navigated node")
         }
+    }
+    
+    checkSnakeCaseNumbers() {
+    	Console.write("Checking snake case numbers... ")
+    	
+    	Double dPos =  51_325_753.131313
+    	Double dNeg = -51_325_753.131313
+    	
+    	program.fail("Positive snake case double failed to parse", dPos !=  51325753.131313)
+    	program.fail("Negative snake case double failed to parse", dNeg != -51325753.131313)
+    	
+    	Long lPos =  922_547_211
+    	Long lNeg = -922_547_211
+    	
+    	program.fail("Negative snake case double failed to parse", lPos !=  922547211)
+    	program.fail("Negative snake case double failed to parse", lNeg != -922547211)
+    	
+    	Console.writeLine("OK")
     }
 }
