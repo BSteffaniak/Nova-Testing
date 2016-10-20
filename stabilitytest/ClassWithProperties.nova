@@ -1,32 +1,25 @@
 package "stabilitytest"
 
-public class ClassWithProperties
-{
+class ClassWithProperties {
     Int privateProp1
     Int privateProp2
     
-    public Int prop1
-    {
-        get
-        {
+    public Int prop1 {
+        get {
             return privateProp1
         }
         
-        set
-        {
+        set {
             privateProp1 = value
         }
     }
     
-    public Int prop2
-    {
-        get
-        {
+    public Int prop2 {
+        get {
             return privateProp2
         }
         
-        set
-        {
+        set {
             privateProp2 = value
         }
     }

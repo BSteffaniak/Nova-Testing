@@ -4,20 +4,18 @@ import "nova/web/svg/no3/No3"
 import "nova/io/File"
 import "nova/time/Timer"
 
-public class SvgChart
-{
-	public static main(String[] args)
-	{
-		Timer timer = new Timer().start()
-		
-		var selection = No3.select("body")
-		
-		Console.writeLine(selection.toJs())
-		
-		timer.stop()
-		
-		Console.write("Done generating " + timer.duration)
-		
-		Console.waitForEnter()
-	}
+class SvgChart {
+    public static main(String[] args) {
+        Timer timer = new Timer().start()
+        
+        var selection = No3.select("body")
+        
+        Console.writeLine(selection.toJs())
+        
+        timer.stop()
+        
+        Console.write("Done generating " + timer.duration)
+        
+        Console.waitForEnter()
+    }
 }

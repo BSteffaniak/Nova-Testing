@@ -1,9 +1,7 @@
 package "example/copy"
 
-public class Dog
-{
-	public construct(Int a, Int b)
-	{
-		Console.writeLine(a + ", " + b)
-	}
+class Dog {
+    public construct(Int a, Int b) {
+        Console.writeLine(a + ", " + b)
+    }
 }

@@ -3,10 +3,8 @@ package "example"
 import "nova/datastruct/HashSet"
 import "nova/time/Timer"
 
-public class HashSetDemo
-{
-    public static main(String[] args)
-    {
+class HashSetDemo {
+    public static main(String[] args) {
         var set = new HashSet<String>()
         
         set.add("TEseting")
@@ -23,8 +21,7 @@ public class HashSetDemo
         var count = 50000
         var timer = new Timer().start()
         
-        for (i in 0..count)
-        {
+        for (i in 0..count) {
             "my string#i"
         }
         
@@ -32,8 +29,7 @@ public class HashSetDemo
         
         Console.writeLine("Took #{stringTime}ms to create #count strings")
         
-        for (i in 0..50000)
-        {
+        for (i in 0..50000) {
             set.add("my string#i")
         }
         
@@ -43,8 +39,7 @@ public class HashSetDemo
         
         timer.start()
         
-        for (i in 0..count)
-        {
+        for (i in 0..count) {
             set.get("my string#i")
         }
         
@@ -54,8 +49,7 @@ public class HashSetDemo
         
         timer.start()
         
-        for (i in 0..count)
-        {
+        for (i in 0..count) {
             "my string#i"
         }
         

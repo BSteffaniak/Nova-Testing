@@ -1,19 +1,16 @@
 package "example"
 
-public class BodyBuilder extends Person
-{
-	visible Int weightClass
-	
-	public construct(Int weightClass, String name)
-	{
-		age = 5
-		
-		this.weightClass = weightClass
-		this.name        = name
-	}
-	
-	public sayHello()
-	{
-		Console.writeLine("Hello from " + name + " the BodyBuilder")
-	}
+class BodyBuilder extends Person {
+    visible Int weightClass
+    
+    public construct(Int weightClass, String name) {
+        age = 5
+        
+        this.weightClass = weightClass
+        this.name        = name
+    }
+    
+    public sayHello() {
+        Console.writeLine("Hello from " + name + " the BodyBuilder")
+    }
 }
