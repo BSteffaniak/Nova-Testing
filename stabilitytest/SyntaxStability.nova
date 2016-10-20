@@ -20,6 +20,7 @@ class SyntaxStability extends StabilityTestCase {
         checkZipper()
         checkSafeNavigation()
         checkSnakeCaseNumbers()
+        checkArrayInitializers()
     }
 
     checkMatchStatements() {
@@ -502,6 +503,15 @@ class SyntaxStability extends StabilityTestCase {
     }
     
     checkArrayInitializers() {
+    	Console.write("Checking array initializers... ")
     	
+    	Int num1 = 1
+    	Int num2 = 2
+    	
+    	var myInts = [0, 0, num1, num2, 0]
+    	
+    	program.fail("Failed to ", myInts[2] != num1 || myInts[3] != num2)
+    	
+    	Console.writeLine("OK")
     }
 }
