@@ -48,11 +48,7 @@ class StabilityTest extends StabilityTestCase {
         }
     }
     
-    public fail() {
-        fail("Failed")
-    }
-    
-    public fail(String message) {
-        throw new UnstableException(message)
+    public fail(String message = "Failed", Bool condition = true) {
+        if (condition) throw new UnstableException(message)
     }
 }
