@@ -18,8 +18,7 @@ class FileTest {
             String data = f.readAllContents()
             
             Console.writeLine(data)
-        }
-        else {
+        } else {
             Console.writeLine("Your file does not exist..")
         }
         

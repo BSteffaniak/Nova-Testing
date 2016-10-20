@@ -39,8 +39,7 @@ class DatabaseDemo {
         
         if (error.count > 0) {
             Console.writeLine("Error: " + error)
-        }
-        else {
+        } else {
             Console.writeLine("Connected.")
         }
         

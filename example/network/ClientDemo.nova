@@ -33,8 +33,7 @@ class ClientDemo {
             }
             
             socket.close()
-        }
-        else {
+        } else {
             Console.writeLine("Failed to connect")
             
             Console.waitForEnter()

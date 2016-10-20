@@ -13,8 +13,7 @@ class ServerDemo {
         
         if (!socket.start(port)) {
             Console.writeLine("Failed to start server")
-        }
-        else {
+        } else {
             Console.writeLine("Started server on port " + port)
             Console.writeLine("Waiting on client...")
             
