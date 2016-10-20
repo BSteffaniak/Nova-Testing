@@ -36,9 +36,7 @@ class SyntaxStability extends StabilityTestCase {
             default program.fail("Match failed to accept the correct case")
         }
 
-        if (!worked) {
-            program.fail("FAIL")
-        }
+        program.fail("FAIL", !worked)
 
         Console.writeLine("OK")
 
@@ -57,10 +55,8 @@ class SyntaxStability extends StabilityTestCase {
                 program.fail("Match accepted incorrect case")
             default
                 program.fail("Match failed to accept the correct case")
-
-        if (!worked) {
-            program.fail("FAIL")
-        }
+        
+        program.fail("FAIL", !worked)
 
         Console.writeLine("OK")
 
@@ -108,10 +104,8 @@ class SyntaxStability extends StabilityTestCase {
                 program.fail("Match failed to accept the correct case")
             }
         }
-
-        if (!worked) {
-            program.fail("FAIL")
-        }
+        
+        program.fail("FAIL", !worked)
 
         Console.writeLine("OK")
 
@@ -138,9 +132,7 @@ class SyntaxStability extends StabilityTestCase {
             }
         }
 
-        if (!worked || !worked2) {
-            program.fail("FAIL")
-        }
+        program.fail("FAIL", !worked || !worked2)
 
         Console.writeLine("OK")
     }
@@ -168,9 +160,7 @@ class SyntaxStability extends StabilityTestCase {
                     num3++
                 }
 
-        if (num != 100 || num2 != 100 || num3 != 100) {
-            program.fail("Inline while loop failed.")
-        }
+        program.fail("Inline while loop failed.", num != 100 || num2 != 100 || num3 != 100)
 
         Console.writeLine("OK")
     }
@@ -193,9 +183,7 @@ class SyntaxStability extends StabilityTestCase {
                     num3++
                 }
 
-        if (num != 100 || num2 != 100 || num3 != 100) {
-            program.fail("Inline for loop failed. Expected 100, 100, 100 received #{num}, #{num2}, #{num3}")
-        }
+        program.fail("Inline for loop failed. Expected 100, 100, 100 received #{num}, #{num2}, #{num3}", num != 100 || num2 != 100 || num3 != 100)
 
         Console.writeLine("OK")
     }
@@ -226,24 +214,14 @@ class SyntaxStability extends StabilityTestCase {
 //            }
 //        }
 
-        if (obj == null) {
-            program.fail("Failed to reach correct condition");
-        }
+        program.fail("Failed to reach correct condition", obj == null)
 
         Console.writeLine("OK");
     }
 
-    static test1() -> Object {
-        return null
-    }
-
-    static test2() -> Object {
-        return null
-    }
-
-    static test3() -> Object {
-        return new Object()
-    }
+    static test1() => null
+    static test2() => null
+    static test3() => new Object()
 
     checkMultipleReturnValues() {
         Console.write("Checking methods with multiple return values... ")
@@ -253,27 +231,21 @@ class SyntaxStability extends StabilityTestCase {
 
         ret1, ret2 = ret2()
 
-        if (ret1 != 5 || ret2 != 2) {
-            program.fail("Failed to pass over second return value")
-        }
+        program.fail("Failed to pass over second return value", ret1 != 5 || ret2 != 2)
 
         ret1 = 1
         ret2 = 2
 
         ret1, ret2 = swap(ret1, ret2)
 
-        if (ret1 != 2 || ret2 != 1) {
-            program.fail("Failed to swap primitive values with multiple return values")
-        }
+        program.fail("Failed to swap primitive values with multiple return values", ret1 != 2 || ret2 != 1)
 
         String s1 = "hello"
         String s2 = "world"
 
         s1, s2 = swap2(s1, s2)
 
-        if (!s1.equals("world") || !s2.equals("hello")) {
-            program.fail("Failed to swap String values with multiple return values")
-        }
+        program.fail("Failed to swap String values with multiple return values", !s1.equals("world") || !s2.equals("hello"))
 
         Console.writeLine("OK")
     }
@@ -313,9 +285,7 @@ class SyntaxStability extends StabilityTestCase {
         }
 
         for (n in 0..list2.count) {
-            if (list2.get(n).count < 4) {
-                program.fail("Failed to filter data correctly")
-            }
+            program.fail("Failed to filter data correctly", list2[n].count < 4)
         }
 
         /*if (list2.any(x -> x.count < 4)) {
@@ -329,12 +299,10 @@ class SyntaxStability extends StabilityTestCase {
 
         Console.write("Checking iterator functionality... ")
 
-        Iterator<String, Int> iter = list2.iterator
+        Iterator<String> iter = list2.iterator
 
         while (iter.hasNext) {
-            if (iter.next.count < 4) {
-                program.fail("Failed to run iterator")
-            }
+            program.fail("Failed to run iterator", iter.next.count < 4)
         }
 
         Console.writeLine("OK")
@@ -342,9 +310,7 @@ class SyntaxStability extends StabilityTestCase {
         Console.write("Checking foreach loop functionality... ")
 
         for (string in list2) {
-            if (string.count < 4) {
-                program.fail("Failed to run foreach loop")
-            }
+            program.fail("Failed to run foreach loop", string.count < 4)
         }
 
         Console.writeLine("OK")
@@ -355,15 +321,11 @@ class SyntaxStability extends StabilityTestCase {
 
         var first = trueValue() ? "hey".equals("hey") : "hey".equals("hey2")
 
-        if (!first) {
-            program.fail("Failed first ternary test")
-        }
+        program.fail("Failed first ternary test", !first)
 
         var second = falseValue() ? "one" : "two"
 
-        if (!second.equals("two")) {
-            program.fail("Failed second ternary test")
-        }
+        program.fail("Failed second ternary test", !second.equals("two"))
 
         Console.writeLine("OK")
     }
@@ -376,15 +338,11 @@ class SyntaxStability extends StabilityTestCase {
 
         var result1 = str ?: "wtf"
 
-        if (result1.equals("wtf")) {
-            program.fail("Failed first elvis test")
-        }
+        program.fail("Failed first elvis test", result1.equals("wtf"))
 
         var result2 = str2 ?: "this is null"
 
-        if (!result2.equals("this is null")) {
-            program.fail("Failed second elvis test")
-        }
+        program.fail("Failed second elvis test", !result2.equals("this is null"))
 
         Console.writeLine("OK")
     }
@@ -409,10 +367,8 @@ class SyntaxStability extends StabilityTestCase {
 
             i++
         }
-
-        if (i != 101) {
-            program.fail("Vanilla repeat failed")
-        }
+        
+        program.fail("Vanilla repeat failed", i != 101)
 
         i = 0
 
@@ -420,9 +376,7 @@ class SyntaxStability extends StabilityTestCase {
             i++
         }
 
-        if (i != 101) {
-            program.fail("Repeat 101 times failed")
-        }
+        program.fail("Repeat 101 times failed", i != 101)
 
         i = 0
 
@@ -432,17 +386,13 @@ class SyntaxStability extends StabilityTestCase {
             i++
         }
 
-        if (i != 101) {
-            program.fail("Repeat times (#times) failed")
-        }
+        program.fail("Repeat times (#times) failed", i != 101)
 
         i = 0
 
         repeat (times) i++
 
-        if (i != 101) {
-            program.fail("Repeat fragment failed")
-        }
+        program.fail("Repeat fragment failed", i != 101)
 
         Console.writeLine("OK")
     }
@@ -460,21 +410,15 @@ class SyntaxStability extends StabilityTestCase {
 
         var num = named("", arg: "yo", num: 4)
 
-        if (num != 8) {
-            program.fail("Default argument failed. Expected 8, received #num")
-        }
+        program.fail("Default argument failed. Expected 8, received #num", num != 8)
 
         num = named("", add: 2, arg: "heyasdf", num: 5)
 
-        if (num != 37) {
-            program.fail("Named arguments failed. Expeced 37, received #num first")
-        }
+        program.fail("Named arguments failed. Expeced 37, received #num first", num != 37)
 
         num = named(add: 2, num: 5, arg: "heyasdf", s: "")
 
-        if (num != 37) {
-            program.fail("Named arguments failed. Expeced 37, received #num second")
-        }
+        program.fail("Named arguments failed. Expeced 37, received #num second", num != 37)
 
         Console.writeLine("OK")
     }
@@ -510,22 +454,17 @@ class SyntaxStability extends StabilityTestCase {
             
             node?.child?.child.value = 5
             
-            if (node?.child?.child.value != 5) {
-                program.fail("Failed to set node value while safely navigating it")
-            }
+            program.fail("Failed to set node value while safely navigating it", node?.child?.child.value != 5)
             
             node.child.child = null
             
-            if (node?.child?.child?.value == 3) {
-                program.fail("Failed to skip null child")
-            }
+            program.fail("Failed to skip null child", node?.child?.child?.value == 3)
             
             node.child.child = new Node()
             node.child.child.child = new Node()
             node.child.child.child.child = new Node()
             node.child.child.child.child.value = 91
             
-        
             Console.write("function call... ")
             callMeWithNode(node?.child?.child?.child?.child)
             
@@ -534,9 +473,7 @@ class SyntaxStability extends StabilityTestCase {
             Console.write("array access... ")
             array[node?.child?.value] = "hello"
             
-            if (!array[2].equals("hello")) {
-                program.fail("Failed to set correct array index with correct value using the safe navigation operator")
-            }
+            program.fail("Failed to set correct array index with correct value using the safe navigation operator", !array[2].equals("hello"))
         } else {
             program.fail("Failed to safely navigate valid children")
         }
@@ -544,11 +481,7 @@ class SyntaxStability extends StabilityTestCase {
         Console.writeLine("OK")
     }
     
-    callMeWithNode(Node n) {
-        if (n.value != 91) {
-            program.fail("Failed to call method with correct safely navigated node")
-        }
-    }
+    callMeWithNode(Node n) => program.fail("Failed to call method with correct safely navigated node", n.value != 91)
     
     checkSnakeCaseNumbers() {
     	Console.write("Checking snake case numbers... ")
@@ -562,9 +495,13 @@ class SyntaxStability extends StabilityTestCase {
     	Long lPos =  922_547_211
     	Long lNeg = -922_547_211
     	
-    	program.fail("Negative snake case double failed to parse", lPos !=  922547211)
-    	program.fail("Negative snake case double failed to parse", lNeg != -922547211)
+    	program.fail("Negative snake case long failed to parse", lPos !=  922547211)
+    	program.fail("Negative snake case long failed to parse", lNeg != -922547211)
     	
     	Console.writeLine("OK")
+    }
+    
+    checkArrayInitializers() {
+    	
     }
 }
