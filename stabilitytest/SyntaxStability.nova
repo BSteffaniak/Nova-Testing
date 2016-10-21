@@ -17,6 +17,7 @@ class SyntaxStability extends StabilityTestCase {
         checkElvis()
         checkRepeat()
         checkNamedArguments()
+        checkDefaultClosureArguments()
         checkZipper()
         checkSafeNavigation()
         checkSnakeCaseNumbers()
@@ -422,6 +423,20 @@ class SyntaxStability extends StabilityTestCase {
         program.fail("Named arguments failed. Expeced 37, received #num second", num != 37)
 
         Console.writeLine("OK")
+    }
+    
+    func1(Int a) -> Int => a * 2
+    func2(Int a) -> Int => a * 4
+    
+    myFunc(something(Int) -> Int = func2) => something(5)
+    
+    checkDefaultClosureArguments() {
+    	Console.write("Checking default closure arguments... ")
+    	
+    	program.fail("Failed to call default closure", myFunc() != 20)
+    	program.fail("Failed to call overrided default closure", myFunc(func1) != 10)
+    	
+    	Console.writeLine("OK")
     }
 
     checkZipper() { // lol
