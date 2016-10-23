@@ -40,6 +40,7 @@ class StabilityTest extends StabilityTestCase {
             new LambdaStability(this).test()
             new ToStringStability(this).test()
             new AssignmentStability(this).test()
+            new RegexStability(this).test()
             
             Console.writeLine("All OK")
         }
