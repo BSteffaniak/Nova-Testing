@@ -15,16 +15,16 @@ class RegexStability extends StabilityTestCase {
     match() {
         Console.write("Checking Regex match... ")
         
-        program.fail("Failed to find valid match", !Regex.containsMatch("a[bd]c", "hello adc goodbye"))
-        program.fail("Failed to not find match", Regex.containsMatch("a[bd]c", "no match here..."))
+        program.fail("Failed to find valid match", !Regex.containsMatch(/a[bd]c/, "hello adc goodbye"))
+        program.fail("Failed to not find match", Regex.containsMatch(/a[bd]c/, "no match here..."))
         
-        var matches = Regex.getMatches("a[bd]c", "this is abc test adc adc hello")
+        var matches = Regex.getMatches(/a[bd]c/, "this is abc test adc adc hello")
         
         Console.write("#matches.count match#{matches.count != 1 ? "es" : ""}: ")
         
         matches.forEach({ Console.write("#_, ") })
         
-        var matches2 = Regex.getMatches("\\d+", "whats my number? 818 414-5326")
+        var matches2 = Regex.getMatches(/\d+/, "whats my number? 818 414-5326")
         
         Console.write("#matches2.count match#{matches2.count != 1 ? "es" : ""}: ")
         
