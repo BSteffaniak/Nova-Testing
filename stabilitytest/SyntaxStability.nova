@@ -497,6 +497,16 @@ class SyntaxStability extends StabilityTestCase {
         Console.writeLine("OK")
     }
     
+    checkArraySafeNavigation() {
+    	Console.write("Checking array safe navigaiton... ")
+    	
+    	/*var myArray = [0, 1, 2, 3, 4, 5, 6]
+    	
+    	program.fail("Failed to access valid index with safe navigation", myArray?[4] != 4)
+    	*/
+    	Console.writeLine("OK")
+    }
+    
     callMeWithNode(Node n) => program.fail("Failed to call method with correct safely navigated node", n.value != 91)
     
     checkSnakeCaseNumbers() {
