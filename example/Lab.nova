@@ -68,6 +68,10 @@ class Lab {
             Console.writeLine("ok, now what")
         })
         
+        String[][] sss = new String[4][2][1]
+        
+        Console.writeLine(sss)
+        
         Console.writeLine("Started async execution")
         
         String[][] multi = new Array()
@@ -105,7 +109,7 @@ class Lab {
         takesString(x)
 
         if (true) {
-            x = new Array<String>()
+            x = new String[]
 
             x.add("hey")
             x.add("its now an array")
