@@ -1,9 +1,7 @@
 package "stabilitytest"
 
 class ToStringStability extends StabilityTestCase {
-    public construct(StabilityTest program) {
-        super(program)
-    }
+    public construct(StabilityTest program) => super(program)
     
     public test() {
         Console.write("Checking toString implementations... ")
@@ -27,9 +25,6 @@ class ToStringStability extends StabilityTestCase {
         Console.writeLine("OK")
     }
     
-    checkToString(String type, Number number, String expected) {
-        if (!number.toString().equals(expected)) {
-            program.fail("#{type}.toString failed. expected #expected but received #number")
-        }
-    }
+    checkToString(String type, Number number, String expected) =>
+        program.fail("#{type}.toString failed. expected #expected but received #number", !number.toString().equals(expected))
 }

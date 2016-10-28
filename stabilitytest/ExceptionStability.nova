@@ -1,9 +1,7 @@
 package "stabilitytest"
 
 class ExceptionStability extends StabilityTestCase {
-    public construct(StabilityTest program) {
-        super(program)
-    }
+    public construct(StabilityTest program) => super(program)
     
     public test() {
         Console.writeLine("Checking Exception handling...")
@@ -12,14 +10,11 @@ class ExceptionStability extends StabilityTestCase {
         
         try {
             testException()
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             worked = true
         }
         
-        if (!worked) {
-            program.fail("Failed; uncaught Exception")
-        }
+        program.fail("Failed; uncaught Exception", !worked)
     }
     
     testException() {
@@ -31,8 +26,7 @@ class ExceptionStability extends StabilityTestCase {
             try {
                 Int den = 0
                 Int i   = 43 / den
-            }
-            catch (DivideByZeroException e) {
+            } catch (DivideByZeroException e) {
                 worked = true
                 
                 Console.writeLine("OK")
@@ -42,19 +36,14 @@ class ExceptionStability extends StabilityTestCase {
             }
             
             program.fail("Failed to catch DivideByZeroException")
-        }
-        catch (StabilityTestException e) {
-            if (!worked) {
-                program.fail("Failed; uncaught DivideByZeroException")
-            }
+        } catch (StabilityTestException e) {
+            program.fail("Failed; uncaught DivideByZeroException", !worked)
             
             Console.writeLine("OK")
             
             throw new Exception()
         }
         
-        if (!worked) {
-            program.fail("Failed; uncaught StabilityTestException")
-        }
+        program.fail("Failed; uncaught StabilityTestException", !worked)
     }
 }

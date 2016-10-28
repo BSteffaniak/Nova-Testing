@@ -6,11 +6,7 @@ import "nova/thread/Thread"
 class StabilityExceptionHandler extends UncaughtExceptionHandler {
     StabilityTest program
     
-    public construct(StabilityTest program) {
-        this.program = program
-    }
+    public construct(StabilityTest program) => this.program = program
     
-    public uncaughtException(Thread thread, Exception exception) {
-        program.fail()
-    }
+    public uncaughtException(Thread thread, Exception exception) => program.fail()
 }

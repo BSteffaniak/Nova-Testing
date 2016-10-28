@@ -18,10 +18,8 @@ class TimeStability extends StabilityTestCase {
         
         timer.stop()
         
-        if (timer.duration >= 100 && timer.duration < 130) {
-            Console.writeLine("OK")
-        } else {
-            program.fail("Failed; expected 100ms, found " + timer.duration + "ms")
-        }
+        program.fail("Failed; expected 100ms, found #{timer.duration}ms", timer.duration < 99 || timer.duration >= 130)
+        
+        Console.writeLine("OK")
     }
 }

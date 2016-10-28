@@ -34,17 +34,11 @@ class ClosureStability extends StabilityTestCase {
         
         Double value = 0.5
         
-        if (callClosure(multiply, a, b) != multiply(a, b))
-            program.fail("Failed to call multiply(Int, Int) closure")
-            
-        if (callClosure(pow, a, b) != pow(a, b))
-            program.fail("Failed to call pow(Int, Int) closure")
-            
-        if (mathClosure(Math.sin, value) - Math.sin(value) >= TOLERANCE)
-            program.fail("Failed to call Math.sin(Double) closure")
-            
-        if (mathClosure(Math.tan, value) - Math.tan(value) >= TOLERANCE)
-            program.fail("Failed to call Math.tan(Double) closure")
+        program.fail("Failed to call multiply(Int, Int) closure", callClosure(multiply, a, b) != multiply(a, b))
+        program.fail("Failed to call pow(Int, Int) closure", callClosure(pow, a, b) != pow(a, b))
+        
+        program.fail("Failed to call Math.sin(Double) closure", mathClosure(Math.sin, value) - Math.sin(value) >= TOLERANCE)
+        program.fail("Failed to call Math.tan(Double) closure", mathClosure(Math.tan, value) - Math.tan(value) >= TOLERANCE)
         
         Console.writeLine("OK")
     }
@@ -56,9 +50,7 @@ class ClosureStability extends StabilityTestCase {
         
         instanceClosure(c.incrementNumber)
         
-        if (c.number == 0) {
-            program.fail("Failed to call incrementNumber() instance closure")
-        }
+        program.fail("Failed to call incrementNumber() instance closure", c.number == 0)
         
         instanceClosure(new ClosureStability(program).incrementNumber)
         instanceClosure(c.incrementNumber)
@@ -66,27 +58,16 @@ class ClosureStability extends StabilityTestCase {
         Console.writeLine("OK")
     }
     
-    static callClosure(closure(Int, Int) -> Int, Int a, Int b) -> Int {
-        return closure(a, b)
-    }
-    
-    static mathClosure(closure(Double) -> Double, Double value) -> Double {
-        return closure(value)
-    }
-    
-    static instanceClosure(closure()) {
-        closure()
-    }
-    
-    static multiply(Int value1, Int value2) -> Int {
-        return value1 * value2
-    }
+    static callClosure(closure(Int, Int) -> Int, Int a, Int b) => closure(a, b)
+    static mathClosure(closure(Double) -> Double, Double value) => closure(value)
+    static instanceClosure(closure()) => closure()
+    static multiply(Int value1, Int value2) => value1 * value2
     
     static pow(Int base, Int pow) -> Int {
         Int value = base
         
         for (i in 0..(pow - 1)) {
-            value = value * base
+            value *= base
         }
         
         return value

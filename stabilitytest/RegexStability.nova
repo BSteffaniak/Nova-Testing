@@ -4,9 +4,7 @@ import "nova/regex/Regex"
 import "nova/regex/Match"
 
 class RegexStability extends StabilityTestCase {
-    public construct(StabilityTest program) {
-        super(program)
-    }
+    public construct(StabilityTest program) => super(program)
     
     public test() {
         match()

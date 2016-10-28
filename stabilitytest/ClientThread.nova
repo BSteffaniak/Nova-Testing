@@ -20,9 +20,7 @@ class ClientThread extends Thread {
         
         Console.write("ClientSocket attempting to connect to #ip:#{port}... ")
         
-        if (!client.connect(ip, port)) {
-            program.fail("Failed to connect to localhost server")
-        }
+        program.fail("Failed to connect to localhost server", !client.connect(ip, port))
         
         Console.writeLine("OK")
         
@@ -30,9 +28,7 @@ class ClientThread extends Thread {
         
         String s = client.connection.in.readString()
         
-        if (s.count != NetworkStability.received.count || !s.equals(NetworkStability.received)) {
-            program.fail("Client unable to receive the correct message from server")
-        }
+        program.fail("Client unable to receive the correct message from server", s.count != NetworkStability.received.count || !s.equals(NetworkStability.received))
         
         Console.write("Attempting to send String to ServerSocket... ")
         
@@ -42,9 +38,7 @@ class ClientThread extends Thread {
         
         Console.write("Attempting to close ClientSocket... ")
         
-        if (!client.close()) {
-            program.fail("Unable to close Client connection")
-        }
+        program.fail("Unable to close Client connection", !client.close())
         
         Console.writeLine("OK")
     }

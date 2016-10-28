@@ -8,9 +8,7 @@ class FileStability extends StabilityTestCase {
     
     static Int lines
     
-    public construct(StabilityTest program) {
-        super(program)
-    }
+    public construct(StabilityTest program) => super(program)
     
     public test() {
         Console.writeLine("Checking File IO...")
@@ -19,14 +17,13 @@ class FileStability extends StabilityTestCase {
         lines       = 100
         
         try {
-            File f = new File("temp" + Time.currentTimeMillis)
+            File f = new File("temp#Time.currentTimeMillis")
             
             createFile(f)
             writeToFile(f)
             readFromFile( f)
             deleteFile(f)
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             program.fail("Failed; Exception thrown")
         }
     }
@@ -34,9 +31,7 @@ class FileStability extends StabilityTestCase {
     createFile(File f) {
         Console.write("Creating file... ")
         
-        if (!f.create()) {
-            program.fail()
-        }
+        program.fail("Failed to create file", !f.create())
         
         Console.writeLine("OK")
     }
@@ -60,18 +55,14 @@ class FileStability extends StabilityTestCase {
         String line  = f.readLine()
         
         while (line != null) {
-            if (!line.equals(inputString)) {
-                program.fail()
-            }
+            program.fail("Reading from file failed: '#line' != '#inputString'", !line.equals(inputString))
             
             line = f.readLine()
             
             times++
         }
         
-        if (times != lines) {
-            program.fail("Failed; only read " + times + "/" + 100 + " lines")
-        }
+        program.fail("Failed; only read #{times}/100 lines", times != lines)
         
         Console.writeLine("OK")
     }
@@ -79,9 +70,7 @@ class FileStability extends StabilityTestCase {
     deleteFile(File f) {
         Console.write("Deleting file... ")
         
-        if (!f.delete()) {
-            program.fail("Failed to delete file")
-        }
+        program.fail("Failed to delete file", !f.delete())
         
         Console.writeLine("OK")
     }

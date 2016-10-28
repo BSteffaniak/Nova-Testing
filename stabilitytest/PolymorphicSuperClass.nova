@@ -3,16 +3,8 @@ package "stabilitytest"
 class PolymorphicSuperClass {
     visible PolymorphicSubClass child
     
-    visible Int myProperty {
-        get { return 1 }
-        no set
-    }
+    visible Int myProperty => 1
     
-    public giveBirth() {
-        child = new PolymorphicSubClass()
-    }
-    
-    public toString() -> String {
-        return "super class"
-    }
+    public giveBirth() => child = new PolymorphicSubClass()
+    public toString() => "super class"
 }

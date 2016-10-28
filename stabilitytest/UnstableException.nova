@@ -1,7 +1,5 @@
 package "stabilitytest"
 
 class UnstableException extends Exception {
-    public construct(String message) {
-        super(message)
-    }
+    public construct(String message) => super(message)
 }

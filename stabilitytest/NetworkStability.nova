@@ -7,16 +7,14 @@ import "nova/network/ConnectionSocket"
 class NetworkStability extends StabilityTestCase {
     visible static String received = "THIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVED"
     
-    public construct(StabilityTest program) {
-        super(program)
-    }
+    public construct(StabilityTest program) => super(program)
     
     public test() {
         Console.writeLine("Checking network stability...")
         
         Int port = 24243
         
-        ServerSocket server = createServer( port)
+        ServerSocket server = createServer(port)
         
         ClientThread thread = new ClientThread(program, port)
         
@@ -40,17 +38,13 @@ class NetworkStability extends StabilityTestCase {
         
         String s = connection.in.readString()
         
-        if (s.count != received.count || !s.equals(received)) {
-            program.fail("Server unable to receive correct message from client")
-        }
+        program.fail("Server unable to receive correct message from client", s.count != received.count || !s.equals(received))
         
         thread.join()
         
         Console.write("Attempting to close ServerSocket connection... ")
         
-        if (!server.close()) {
-            program.fail("Unable to close server")
-        }
+        program.fail("Unable to close server", !server.close())
 
         Console.writeLine("OK")
     }
@@ -58,11 +52,9 @@ class NetworkStability extends StabilityTestCase {
     createServer(Int port) -> ServerSocket {
         ServerSocket server = new ServerSocket()
         
-        Console.write("Attempting to start ServerSocket on port " + port + "... ")
+        Console.write("Attempting to start ServerSocket on port #{port}... ")
         
-        if (!server.start(port)) {
-            program.fail("Unable to start server on port " + port)
-        }
+        program.fail("Unable to start server on port #port", !server.start(port))
         
         Console.writeLine("OK")
         

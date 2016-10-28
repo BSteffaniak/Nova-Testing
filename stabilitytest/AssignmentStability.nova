@@ -15,9 +15,7 @@ class AssignmentStability extends StabilityTestCase {
         
         var num = props.prop1 = props.prop2 = 1
         
-        if (num != 1 || props.prop1 != 1 || props.prop2 != 1) {
-            program.fail("Did not return mutated property value correctly. Expected 1, 1, 1 but received " + num + ", " + props.prop1 + ", " + props.prop2)
-        }
+        program.fail("Did not return mutated property value correctly. Expected 1, 1, 1 but received #num, #props.prop1, #props.prop2", num != 1 || props.prop1 != 1 || props.prop2 != 1)
         
         Console.writeLine("OK")
         
@@ -29,9 +27,7 @@ class AssignmentStability extends StabilityTestCase {
         
         a = b = c = 1
         
-        if (a != 1 || b != 1 || c != 1) {
-            program.fail("Did not set assigned primitive values correctly. Expected 1, 1, 1 but received " + a + ", " + b + ", " + c)
-        }
+        program.fail("Did not set assigned primitive values correctly. Expected 1, 1, 1 but received #a, #b, #c", a != 1 || b != 1 || c != 1)
         
         Console.writeLine("OK")
     }
