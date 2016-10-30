@@ -5,13 +5,9 @@ class ClosureStability extends StabilityTestCase {
     
     Int    number
     
-    public construct(StabilityTest program) {
-        super(program)
-    }
+    public construct(StabilityTest program) => super(program)
     
-    incrementNumber() {
-        number++
-    }
+    incrementNumber() => number++
     
     public test() {
         TOLERANCE = 0.0000000001

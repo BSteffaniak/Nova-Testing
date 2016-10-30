@@ -24,15 +24,11 @@ class NetworkStability extends StabilityTestCase {
         
         ConnectionSocket connection = server.acceptClient()
         
-        if (connection == null) {
-            program.fail("Failed to accept the client")
-        }
+        program.fail("Failed to accept the client", connection == null)
         
         Console.writeLine("Sending String to ClientSocket... ")
         
-        if (!connection.out.write(received)) {
-            program.fail("Server unable to send data to client")
-        }
+        program.fail("Server unable to send data to client", !connection.out.write(received))
         
         Console.writeLine("Waiting for String from ClientSocket... ")
         
