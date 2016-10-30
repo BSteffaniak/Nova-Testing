@@ -52,8 +52,8 @@ class Lab {
         
         Console.writeLine("#2..8: #{(2..8).join(", ")}")
         
-        String[] list = ["this", "is", "a", "test", "to", "see", "what shows up"]
-        Int[] list2 = [1, 2, 3, 4, 5, 6, 7]
+        var list = ["this", "is", "a", "test", "to", "see", "what shows up"]
+        var list2 = [1, 2, 3, 4, 5, 6, 7]
         
         //Console.writeLine("Sum: #list2.sum()")
         
@@ -68,13 +68,13 @@ class Lab {
             Console.writeLine("ok, now what")
         })
         
-        String[][] sss = new String[4][2][1]
+        var sss = new String[4][2][1]
         
         Console.writeLine(sss)
         
         Console.writeLine("Started async execution")
         
-        String[][] multi = new Array()
+        var multi = new String[][]
         
         multi.add(["This is a test", "index 2"])
         multi.add(["Second dimension yo", "waddup"])
@@ -172,7 +172,7 @@ class Lab {
         
         Console.writeLine("Inverse of 3x3 matrix:\n#matrix3.inverse()")
         
-        Lab l = new Lab()
+        var l = new Lab()
         
         l.chainable().chainable()
         
