@@ -10,7 +10,7 @@ class Test {
         s.push("Larry")
         s.push("Hello")
         
-        while (!s.empty) {
+        while (!s.isEmpty) {
             Console.writeLine(s.pop())
         }
         

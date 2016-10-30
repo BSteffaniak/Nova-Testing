@@ -27,7 +27,7 @@ class GenericDemo {
 //        Object o = new Object()
 //        strs.push(o)
         
-        while (!strs.empty) {
+        while (!strs.isEmpty) {
             String popped = strs.pop()
             
             if (popped != null) {
