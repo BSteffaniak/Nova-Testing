@@ -30,17 +30,22 @@ class StabilityTest extends StabilityTestCase {
     public test() {
         try {
             new ExceptionStability(this).test()
-            //new TimeStability(this).test()
-            //new ThreadStability(this).test()
-            //new FileStability(this).test()
             new SyntaxStability(this).test()
             new ClosureStability(this).test()
             new PolymorphismStability(this).test()
-            //new NetworkStability(this).test()
             new LambdaStability(this).test()
             new ToStringStability(this).test()
             new AssignmentStability(this).test()
             new RegexStability(this).test()
+            
+            [Target c]
+            new TimeStability(this).test()
+            [Target c]
+            new ThreadStability(this).test()
+            [Target c]
+            new FileStability(this).test()
+            [Target c]
+            new NetworkStability(this).test()
             
             Console.writeLine("All OK")
         }

@@ -4,6 +4,8 @@ import "nova/web/svg/Svg";
 import "nova/web/svg/SvgCircle";
 import "nova/web/svg/SvgComponentList"
 import "nova/io/File"
+import "nova/io/FileReader"
+import "nova/io/FileWriter"
 import "nova/time/Timer"
 
 class SvgFractal {
@@ -66,16 +68,20 @@ class SvgFractal {
             }
         }
         
-        File f = new File("C:/Users/Braden Steffaniak/svgoutput.html")
-
-        f.create()
-        f.clearContents()
+        File f = new File("C:/Users/Braden/svgoutput.html")
         
-        s.generateHTMLOutput(f)
+        var writer = new FileWriter(f)
+        
+        writer.create()
+        writer.clearContents()
+        
+        s.generateHTMLOutput(writer)
+        
+        writer.close()
         
         timer.stop()
         
-        Console.write("Done generating " + timer.duration)
+        Console.write("Done generating #timer.duration")
         
         Console.waitForEnter()
     }

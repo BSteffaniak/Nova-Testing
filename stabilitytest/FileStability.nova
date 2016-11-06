@@ -1,6 +1,8 @@
 package "stabilitytest"
 
 import "nova/io/File"
+import "nova/io/FileReader"
+import "nova/io/FileWriter"
 import "nova/time/Time"
 
 class FileStability extends StabilityTestCase {
@@ -19,58 +21,67 @@ class FileStability extends StabilityTestCase {
         try {
             File f = new File("temp#Time.currentTimeMillis")
             
-            createFile(f)
-            writeToFile(f)
-            readFromFile( f)
-            deleteFile(f)
+            var writer = new FileWriter(f)
+            var reader = new FileReader(f)
+            
+            createFile(writer)
+            writeToFile(writer)
+            readFromFile(reader)
+            deleteFile(writer)
         } catch (Exception e) {
             program.fail("Failed; Exception thrown")
         }
     }
     
-    createFile(File f) {
+    createFile(FileWriter writer) {
         Console.write("Creating file... ")
         
-        program.fail("Failed to create file", !f.create())
+        program.fail("Failed to create file", !writer.create())
         
         Console.writeLine("OK")
     }
     
-    writeToFile(File f) {
+    writeToFile(FileWriter writer) {
         Console.write("Writing #{lines} lines of data to file... ")
         
         for (i in 0..lines) {
-            f.writeLine(inputString)
+            writer.writeLine(inputString)
         }
         
         Console.writeLine("OK")
     }
     
-    readFromFile(File f) {
+    readFromFile(FileReader reader) {
         Console.write("Reading lines from file... ")
         
-        f.reopen()
+        if (!reader.open) {
+            reader.open()
+        }
+        
+        program.fail("File reader failed to open", !reader.open)
         
         Int    times = 0
-        String line  = f.readLine()
+        String line  = reader.readLine()
         
         while (line != null) {
             program.fail("Reading from file failed: '#line' != '#inputString'", !line.equals(inputString))
             
-            line = f.readLine()
+            line = reader.readLine()
             
             times++
         }
+        
+        reader.close()
         
         program.fail("Failed; only read #{times}/100 lines", times != lines)
         
         Console.writeLine("OK")
     }
     
-    deleteFile(File f) {
+    deleteFile(FileWriter writer) {
         Console.write("Deleting file... ")
         
-        program.fail("Failed to delete file", !f.delete())
+        program.fail("Failed to delete file", !writer.delete())
         
         Console.writeLine("OK")
     }

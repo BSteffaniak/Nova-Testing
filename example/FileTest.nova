@@ -1,6 +1,8 @@
 package "example"
 
 import "nova/io/File"
+import "nova/io/FileReader"
+import "nova/io/FileWriter"
 import "nova/thread/Thread"
 
 class FileTest {
@@ -10,19 +12,23 @@ class FileTest {
         if (f.exists) {
             Console.writeLine("Your file exists!")
             
-            f.writeLine("Entering data..")
-            f.writeLine("asdfasdf thing.")
+            var writer = new FileWriter(f)
             
-            f.reopen()
+            writer.writeLine("Entering data..")
+            writer.writeLine("asdfasdf thing.")
             
-            String data = f.readAllContents()
+            writer.close()
+            
+            var reader = new FileReader(f)
+            
+            String data = reader.readAllContents()
+            
+            reader.close()
             
             Console.writeLine(data)
         } else {
             Console.writeLine("Your file does not exist..")
         }
-        
-        f.close()
         
         Console.writeLine("Press enter to exit...")
         
