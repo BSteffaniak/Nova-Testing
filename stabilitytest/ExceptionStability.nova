@@ -14,7 +14,7 @@ class ExceptionStability extends StabilityTestCase {
             worked = true
         }
         
-        program.fail("Failed; uncaught Exception", !worked)
+        program.fail("Failed to catch Exception", !worked)
     }
     
     testException() {
@@ -37,13 +37,13 @@ class ExceptionStability extends StabilityTestCase {
             
             program.fail("Failed to catch DivideByZeroException")
         } catch (StabilityTestException e) {
-            program.fail("Failed; uncaught DivideByZeroException", !worked)
+            program.fail("Failed to catch DivideByZeroException", !worked)
             
             Console.writeLine("OK")
             
             throw new Exception()
         }
         
-        program.fail("Failed; uncaught StabilityTestException", !worked)
+        program.fail("Failed to catch StabilityTestException", !worked)
     }
 }
