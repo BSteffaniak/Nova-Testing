@@ -20,7 +20,7 @@ class ExceptionStability extends StabilityTestCase {
         
         try {
             testSoftExceptions()
-        } catch soft (DivideByZeroException e) {
+        } catch all (DivideByZeroException e) {
             worked = true
             
             Console.writeLine("OK")
