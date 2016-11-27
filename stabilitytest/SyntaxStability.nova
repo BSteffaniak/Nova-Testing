@@ -15,7 +15,7 @@ class SyntaxStability extends StabilityTestCase {
         checkIterators()
         checkTernary()
         checkElvis()
-        checkRepeat()
+        // checkRepeat()
         checkNamedArguments()
         checkDefaultClosureArguments()
         checkZipper()
@@ -357,47 +357,47 @@ class SyntaxStability extends StabilityTestCase {
         return false
     }
 
-    checkRepeat() {
-        Console.write("Checking repeat functionality... ")
+    // checkRepeat() {
+    //     Console.write("Checking repeat functionality... ")
 
-        Int i = 0
+    //     Int i = 0
 
-        repeat {
-            if (i == 101) {
-                break
-            }
+    //     repeat {
+    //         if (i == 101) {
+    //             break
+    //         }
 
-            i++
-        }
+    //         i++
+    //     }
         
-        program.fail("Vanilla repeat failed", i != 101)
+    //     program.fail("Vanilla repeat failed", i != 101)
 
-        i = 0
+    //     i = 0
 
-        repeat (101) {
-            i++
-        }
+    //     repeat (101) {
+    //         i++
+    //     }
 
-        program.fail("Repeat 101 times failed", i != 101)
+    //     program.fail("Repeat 101 times failed", i != 101)
 
-        i = 0
+    //     i = 0
 
-        Int times = 101
+    //     Int times = 101
 
-        repeat (times) {
-            i++
-        }
+    //     repeat (times) {
+    //         i++
+    //     }
 
-        program.fail("Repeat times (#times) failed", i != 101)
+    //     program.fail("Repeat times (#times) failed", i != 101)
 
-        i = 0
+    //     i = 0
 
-        repeat (times) i++
+    //     repeat (times) i++
 
-        program.fail("Repeat fragment failed", i != 101)
+    //     program.fail("Repeat fragment failed", i != 101)
 
-        Console.writeLine("OK")
-    }
+    //     Console.writeLine("OK")
+    // }
 
     named(String s, String arg, Int jum = 4, Int jdd = 0, Int joe = 0) -> Int {
         return -1
