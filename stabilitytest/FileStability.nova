@@ -54,11 +54,11 @@ class FileStability extends StabilityTestCase {
     readFromFile(FileReader reader) {
         Console.write("Reading lines from file... ")
         
-        if (!reader.open) {
+        if (!reader.isOpen) {
             reader.open()
         }
         
-        program.fail("File reader failed to open", !reader.open)
+        program.fail("File reader failed to open", !reader.isOpen)
         
         Int    times = 0
         String line  = reader.readLine()
