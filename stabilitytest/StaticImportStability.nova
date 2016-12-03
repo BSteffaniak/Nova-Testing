@@ -9,7 +9,7 @@ class StaticImportStability extends StabilityTestCase {
         Console.write("Checking math static imports... ")
         
         program.fail("Did not call abs correctly", abs(-5) != 5)
-        program.fail("Did not call max correctly", max(-5, -6) != 5)
+        program.fail("Did not call max correctly", max(-5, -6) != -5)
         program.fail("Did not call min correctly", min(-5, -6) != -6)
         program.fail("Did not call sign correctly", sign(-5) != -1)
         program.fail("Did not call round correctly", round(5.6) != 6)
