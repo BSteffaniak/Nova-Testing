@@ -11,7 +11,7 @@ class ExceptionStability extends StabilityTestCase {
         try {
             testException()
         } catch (Exception e) {
-            worked = true
+            worked = e.class == Exception // Make sure not a sub-class
         }
         
         program.fail("Failed to catch Exception", !worked)
@@ -30,8 +30,6 @@ class ExceptionStability extends StabilityTestCase {
     }
     
     testException() {
-        Bool worked = false
-        
         try {
             Console.write("Checking DivideByZeroException... ")
             
@@ -39,8 +37,6 @@ class ExceptionStability extends StabilityTestCase {
                 Int den = 0
                 Int i   = 43 / den
             } catch (DivideByZeroException e) {
-                worked = true
-                
                 Console.writeLine("OK")
                 Console.write("Checking StabilityTestException... ")
                 
@@ -49,14 +45,12 @@ class ExceptionStability extends StabilityTestCase {
             
             program.fail("Failed to catch DivideByZeroException")
         } catch (StabilityTestException e) {
-            program.fail("Failed to catch DivideByZeroException", !worked)
-            
             Console.writeLine("OK")
             
             throw new Exception()
         }
         
-        program.fail("Failed to catch StabilityTestException", !worked)
+        program.fail("Failed to catch StabilityTestException")
     }
     
     testSoftExceptions() {
