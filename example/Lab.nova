@@ -172,9 +172,18 @@ class Lab {
         
         Console.writeLine("Inverse of 3x3 matrix:\n#matrix3.inverse()")
         
-        var l = new Lab()
+        let l = new Lab()
         
         l.chainable().chainable()
+        
+        immutable String[] myImmutableArray = ["one", "two", "three"]
+        
+        Console.log("Immutable: #myImmutableArray")
+        
+        let outputArray = myImmutableArray.add("four")
+        
+        Console.log("Modified(#myImmutableArray.count): #myImmutableArray")
+        Console.log("Output(#outputArray.count): #outputArray")
         
         Console.waitForEnter()
     }
