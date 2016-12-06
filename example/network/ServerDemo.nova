@@ -19,11 +19,11 @@ class ServerDemo {
             
             ConnectionSocket request = socket.acceptClient()
             
-            if (request == null) {
+            if (!request) {
                 Console.writeLine("Failed to accept client")
             }
             
-            while (request != null) {
+            while (request) {
                 connections.add(request)
                 
                 ConnectionThread thread = new ConnectionThread(request)
@@ -33,7 +33,7 @@ class ServerDemo {
                 OutputThread othread = new OutputThread(socket, request)
                 
                 othread.start()
-                Console.writeLine("Waiting on anoter")
+                Console.writeLine("Waiting on another")
                 request = socket.acceptClient()
             }
             

@@ -30,7 +30,7 @@ class GenericDemo {
         while (!strs.isEmpty) {
             String popped = strs.pop()
             
-            if (popped != null) {
+            if (popped) {
                 popped = "\"" + popped + "\""
             }
             

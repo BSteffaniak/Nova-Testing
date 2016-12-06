@@ -193,9 +193,9 @@ class SyntaxStability extends StabilityTestCase {
     checkUntil() {
         Console.write("Checking until statement... ")
 
-        Object obj = null
+        Object obj
 
-        until (obj != null) {
+        until (obj) {
             obj = test1()
             obj = test2()
             obj = test3()

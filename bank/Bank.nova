@@ -104,7 +104,7 @@ class Bank {
                 
                 String input = getInput()
                 
-                if (input == null) break
+                if (!input) break
                 
                 Int choice = Int.parseInt(input)
                 
@@ -117,7 +117,7 @@ class Bank {
                     
                     input = getInput()
                     
-                    if (input == null) break
+                    if (!input) break
                     
                     Int num = Int.parseInt(input)
                 } else if (choice == 3) {
@@ -131,7 +131,7 @@ class Bank {
                     
                     input = getInput()
                     
-                    if (input == null) break
+                    if (!input) break
                     
                     Double amount = Double.parseDouble(input)
                     
@@ -147,7 +147,7 @@ class Bank {
                     
                     input = getInput()
                     
-                    if (input == null) break
+                    if (!input) break
                     
                     Double amount = Double.parseDouble(input)
                     
@@ -161,7 +161,7 @@ class Bank {
                     
                     String str = getInput()
                     
-                    if (str == null) break
+                    if (!str) break
                     
                     if (str.size <= 0) {
                         continue
