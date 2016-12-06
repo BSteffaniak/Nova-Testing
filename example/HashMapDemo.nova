@@ -20,7 +20,7 @@ class HashMapDemo {
         
         words.forEach({ Console.writeLine("Contains: #_") })
 
-        Console.writeLine("\n" + words.filter({ ((String)_.key).contains("hey") }).map({ _.value }).join(", ") + "\n")
+        Console.writeLine("\n" + words.filter({ _.key.contains("hey") }).map({ _.value }).join(", ") + "\n")
         
         words.forEach({ Console.writeLine("Contains: #_") })
         
