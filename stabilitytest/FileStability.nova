@@ -63,7 +63,7 @@ class FileStability extends StabilityTestCase {
         Int    times = 0
         String line  = reader.readLine()
         
-        while (line != null) {
+        while (line) {
             program.fail("Reading from file failed: '#line' != '#inputString'", !line.equals(inputString))
             
             line = reader.readLine()
