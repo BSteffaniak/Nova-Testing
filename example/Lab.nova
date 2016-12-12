@@ -148,8 +148,8 @@ class Lab {
         Console.writeLine("Matrix:\n#matrix1")
         Console.writeLine("Matrix:\n#matrix1.transpose()")
         Console.writeLine("Matrix:\n#matrix2")
-        Console.writeLine("Matrix:\n#matrix1.multiply(matrix2)")
-        Console.writeLine("Matrix:\n#matrix1.transpose().add(matrix2)")
+        Console.writeLine("Matrix:\n#{matrix1 * matrix2}")
+        Console.writeLine("Matrix:\n#{matrix1.transpose() + matrix2}")
         
         var matrix3 = new Matrix(3, 3)
         matrix3[0][0] = 6
