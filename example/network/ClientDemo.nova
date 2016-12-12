@@ -23,7 +23,7 @@ class ClientDemo {
             while (socket.connection.connected) {
                 String message = Console.readLine()
                 
-                if (message.equals("q")) {
+                if (message == "q") {
                     socket.close()
                     
                     break

@@ -247,7 +247,7 @@ class SyntaxStability extends StabilityTestCase {
 
         s1, s2 = swap2(s1, s2)
 
-        program.fail("Failed to swap String values with multiple return values", !s1.equals("world") || !s2.equals("hello"))
+        program.fail("Failed to swap String values with multiple return values", s1 != "world" || s2 != "hello")
 
         Console.writeLine("OK")
     }
@@ -321,13 +321,13 @@ class SyntaxStability extends StabilityTestCase {
     checkTernary() {
         Console.write("Checking ternary functionality... ")
 
-        var first = trueValue() ? "hey".equals("hey") : "hey".equals("hey2")
+        var first = trueValue() ? "hey" == "hey" : "hey" == "hey2"
 
         program.fail("Failed first ternary test", !first)
 
         var second = falseValue() ? "one" : "two"
 
-        program.fail("Failed second ternary test", !second.equals("two"))
+        program.fail("Failed second ternary test", second != "two")
 
         Console.writeLine("OK")
     }
@@ -336,15 +336,15 @@ class SyntaxStability extends StabilityTestCase {
         Console.write("Checking elvis functionality... ")
 
         var str = "this isnt null"
-        var str2 = null
+        String str2 = null
 
         var result1 = str ?: "wtf"
 
-        program.fail("Failed first elvis test", result1.equals("wtf"))
+        program.fail("Failed first elvis test", result1 == "wtf")
 
         var result2 = str2 ?: "this is null"
 
-        program.fail("Failed second elvis test", !result2.equals("this is null"))
+        program.fail("Failed second elvis test", result2 != "this is null")
 
         Console.writeLine("OK")
     }
@@ -489,7 +489,7 @@ class SyntaxStability extends StabilityTestCase {
             Console.write("array access... ")
             array[node?.child?.value] = "hello"
             
-            program.fail("Failed to set correct array index with correct value using the safe navigation operator", !array[2].equals("hello"))
+            program.fail("Failed to set correct array index with correct value using the safe navigation operator", array[2] != "hello")
         } else {
             program.fail("Failed to safely navigate valid children")
         }

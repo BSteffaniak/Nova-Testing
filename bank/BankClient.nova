@@ -23,7 +23,7 @@ class BankClient {
                 
                 String input = null
                 
-                while (!input || input.equals("YOU IMPOSTER!\n")) {
+                while (!input || input == "YOU IMPOSTER!\n") {
                     Console.write(socket.connection.in.readString())
                     
                     String username = Console.readLine()

@@ -18,7 +18,9 @@ class ArrayDemo {
                 Console.writeLine("Contains: " + list[i])
             }
             
-            Animal animal = list.remove(2)
+            Animal animal = list[2]
+            
+            list.remove(2)
             
             Console.writeLine("--------- Removed: " + animal + " ----------")
             

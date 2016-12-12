@@ -17,19 +17,19 @@ class LambdaStability extends StabilityTestCase {
         
         program.fail("Failed first list map with 2 args. Expected '#mappedExpected' but received '#mappedOutput'", !mappedOutput.equals(mappedExpected))
         //Console.writeLine("Mapped backwards: " + list.filter(x -> x.count >= 4).map(x -> x + "?").reverse().join(", "))
-        //if (!list2.map(x -> x + "!").join(", ").equals(""))
+        //if (list2.map(x -> x + "!").join(", ") != "")
         
         LinkedList<String> linked = new LinkedList()
         
         linked.add("test").add("test2").add("test3")
         
-        program.fail("Failed reverse linked list", !linked.reverse().join(", ").equals("test3, test2, test"))
-        program.fail("Failed forward linked list", !linked.join(", ").equals("test, test2, test3"))
+        program.fail("Failed reverse linked list", linked.reverse().join(", ") != "test3, test2, test")
+        program.fail("Failed forward linked list", linked.join(", ") != "test, test2, test3")
         
         String[] repeated = list.map({ "test" })
         
         for (item in repeated) {
-            program.fail("Map with no arguments failed", !item.equals("test"))
+            program.fail("Map with no arguments failed", item != "test")
         }
         
         Console.writeLine("OK")

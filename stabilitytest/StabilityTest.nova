@@ -15,7 +15,7 @@ class StabilityTest extends StabilityTestCase {
         
         timer.stop()
         
-//        if (args[1].equals("test"))
+//        if (args[1] == "test")
 //        System.execute("Executable.exe a")
         
         Console.writeLine("Took " + timer.duration + "ms")

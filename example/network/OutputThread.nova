@@ -19,7 +19,7 @@ class OutputThread extends Thread {
         while (socket.connected) {
             String message = Console.readLine()
             
-            if (message.equals("q")) {
+            if (message == "q") {
                 serverSocket.close()
                 
                 break

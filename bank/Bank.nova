@@ -55,7 +55,7 @@ class Bank {
             while (true) {
                 String input = Console.readLine()
                 
-                if (input.equals("q")) {
+                if (input == "q") {
                     socket.close()
                     
                     thread.kill()
