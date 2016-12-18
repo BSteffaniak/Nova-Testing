@@ -23,7 +23,9 @@ class Lab {
         
         //Console.writeLine(v.x + ", " + v.y)
         
-        var tree = new BinaryTree(["F", "B", "A", "D", "C", "E", "G", "I", "H"])
+        let strData = ["F", "B", "A", "D", "C", "E", "G", "I", "H"]
+        
+        var tree = new BinaryTree(strData)
         
         Console.writeLine("Preorder: #{tree.preorder().join(", ")}")
         Console.writeLine("Inorder: #{tree.inorder().join(", ")}")
@@ -36,6 +38,8 @@ class Lab {
         num2 = num1 = 7
         
         Console.writeLine("My nums: #num1, #num2 hey: #tree.inorder()!")
+        
+        Console.log("Sorted array: #strData.sort()")
         
         Console.writeLine("Result from ternary: #num1 #{ num1 < 3 ? "<" : ">=" } 3")
         
