@@ -39,7 +39,8 @@ class Lab {
         
         Console.writeLine("My nums: #num1, #num2 hey: #tree.inorder()!")
         
-        Console.log("Sorted array: #strData.sort()")
+        Console.log("MergeSorted array: #strData.mergeSort()")
+        Console.log("QuickSorted array: #strData.quickSort()")
         
         Console.writeLine("Result from ternary: #num1 #{ num1 < 3 ? "<" : ">=" } 3")
         
