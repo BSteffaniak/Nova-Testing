@@ -24,6 +24,7 @@ class Lab {
         //Console.writeLine(v.x + ", " + v.y)
         
         let strData = ["F", "B", "A", "D", "C", "E", "G", "I", "H"]
+        let otherStrData = ["F", "B", "A", "D"]
         
         var tree = new BinaryTree(strData)
         
@@ -41,6 +42,11 @@ class Lab {
         
         Console.log("MergeSorted array: #strData.mergeSort()")
         Console.log("QuickSorted array: #strData.quickSort()")
+        
+        Console.log("Concatted arrays: #{strData + otherStrData}")
+        Console.log("Concatted sorted array: #{(strData + otherStrData).sort()}")
+        
+        Console.log("Multiplied string: #{"hey" * 4}")
         
         Console.writeLine("Result from ternary: #num1 #{ num1 < 3 ? "<" : ">=" } 3")
         
