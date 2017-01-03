@@ -1,6 +1,6 @@
 package "example"
 
-public interface Polygon {
+public trait Polygon {
     public numberSides() -> Int
     public calculateArea() -> Double
 }
