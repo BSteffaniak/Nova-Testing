@@ -1,0 +1,20 @@
+package "stabilitytest"
+
+import "stabilitytest/InnerClassStability.MyInner"
+
+class ExternalInnerClassStability extends StabilityTestCase {
+    public construct(StabilityTest program) => super(program)
+    
+    public test() {
+        Console.write("Checking external inner class access... ")
+        
+        let instance = new MyInner(3, 5)
+        
+        // [ExpectCompileError InvalidAccessError]
+        // instance.y = 45
+        
+        program.fail("did not set values correctly", instance.x != 3)
+        
+        Console.writeLine("OK")
+    }
+}
