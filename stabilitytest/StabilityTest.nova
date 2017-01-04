@@ -38,6 +38,7 @@ class StabilityTest extends StabilityTestCase {
             new AssignmentStability(this).test()
             new RegexStability(this).test()
             new StaticImportStability(this).test()
+            new InnerClassStability(this).test()
             
             [Target c] new TimeStability(this).test()
             [Target c] new ThreadStability(this).test()
