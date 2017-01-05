@@ -445,7 +445,7 @@ class SyntaxStability extends StabilityTestCase {
         var array1 = ["This", "is", "a", "test"]
         var array2 = ["one", "two", "three", "four"]//[1, 2, 4, 3]
 
-        var zipped = array1.zip(array2, (x, y) -> "#x #y")
+        var zipped = array1.zip(array2, (x, y) => "#x #y")
         Console.write("Zipped: #zipped ")
         
         Console.writeLine("OK")

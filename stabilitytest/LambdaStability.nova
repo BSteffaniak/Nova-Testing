@@ -12,12 +12,12 @@ class LambdaStability extends StabilityTestCase {
         String[] list = ["this", "is", "a", "test", "to", "see", "what shows up"]
         Int[] list2 = [1, 2, 3, 4, 5, 6, 7]
         
-        String mappedOutput = list.filter(x -> x.count >= 4).map((x, i) -> i + ": " + x + "?").join(", ")
+        String mappedOutput = list.filter(x => x.count >= 4).map((x, i) => i + ": " + x + "?").join(", ")
         String mappedExpected = "0: this?, 1: test?, 2: what shows up?"
         
         program.fail("Failed first list map with 2 args. Expected '#mappedExpected' but received '#mappedOutput'", !mappedOutput.equals(mappedExpected))
-        //Console.writeLine("Mapped backwards: " + list.filter(x -> x.count >= 4).map(x -> x + "?").reverse().join(", "))
-        //if (list2.map(x -> x + "!").join(", ") != "")
+        //Console.writeLine("Mapped backwards: " + list.filter(x => x.count >= 4).map(x => x + "?").reverse().join(", "))
+        //if (list2.map(x => x + "!").join(", ") != "")
         
         LinkedList<String> linked = new LinkedList()
         

@@ -69,7 +69,7 @@ class Lab {
         //Console.writeLine("Sum: #list2.sum()")
         
         /*list.filter({ _.count > 10 }).map({ getClassByName(_) })
-            .forEach(x -> {
+            .forEach(x => {
                 Console.writeLine(x.fields.map({ _.name }).join(", "))
             })*/
         
@@ -93,7 +93,7 @@ class Lab {
         Console.writeLine("Multi dimensional array: #multi")
         Console.writeLine(multi[0][0].chars.contains('z').toString().capitalize())
         
-        Console.writeLine(list.map(x -> {
+        Console.writeLine(list.map(x => {
             var something = 5 * x.count
             
             return "#something #x"
