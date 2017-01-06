@@ -11,7 +11,6 @@ class SyntaxStability extends StabilityTestCase {
         checkLoops()
         checkUntil()
         checkMatchStatements()
-        //checkMultipleReturnValues()
         checkIterators()
         checkTernary()
         checkElvis()
@@ -224,46 +223,7 @@ class SyntaxStability extends StabilityTestCase {
     static test1() => null
     static test2() => null
     static test3() => new Object()
-
-    checkMultipleReturnValues() {
-        Console.write("Checking methods with multiple return values... ")
-
-        Int ret1 = 1
-        Int ret2 = 2
-
-        ret1, ret2 = ret2()
-
-        program.fail("Failed to pass over second return value", ret1 != 5 || ret2 != 2)
-
-        ret1 = 1
-        ret2 = 2
-
-        ret1, ret2 = swap(ret1, ret2)
-
-        program.fail("Failed to swap primitive values with multiple return values", ret1 != 2 || ret2 != 1)
-
-        String s1 = "hello"
-        String s2 = "world"
-
-        s1, s2 = swap2(s1, s2)
-
-        program.fail("Failed to swap String values with multiple return values", s1 != "world" || s2 != "hello")
-
-        Console.writeLine("OK")
-    }
-
-    static ret2() -> Int, Int {
-        return 5
-    }
-
-    static swap(Int a, Int b) -> Int, Int {
-        return b, a
-    }
-
-    static swap2(String a, String b) -> String, String {
-        return b, a
-    }
-
+    
     static filterFunc(String i) -> Bool {
         return i.count >= 4
     }
