@@ -2,6 +2,7 @@ package "example"
 
 import "nova/datastruct/HashMap"
 import "nova/datastruct/Pair"
+import "nova/operators/EqualsOperator"
 
 class HashMapDemo {
     public static main(String args[]) {
