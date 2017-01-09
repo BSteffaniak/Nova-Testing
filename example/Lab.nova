@@ -16,12 +16,15 @@ import "nova/datastruct/list/IntArray"
 import "nova/datastruct/list/Iterator"
 import "nova/datastruct/list/LinkedList"
 import "nova/datastruct/list/List"
+import "nova/io/Curl"
 
 class Lab {
     public static main(String[] args) {
         //var v = new Vector2D(2, 3)
         
         //Console.writeLine(v.x + ", " + v.y)
+        
+        Console.writeLine(Curl.get("https://www.quandl.com/api/v3/datasets/WIKI/TSLA/data.json?rows=3&start_date=2012-11-01&end_date=2013-11-30&order=asc&collapse=quarterly&transform=rdiff&api_key=fKoHCrUdm8GUcCWhRcTs"))
         
         let strData = ["F", "B", "A", "D", "C", "E", "G", "I", "H"]
         let otherStrData = ["F", "B", "A", "D"]
