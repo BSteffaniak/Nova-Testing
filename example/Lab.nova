@@ -24,7 +24,15 @@ class Lab {
         
         //Console.writeLine(v.x + ", " + v.y)
         
-        Console.writeLine(Curl.get("https://www.quandl.com/api/v3/datasets/WIKI/TSLA/data.json?rows=3&start_date=2012-11-01&end_date=2013-11-30&order=asc&collapse=quarterly&transform=rdiff&api_key=fKoHCrUdm8GUcCWhRcTs"))
+        // let jargs = ["curl", "https://www.quandl.com/api/v3/datasets/WIKI/TSLA/data.json?rows=3&start_date=2012-11-01&end_date=2013-11-30&order=asc&collapse=quarterly&transform=rdiff&api_key=fKoHCrUdm8GUcCWhRcTs"]
+        
+        // let curl = System.execute(jargs)
+        
+        // while (var line = curl.reader.readString()) {
+        //     Console.log("==============GOT: " + line)
+        // }
+        
+        // Console.log("Done reading.")
         
         let strData = ["F", "B", "A", "D", "C", "E", "G", "I", "H"]
         let otherStrData = ["F", "B", "A", "D"]
