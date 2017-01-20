@@ -59,7 +59,7 @@ class ExceptionStability extends StabilityTestCase {
         try {
             Console.write("Checking soft exception without a soft catch... ")
             
-            softly throw new StabilityTestException()
+            toss new StabilityTestException()
             
             worked = true
             
@@ -72,7 +72,7 @@ class ExceptionStability extends StabilityTestCase {
         
         Console.write("Checking soft exception with a soft catch... ")
         
-        softly throw new DivideByZeroException()
+        toss new DivideByZeroException()
         
         program.fail("Failed to exit subroutine after throwing soft Exception")
     }
