@@ -77,6 +77,8 @@ class Lab {
         var list = ["this", "is", "a", "test", "to", "see", "what shows up"]
         var list2 = [1, 2, 3, 4, 5, 6, 7]
         
+        list2.add(9).add(2)
+        
         Console.log(list.map({ "'#_'" }).toEnglish("and"))
         Console.log(list.map({ "'#_'" }).toEnglish("and", false))
         
@@ -105,7 +107,7 @@ class Lab {
         multi.add(["Second dimension yo", "waddup"])
         
         Console.writeLine("Multi dimensional array: #multi")
-        Console.writeLine(multi[0][0].chars.contains('z').toString().capitalize())
+        Console.writeLine(multi[0][0].chars.toCharArray().contains('z').toString().capitalize())
         
         Console.writeLine(list.map(x => {
             var something = 5 * x.count
