@@ -144,6 +144,13 @@ class Lab {
             x.add("its now an array")
         }
 
+        let aaa = ["one", "two", "three"]
+        let bbb = [1, 2, 3, 4, 5]
+        
+        aaa.zip(bbb, { _.count * _ }).forEach({
+            Console.log("Got #_")
+        })
+
         //x.add("hey")
         //x.add("its now an array")
         
