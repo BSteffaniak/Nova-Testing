@@ -46,7 +46,7 @@ class SyntaxStability extends StabilityTestCase {
         num    = 3
         worked = false
 
-        match (num)
+        switch (num)
             case 1
                 program.fail("Match accepted incorrect case")
             case 2    program.fail("Match accepted incorrect case")
