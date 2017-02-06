@@ -30,11 +30,11 @@ class SyntaxStability extends StabilityTestCase {
         Bool worked = false
 
         match (num) {
-            case 1 program.fail("Match accepted incorrect case")
-            case 2 program.fail("Match accepted incorrect case")
-            case 3 worked = true
-            case 4 program.fail("Match accepted incorrect case")
-            default program.fail("Match failed to accept the correct case")
+            1 => program.fail("Match accepted incorrect case")
+            2 => program.fail("Match accepted incorrect case")
+            3 => worked = true
+            4 => program.fail("Match accepted incorrect case")
+            default => program.fail("Match failed to accept the correct case")
         }
 
         program.fail("FAIL", !worked)
@@ -47,14 +47,14 @@ class SyntaxStability extends StabilityTestCase {
         worked = false
 
         switch (num)
-            case 1
+            1 =>
                 program.fail("Match accepted incorrect case")
-            case 2    program.fail("Match accepted incorrect case")
-            case 3
+            2 => program.fail("Match accepted incorrect case")
+            3 =>
                 worked = true
-            case 4
+            4 =>
                 program.fail("Match accepted incorrect case")
-            default
+            default =>
                 program.fail("Match failed to accept the correct case")
         
         program.fail("FAIL", !worked)
@@ -67,15 +67,19 @@ class SyntaxStability extends StabilityTestCase {
         worked = false
 
         match (num) {
-            case 1 {
+            1 => {
                 program.fail("Match accepted incorrect case")
-            } case 2 {
+            }
+            2 => {
                 program.fail("Match accepted incorrect case")
-            } case 3 {
+            }
+            3 => {
                 worked = true
-            } case 4 {
+            }
+            4 => {
                 program.fail("Match accepted incorrect case")
-            } default {
+            }
+            default => {
                 program.fail("Match failed to accept the correct case")
             }
         }
@@ -93,15 +97,16 @@ class SyntaxStability extends StabilityTestCase {
         worked  = false
 
         match (num) {
-            case (val++) {
+            val++ => {
                 program.fail("Match accepted incorrect case")
-            } case val++ {
+            } val++ => {
                 program.fail("Match accepted incorrect case")
-            } case (val++) {
+            } (val++) => {
                 worked = true
-            } case val++ {
+            }
+            val++ => {
                 program.fail("Match accepted incorrect case")
-            } default {
+            } default => {
                 program.fail("Match failed to accept the correct case")
             }
         }
@@ -119,16 +124,16 @@ class SyntaxStability extends StabilityTestCase {
         Bool worked2 = false
 
         match (num++) {
-            case val++ {
+            val++ => {
                 program.fail("Match accepted incorrect case")
-            } case val++ {
+            } val++ => {
                 program.fail("Match accepted incorrect case")
-            } case val++ {
+            } val++ => {
                 worked = true
                 fallthrough
-            } case val++ {
+            } val++ => {
                 worked2 = true
-            } default {
+            } default => {
                 program.fail("Match failed to accept the correct case")
             }
         }
