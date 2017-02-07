@@ -6,7 +6,7 @@ class PrimitiveOverloadStability extends StabilityTestCase {
     public construct(StabilityTest program) => super(program)
     
     public test() {
-        Console.write("Checking primitive key for HashMap... ")
+        Console.write("Checking primitive key for HashMap<Int, String>... ")
         
         let map1 = new HashMap<Int, String>()
         
@@ -24,6 +24,27 @@ class PrimitiveOverloadStability extends StabilityTestCase {
         
         program.fail("Failed to iterator over map values. Expected counter value of 2, but got #counter", counter != 2)
         program.fail("Failed to get valid key values. Expected a sum of 15, but got #sum", sum != 15)
+        
+        Console.log("OK")
+        Console.write("Checking primitive key for HashMap<Int, Int>... ")
+        
+        let map2 = new HashMap<Int, Int>()
+        
+        sum = 0
+        counter = 0
+        
+        map2[1] = 49
+        map2[3] = 2
+        map2[-2] = 11
+        
+        for (entry2 in map2) {
+            sum += entry2.key * entry2.value
+            
+            counter++
+        }
+        
+        program.fail("Failed to iterator over map values. Expected counter value of 2, but got #counter", counter != 3)
+        program.fail("Failed to get valid key values. Expected a sum of #{49 + 6 - 22}, but got #sum", sum != 49 + 6 - 22)
         
         Console.log("OK")
     }
