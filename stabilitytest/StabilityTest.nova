@@ -40,6 +40,7 @@ class StabilityTest extends StabilityTestCase {
             new StaticImportStability(this).test()
             new InnerClassStability(this).test()
             new ExternalInnerClassStability(this).test()
+            new PrimitiveOverloadStability(this).test()
             
             [Target c] new TimeStability(this).test()
             [Target c] new ThreadStability(this).test()

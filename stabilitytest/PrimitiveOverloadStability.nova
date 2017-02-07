@@ -1,0 +1,30 @@
+package "stabilitytest"
+
+import "nova/datastruct/HashMap"
+
+class PrimitiveOverloadStability extends StabilityTestCase {
+    public construct(StabilityTest program) => super(program)
+    
+    public test() {
+        Console.write("Checking primitive key for HashMap... ")
+        
+        let map1 = new HashMap<Int, String>()
+        
+        map1[5] = "test"
+        map1[10] = "test2"
+        
+        var sum = 0
+        var counter = 0
+        
+        for (entry in map1) {
+            sum += entry.key
+            
+            counter++
+        }
+        
+        program.fail("Failed to iterator over map values. Expected counter value of 2, but got #counter", counter != 2)
+        program.fail("Failed to get valid key values. Expected a sum of 15, but got #sum", sum != 15)
+        
+        Console.log("OK")
+    }
+}
