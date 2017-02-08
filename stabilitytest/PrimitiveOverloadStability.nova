@@ -37,8 +37,8 @@ class PrimitiveOverloadStability extends StabilityTestCase {
         map2[3] = 2
         map2[-2] = 11
         
-        for (entry2 in map2) {
-            sum += entry2.key * entry2.value
+        for (entry in map2) {
+            sum += entry.key * entry.value
             
             counter++
         }
@@ -71,8 +71,8 @@ class PrimitiveOverloadStability extends StabilityTestCase {
         map2[3] = 2
         map2[-2] = 11
         
-        map2.forEach(entry2=> {
-            sum += entry2.key * entry2.value
+        map2.forEach(entry => {
+            sum += entry.key * entry.value
             
             counter++
         })
