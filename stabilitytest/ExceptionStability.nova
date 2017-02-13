@@ -34,8 +34,10 @@ class ExceptionStability extends StabilityTestCase {
             Console.write("Checking DivideByZeroException... ")
             
             try {
-                Int den = 0
-                Int i   = 43 / den
+                // Int den = 0
+                // Int i   = 43 / den
+                
+                throw new DivideByZeroException()
             } catch (DivideByZeroException e) {
                 Console.writeLine("OK")
                 Console.write("Checking StabilityTestException... ")
