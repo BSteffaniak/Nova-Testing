@@ -22,7 +22,7 @@ import "nova/thread/Thread"
 import "nova/thread/ThreadLocal"
 
 class Lab {
-    static ThreadLocal<Int> local = new ThreadLocal<Int>()
+    static thread Int local = 122
     
     public static main(String[] args) {
         //var v = new Vector2D(2, 3)
@@ -96,20 +96,20 @@ class Lab {
                 Console.writeLine(x.fields.map({ _.name }).join(", "))
             })*/
         
-        Console.log("Main local unset: #local.get()")
-        local.set(10)
-        Console.log("Main local set: #local.get()")
+        Console.log("Main local unset: #local")
+        local = 10
+        Console.log("Main local set: #local")
         
         Async.execute({
-            Console.log("Async local unset: #local.get()")
-            local.set(5)
-            Console.log("Async local set: #local.get()")
+            Console.log("Async local unset: #local")
+            local = 5
+            Console.log("Async local set: #local")
             
             Console.writeLine("Wait a second!")
-            Thread.sleep(1000)
+            Thread.sleep(5000)
             Console.writeLine("ok, now what")
             
-            Console.log("Async local at end: #local.get()")
+            Console.log("Async local at end: #local")
         })
         
         var sss = new String[4][2][1]
@@ -244,7 +244,7 @@ class Lab {
         
         // func()
         
-        Console.log("Main local at end: #local.get()")
+        Console.log("Main local at end: #local")
         
         Console.waitForEnter()
     }
