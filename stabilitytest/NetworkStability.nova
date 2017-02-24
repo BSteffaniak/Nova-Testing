@@ -34,7 +34,7 @@ class NetworkStability extends StabilityTestCase {
         
         String s = connection.in.readString()
         
-        program.fail("Server unable to receive correct message from client", s.count != received.count || !s.equals(received))
+        program.fail("Server unable to receive correct message from client. Expected message of size #received.count, but received of size #s.count", s.count != received.count || !s.equals(received))
         
         thread.join()
         
