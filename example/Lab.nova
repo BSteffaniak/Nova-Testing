@@ -17,8 +17,13 @@ import "nova/datastruct/list/Iterator"
 import "nova/datastruct/list/LinkedList"
 import "nova/datastruct/list/List"
 import "nova/io/Curl"
+import "nova/meta/library/Library"
+import "nova/thread/Thread"
+import "nova/thread/ThreadLocal"
 
 class Lab {
+    static ThreadLocal<Int> local = new ThreadLocal<Int>()
+    
     public static main(String[] args) {
         //var v = new Vector2D(2, 3)
         
@@ -91,10 +96,20 @@ class Lab {
                 Console.writeLine(x.fields.map({ _.name }).join(", "))
             })*/
         
+        Console.log("Main local unset: #local.get()")
+        local.set(10)
+        Console.log("Main local set: #local.get()")
+        
         Async.execute({
+            Console.log("Async local unset: #local.get()")
+            local.set(5)
+            Console.log("Async local set: #local.get()")
+            
             Console.writeLine("Wait a second!")
             Thread.sleep(1000)
             Console.writeLine("ok, now what")
+            
+            Console.log("Async local at end: #local.get()")
         })
         
         var sss = new String[4][2][1]
@@ -220,6 +235,16 @@ class Lab {
         
         Console.log("Modified(#myImmutableArray.count): #myImmutableArray")
         Console.log("Output(#outputArray.count): #outputArray")
+        
+        Console.log("Loading library... ")
+        
+        // let lib = new Library("C:/Users/Braden/GitHub/NovaWorkspace/testlib")
+        // lib.load()
+        // /*let func() = */lib.getFunction("nova/test/Test.staticFunc", true)
+        
+        // func()
+        
+        Console.log("Main local at end: #local.get()")
         
         Console.waitForEnter()
     }
