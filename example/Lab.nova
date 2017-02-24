@@ -20,6 +20,7 @@ import "nova/io/Curl"
 import "nova/meta/library/Library"
 import "nova/thread/Thread"
 import "nova/thread/ThreadLocal"
+import "nova/time/Timer"
 
 class Lab {
     static thread Int local = 122
@@ -246,7 +247,59 @@ class Lab {
         
         Console.log("Main local at end: #local")
         
+        benchmarkThreadLocals()
+        benchmarkThreadLocals()
+        
         Console.waitForEnter()
+    }
+    
+    static ThreadLocal<Int> bench1 = new ThreadLocal<Int>()
+    static Int bench2
+    
+    static benchmarkThreadLocals() {
+        let timer = new Timer()
+        
+        Console.write("Running local mutate... ")
+        
+        timer.start()
+        setThreadLocalMutate()
+        timer.stop()
+        
+        Console.log("Took #timer.duration")
+        
+        Console.write("Running static mutate... ")
+        
+        timer.start()
+        setStatic()
+        timer.stop()
+        
+        Console.log("Took #timer.duration")
+        
+        Console.write("Running local access... ")
+        
+        timer.start()
+        setThreadLocalAccess()
+        timer.stop()
+        
+        Console.log("Took #timer.duration")
+    }
+    
+    static setThreadLocalMutate() {
+        for (i in 0..1_000_000) {
+            bench1.set(10)
+        }
+    }
+    
+    static setThreadLocalAccess() {
+        for (i in 0..1_000_000) {
+            bench1.get()
+        }
+    }
+    
+    static setStatic() {
+        for (i in 0..1_000_000) {
+            bench2 = 10
+        }
     }
     
     chainable() => this {
