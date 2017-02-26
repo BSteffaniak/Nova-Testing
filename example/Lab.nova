@@ -107,7 +107,7 @@ class Lab {
             Console.log("Async local set: #local")
             
             Console.writeLine("Wait a second!")
-            Thread.sleep(5000)
+            Thread.sleep(1000)
             Console.writeLine("ok, now what")
             
             Console.log("Async local at end: #local")
