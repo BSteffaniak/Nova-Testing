@@ -253,7 +253,7 @@ class Lab {
         Console.waitForEnter()
     }
     
-    static ThreadLocal<Int> bench1 = new ThreadLocal<Int>()
+    static thread Int bench1
     static Int bench2
     
     static benchmarkThreadLocals() {
@@ -286,13 +286,13 @@ class Lab {
     
     static setThreadLocalMutate() {
         for (i in 0..1_000_000) {
-            bench1.set(10)
+            bench1 = 10
         }
     }
     
     static setThreadLocalAccess() {
         for (i in 0..1_000_000) {
-            bench1.get()
+            let x = bench1
         }
     }
     
