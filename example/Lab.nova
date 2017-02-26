@@ -23,7 +23,7 @@ import "nova/thread/ThreadLocal"
 import "nova/time/Timer"
 
 class Lab {
-    static thread Int local = 122
+    static thread_local Int local = 122
     
     public static main(String[] args) {
         //var v = new Vector2D(2, 3)
@@ -253,7 +253,7 @@ class Lab {
         Console.waitForEnter()
     }
     
-    static thread Int bench1
+    static thread_local Int bench1
     static Int bench2
     
     static benchmarkThreadLocals() {
