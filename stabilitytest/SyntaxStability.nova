@@ -518,6 +518,30 @@ class SyntaxStability extends StabilityTestCase {
         program.fail("Failed to call first class function returned from function", !funcSwitch)
         
         Console.writeLine("OK")
+        
+        funcSwitch = false
+        
+        Console.write("Checking calling a function returned by an inline function... ")
+        
+        let func2 = inlineGetFunc()
+        
+        func2()
+        
+        program.fail("Failed to call first class function returned from inline function", !funcSwitch)
+        
+        Console.writeLine("OK")
+        
+        funcSwitch = false
+        
+        Console.write("Checking calling a function returned by an inline function with type specified... ")
+        
+        let func3 = inlineGetFunc2()
+        
+        func3()
+        
+        program.fail("Failed to call first class function returned from inline function with type specified", !funcSwitch)
+        
+        Console.writeLine("OK")
     }
     
     refFunc() {
@@ -527,4 +551,8 @@ class SyntaxStability extends StabilityTestCase {
     getFunc() -> func() {
         return refFunc
     }
+    
+    inlineGetFunc() => refFunc
+    
+    inlineGetFunc2() -> f() => refFunc
 }
