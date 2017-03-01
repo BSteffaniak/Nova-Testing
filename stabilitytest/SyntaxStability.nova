@@ -21,6 +21,7 @@ class SyntaxStability extends StabilityTestCase {
         checkSafeNavigation()
         checkSnakeCaseNumbers()
         checkArrayInitializers()
+        checkFunctionReturnType()
     }
 
     checkMatchStatements() {
@@ -503,5 +504,27 @@ class SyntaxStability extends StabilityTestCase {
     	program.fail("Failed to ", myInts[2] != num1 || myInts[3] != num2)
     	
     	Console.writeLine("OK")
+    }
+    
+    Bool funcSwitch = false
+    
+    checkFunctionReturnType() {
+        Console.write("Checking calling a function returned by a function... ")
+        
+        let func = getFunc()
+        
+        func()
+        
+        program.fail("Failed to call first class function returned from function", !funcSwitch)
+        
+        Console.writeLine("OK")
+    }
+    
+    refFunc() {
+        funcSwitch = true
+    }
+    
+    getFunc() -> func() {
+        return refFunc
     }
 }
