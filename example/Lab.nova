@@ -17,7 +17,7 @@ import "nova/datastruct/list/Iterator"
 import "nova/datastruct/list/LinkedList"
 import "nova/datastruct/list/List"
 import "nova/io/Curl"
-import "nova/meta/library/Library"
+import "nova/meta/Library"
 import "nova/thread/Thread"
 import "nova/thread/ThreadLocal"
 import "nova/time/Timer"
@@ -239,11 +239,11 @@ class Lab {
         
         Console.log("Loading library... ")
         
-        // let lib = new Library("C:/Users/Braden/GitHub/NovaWorkspace/testlib")
-        // lib.load()
-        // /*let func() = */lib.getFunction("nova/test/Test.staticFunc", true)
+        let lib = new Library("C:/Users/Braden/GitHub/NovaWorkspace/testlib").load()
         
-        // func()
+        let func = lib.getFunction("staticFunc", "nova/test/Test")
+        
+        func()
         
         Console.log("Main local at end: #local")
         
