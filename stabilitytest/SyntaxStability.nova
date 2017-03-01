@@ -507,7 +507,7 @@ class SyntaxStability extends StabilityTestCase {
     }
     
     Bool funcSwitch = false
-    Int funcCount
+    Int funcCount, chainCount
     
     checkFunctionReturnType() {
         Console.write("Checking calling a function returned by a function... ")
@@ -570,6 +570,62 @@ class SyntaxStability extends StabilityTestCase {
         program.fail("Failed to call first class chained function returned from function: #funcSwitch, #funcCount", !funcSwitch || funcCount != 3)
         
         Console.writeLine("OK")
+        
+        funcCount = 0
+        funcSwitch = false
+        chainCount = 0
+        
+        Console.write("Checking calling a chained function x3 returned by a function... ")
+        
+        let chainX3 = chainedFuncReference3()
+        
+        chainX3()()()
+        
+        program.fail("Failed to call first class chained function x3 returned from function: #funcSwitch, #funcCount, x#chainCount", !funcSwitch || funcCount != 1 || chainCount != 3)
+        
+        Console.writeLine("OK")
+        
+        funcCount = 0
+        funcSwitch = false
+        chainCount = 0
+        
+        Console.write("Checking calling a chained function x4 returned by a function... ")
+        
+        let chainX4 = chainedFuncReference4()
+        
+        chainX4()()()()
+        
+        program.fail("Failed to call first class chained function x4 returned from function: #funcSwitch, #funcCount, x#chainCount", !funcSwitch || funcCount != 1 || chainCount != 4)
+        
+        Console.writeLine("OK")
+        
+        funcCount = 0
+        funcSwitch = false
+        chainCount = 0
+        
+        Console.write("Checking calling a chained function x5 returned by a function... ")
+        
+        let chainX5 = chainedFuncReference5()
+        
+        chainX5()()()()()
+        
+        program.fail("Failed to call first class chained function x5 returned from function: #funcSwitch, #funcCount, x#chainCount", !funcSwitch || funcCount != 1 || chainCount != 5)
+        
+        Console.writeLine("OK")
+        
+        funcCount = 0
+        funcSwitch = false
+        chainCount = 0
+        
+        Console.write("Checking calling a chained function x6 returned by a function... ")
+        
+        let chainX6 = chainedFuncReference6()
+        
+        chainX6()()()()()()
+        
+        program.fail("Failed to call first class chained function x6 returned from function: #funcSwitch, #funcCount, x#chainCount", !funcSwitch || funcCount != 1 || chainCount != 6)
+        
+        Console.writeLine("OK")
     }
     
     refFunc() {
@@ -581,9 +637,13 @@ class SyntaxStability extends StabilityTestCase {
         return refFunc
     }
     
-    inlineGetFunc() => refFunc
+    inlineGetFunc() => refFunc { chainCount++ }
     
     inlineGetFunc2() -> f() => refFunc
     
-    chainedFuncReference() => inlineGetFunc
+    chainedFuncReference() => inlineGetFunc { chainCount++ }
+    chainedFuncReference3() => chainedFuncReference { chainCount++ }
+    chainedFuncReference4() => chainedFuncReference3 { chainCount++ }
+    chainedFuncReference5() => chainedFuncReference4 { chainCount++ }
+    chainedFuncReference6() => chainedFuncReference5 { chainCount++ }
 }
