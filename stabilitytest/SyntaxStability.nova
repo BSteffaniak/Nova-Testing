@@ -507,6 +507,7 @@ class SyntaxStability extends StabilityTestCase {
     }
     
     Bool funcSwitch = false
+    Int funcCount
     
     checkFunctionReturnType() {
         Console.write("Checking calling a function returned by a function... ")
@@ -542,10 +543,38 @@ class SyntaxStability extends StabilityTestCase {
         program.fail("Failed to call first class function returned from inline function with type specified", !funcSwitch)
         
         Console.writeLine("OK")
+        
+        funcCount = 0
+        funcSwitch = false
+        
+        Console.write("Checking calling a chained function returned by a function... ")
+        
+        let chained = chainedFuncReference()
+        
+        chained()()
+        
+        program.fail("Failed to call first class chained function returned from function: #funcSwitch, #funcCount", !funcSwitch || funcCount != 1)
+        
+        Console.writeLine("OK")
+        
+        funcCount = 0
+        funcSwitch = false
+        
+        Console.write("Checking calling an assigned chained function returned by a function... ")
+        
+        let c = chained()
+        c()
+        c()
+        c()
+        
+        program.fail("Failed to call first class chained function returned from function: #funcSwitch, #funcCount", !funcSwitch || funcCount != 3)
+        
+        Console.writeLine("OK")
     }
     
     refFunc() {
         funcSwitch = true
+        funcCount++
     }
     
     getFunc() -> func() {
@@ -555,4 +584,6 @@ class SyntaxStability extends StabilityTestCase {
     inlineGetFunc() => refFunc
     
     inlineGetFunc2() -> f() => refFunc
+    
+    chainedFuncReference() => inlineGetFunc
 }
