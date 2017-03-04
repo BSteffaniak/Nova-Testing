@@ -2,13 +2,14 @@ package "stabilitytest"
 
 import "nova/thread/Thread"
 
-class ThreadStability extends StabilityTestCase {
-    public construct(StabilityTest program) {
-        super(program)
-    }
-    
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class ThreadStability {
+    [Test "Testing 20 Threads with memory access"]
     public test() {
-        Console.writeLine("Checking Thread.nova with 20 Threads... ")
         ThreadImplementation[] threads = new Array(20)
         
         createThreads(threads, 20)
@@ -19,7 +20,7 @@ class ThreadStability extends StabilityTestCase {
     }
     
     createThreads(ThreadImplementation[] threads, Int amount) {
-        StabilityExceptionHandler handler = new StabilityExceptionHandler(program)
+        StabilityExceptionHandler handler = new StabilityExceptionHandler()
         
         for (i in 0..amount) {
             threads[i] = new ThreadImplementation(10, 10)
@@ -31,13 +32,9 @@ class ThreadStability extends StabilityTestCase {
     static checkMemoryAccess() {
         Thread.sleep(30)
         
-        Console.write("Checking memory access with multi-threading... ")
-        
         for (i in 0..1000) {
             String s = Int.toString(i)
         }
-        
-        Console.writeLine("OK")
     }
     
     static joinThreads(ThreadImplementation[] threads, Int amount) {
