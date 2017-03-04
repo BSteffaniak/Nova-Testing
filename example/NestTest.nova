@@ -5,7 +5,7 @@ import "novex/nest/TestSuite"
 
 import static "novex/nest/Nest"
 
-test_suite class NestTest {
+testable class NestTest {
     public static main(String[] args) {
         let test = new NestTest()
         

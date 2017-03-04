@@ -5,7 +5,7 @@ import "novex/nest/TestSuite"
 
 import static "novex/nest/Nest"
 
-test_suite class ClosureStability {
+testable class ClosureStability {
     static final Double TOLERANCE = 0.0000000001
     
     Int    number
