@@ -2,156 +2,125 @@ package "stabilitytest"
 
 import "nova/datastruct/list/Iterator"
 
-class SyntaxStability extends StabilityTestCase {
-    public construct(StabilityTest program) {
-        super(program)
-    }
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
 
-    public test() {
-        checkLoops()
-        checkUntil()
-        checkMatchStatements()
-        checkIterators()
-        checkTernary()
-        checkElvis()
-        // checkRepeat()
-        checkNamedArguments()
-        checkDefaultClosureArguments()
-        checkZipper()
-        checkSafeNavigation()
-        checkSnakeCaseNumbers()
-        checkArrayInitializers()
-        checkFunctionReturnType()
-    }
+import static "novex/nest/Nest"
 
-    checkMatchStatements() {
-        Console.write("Checking simple match statement... ")
-
+test_suite class SyntaxStability {
+    [Test "Testing simple match statement"]
+    testSimpleMatchStatement() {
         Int  num    = 3
         Bool worked = false
 
         match (num) {
-            1 => program.fail("Match accepted incorrect case")
-            2 => program.fail("Match accepted incorrect case")
+            1 => fail("Match accepted incorrect case")
+            2 => fail("Match accepted incorrect case")
             3 => worked = true
-            4 => program.fail("Match accepted incorrect case")
-            default => program.fail("Match failed to accept the correct case")
+            4 => fail("Match accepted incorrect case")
+            default => fail("Match failed to accept the correct case")
         }
 
-        program.fail("FAIL", !worked)
+        expectTrue(worked, "FAIL")
+    }
 
-        Console.writeLine("OK")
-
-        Console.write("Checking simple match statement with indentation... ")
-
-        num    = 3
-        worked = false
+    [Test "Testing simple match statement with indentation"]
+    testSimpleMatchStatementWithIndentation() {
+        Int  num    = 3
+        Bool worked = false
 
         switch (num)
             1 =>
-                program.fail("Match accepted incorrect case")
-            2 => program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
+            2 => fail("Match accepted incorrect case")
             3 =>
                 worked = true
             4 =>
-                program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
             default =>
-                program.fail("Match failed to accept the correct case")
+                fail("Match failed to accept the correct case")
         
-        program.fail("FAIL", !worked)
-
-        Console.writeLine("OK")
-
-        Console.write("Checking simple match statement with scopes... ")
-
-        num    = 3
-        worked = false
+        expectTrue(worked, "FAIL")
+    }
+    
+    [Test "Testing simple match statement with scopes"]
+    testSimpleMatchStatementWithScopes() {
+        Int  num    = 3
+        Bool worked = false
 
         match (num) {
             1 => {
-                program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
             }
             2 => {
-                program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
             }
             3 => {
                 worked = true
             }
             4 => {
-                program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
             }
             default => {
-                program.fail("Match failed to accept the correct case")
+                fail("Match failed to accept the correct case")
             }
         }
 
-        if (!worked) {
-            program.fail("FAIL")
-        }
-
-        Console.writeLine("OK")
-
-        Console.write("Checking match statement with variable case values... ")
-
-        Int val = 1
-        num     = 3
-        worked  = false
+        expectTrue(worked, "FAIL")
+    }
+    
+    [Test "Testing match statement with variable case values"]
+    testMatchStatementWithVariableCaseValues() {
+        Int  val    = 1
+        Int  num    = 3
+        Bool worked = false
 
         match (num) {
             val++ => {
-                program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
             } val++ => {
-                program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
             } (val++) => {
                 worked = true
             }
             val++ => {
-                program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
             } default => {
-                program.fail("Match failed to accept the correct case")
+                fail("Match failed to accept the correct case")
             }
         }
         
-        program.fail("FAIL", !worked)
-
-        Console.writeLine("OK")
-
-        Console.write("Checking match statement with variable case values and fallthrough... ")
-
-        val    = 1
-        num    = 3
-        worked = false
+        expectTrue(worked, "FAIL")
+    }
+    
+    [Test "Testing match statement with variable case values and fallthrough"]
+    testMatchStatementWithVariableCaseValuesAndFallthrough() {
+        Int  val    = 1
+        Int  num    = 3
+        Bool worked = false
 
         Bool worked2 = false
 
         match (num++) {
             val++ => {
-                program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
             } val++ => {
-                program.fail("Match accepted incorrect case")
+                fail("Match accepted incorrect case")
             } val++ => {
                 worked = true
                 fallthrough
             } val++ => {
                 worked2 = true
             } default => {
-                program.fail("Match failed to accept the correct case")
+                fail("Match failed to accept the correct case")
             }
         }
 
-        program.fail("FAIL", !worked || !worked2)
-
-        Console.writeLine("OK")
+        expectTrue(worked && worked2, "FAIL")
     }
-
-    checkLoops() {
-        checkWhileLoops()
-        checkForLoops()
-    }
-
-    checkWhileLoops() {
-        Console.write("Checking inline while loop... ")
-
+    
+    [Test "Testing inline while loop"]
+    testWhileLoops() {
         Int num  = 0
         Int num2 = 0
         Int num3 = 0
@@ -167,14 +136,11 @@ class SyntaxStability extends StabilityTestCase {
                     num3++
                 }
 
-        program.fail("Inline while loop failed.", num != 100 || num2 != 100 || num3 != 100)
-
-        Console.writeLine("OK")
+        expectTrue(num == 100 && num2 == 100 && num3 == 100, "Inline while loop failed.")
     }
-
-    checkForLoops() {
-        Console.write("Checking inline for loop... ")
-
+    
+    [Test "Testing inline for loop"]
+    testForLoops() {
         Int num  = 0
         Int num2 = 0
         Int num3 = 0
@@ -190,14 +156,11 @@ class SyntaxStability extends StabilityTestCase {
                     num3++
                 }
 
-        program.fail("Inline for loop failed. Expected 100, 100, 100 received #{num}, #{num2}, #{num3}", num != 100 || num2 != 100 || num3 != 100)
-
-        Console.writeLine("OK")
+        expectTrue(num == 100 && num2 == 100 && num3 == 100, "Inline for loop failed. Expected 100, 100, 100 received #{num}, #{num2}, #{num3}")
     }
-
-    checkUntil() {
-        Console.write("Checking until statement... ")
-
+    
+    [Test "Testing until statement"]
+    testUntil() {
         Object obj
 
         until (obj) {
@@ -205,7 +168,7 @@ class SyntaxStability extends StabilityTestCase {
             obj = test2()
             obj = test3()
 
-            program.fail("Failed to stop after correct condition")
+            fail("Failed to stop after correct condition")
         }
 
 //        if (obj == null) {
@@ -221,9 +184,7 @@ class SyntaxStability extends StabilityTestCase {
 //            }
 //        }
 
-        program.fail("Failed to reach correct condition", obj == null)
-
-        Console.writeLine("OK");
+        expectFalse(obj == null, "Failed to reach correct condition")
     }
 
     static test1() => null
@@ -239,21 +200,20 @@ class SyntaxStability extends StabilityTestCase {
             throw new UnstableException("filtering failed")
         }
     }
-
-    checkIterators() {
-        Console.write("Checking filter functionality... ")
-
+    
+    [Test "Testing filter functionality"]
+    testFilterFunctionality() {
         String[] list = ["this", "is", "a", "test", "to", "see", "what shows up"]
         String[] list2 = list.filter(filterFunc)
-
+        
         try {
             list2.forEach(foreachClosure)
         } catch (UnstableException e) {
-            program.fail("Failed to filter data correctly")
+            fail("Failed to filter data correctly")
         }
 
         for (n in 0..list2.count) {
-            program.fail("Failed to filter data correctly", list2[n].count < 4)
+            expectTrue(list2[n].count >= 4, "Failed to filter data correctly")
         }
 
         /*if (list2.any(x -> x.count < 4)) {
@@ -262,57 +222,53 @@ class SyntaxStability extends StabilityTestCase {
         if (!list2.all(x -> x.count >= 4)) {
             program.fail("Failed to filter data correctly")
         }*/
-
-        Console.writeLine("OK")
-
-        Console.write("Checking iterator functionality... ")
-
+    }
+    
+    [Test "Testing iterator functionality"]
+    testIteratorFunctionality() {
+        String[] list = ["this", "is", "a", "test", "to", "see", "what shows up"]
+        String[] list2 = list.filter(filterFunc)
+        
         Iterator<String> iter = list2.iterator
-
+        
         while (iter.hasNext) {
-            program.fail("Failed to run iterator", iter.next.count < 4)
+            expectTrue(iter.next.count >= 4, "Failed to run iterator")
         }
-
-        Console.writeLine("OK")
-
-        Console.write("Checking foreach loop functionality... ")
-
+    }
+    
+    [Test "Testing foreach loop functionality"]
+    testForeachLoopFunctionality() {
+        String[] list = ["this", "is", "a", "test", "to", "see", "what shows up"]
+        String[] list2 = list.filter(filterFunc)
+        
         for (string in list2) {
-            program.fail("Failed to run foreach loop", string.count < 4)
+            expectTrue(string.count >= 4, "Failed to run foreach loop")
         }
-
-        Console.writeLine("OK")
     }
 
-    checkTernary() {
-        Console.write("Checking ternary functionality... ")
-
+    [Test "Testing ternary functionality"]
+    testTernary() {
         var first = trueValue() ? "hey" == "hey" : "hey" == "hey2"
 
-        program.fail("Failed first ternary test", !first)
+        expectTrue(first, "Failed first ternary test")
 
         var second = falseValue() ? "one" : "two"
 
-        program.fail("Failed second ternary test", second != "two")
-
-        Console.writeLine("OK")
+        expectTrue(second == "two", "Failed second ternary test")
     }
 
-    checkElvis() {
-        Console.write("Checking elvis functionality... ")
-
+    [Test "Testing elvis functionality"]
+    testElvis() {
         var str = "this isnt null"
         String str2 = null
 
         var result1 = str ?: "wtf"
 
-        program.fail("Failed first elvis test", result1 == "wtf")
+        expectFalse(result1 == "wtf", "Failed first elvis test")
 
         var result2 = str2 ?: "this is null"
 
-        program.fail("Failed second elvis test", result2 != "this is null")
-
-        Console.writeLine("OK")
+        expectTrue(result2 == "this is null", "Failed second elvis test")
     }
 
     trueValue() -> Bool {
@@ -372,23 +328,20 @@ class SyntaxStability extends StabilityTestCase {
     named(String s, String arg, Int num = 4, Int add = 0) -> Int {
         return num * arg.count + add
     }
-
-    checkNamedArguments() {
-        Console.write("Checking named arguments... ")
-
+    
+    [Test "Testing named arguments"]
+    testNamedArguments() {
         var num = named("", arg: "yo", num: 4)
-
-        program.fail("Default argument failed. Expected 8, received #num", num != 8)
-
+        
+        expectTrue(num == 8, "Default argument failed. Expected 8, received #num")
+        
         num = named("", add: 2, arg: "heyasdf", num: 5)
-
-        program.fail("Named arguments failed. Expeced 37, received #num first", num != 37)
-
+        
+        expectTrue(num == 37, "Named arguments failed. Expeced 37, received #num first")
+        
         num = named(add: 2, num: 5, arg: "heyasdf", s: "")
-
-        program.fail("Named arguments failed. Expeced 37, received #num second", num != 37)
-
-        Console.writeLine("OK")
+        
+        expectTrue(num == 37, "Named arguments failed. Expeced 37, received #num second")
     }
     
     func1(Int a) -> Int => a * 2
@@ -396,30 +349,23 @@ class SyntaxStability extends StabilityTestCase {
     
     myFunc(something(Int) -> Int = func2) => something(5)
     
+    [Test "Testing default closure arguments"]
     checkDefaultClosureArguments() {
-    	Console.write("Checking default closure arguments... ")
-    	
-    	program.fail("Failed to call default closure", myFunc() != 20)
-    	program.fail("Failed to call overrided default closure", myFunc(func1) != 10)
-    	
-    	Console.writeLine("OK")
+    	expectTrue(myFunc() == 20, "Failed to call default closure")
+    	expectTrue(myFunc(func1) == 10, "Failed to call overrided default closure")
     }
-
+    
+    [Test "Testing zip function"]
     checkZipper() { // lol
-        Console.write("Checking zip function... ")
-
         var array1 = ["This", "is", "a", "test"]
         var array2 = ["one", "two", "three", "four"]//[1, 2, 4, 3]
 
         var zipped = array1.zip(array2, (x, y) => "#x #y")
         Console.write("Zipped: #zipped ")
-        
-        Console.writeLine("OK")
     }
-
-    checkSafeNavigation() {
-        Console.write("Checking safe navigation operator... ")
-        
+    
+    [Test "Testing safe navigation operator"]
+    testSafeNavigation() {
         var node = new Node()
         node.value = 1
         
@@ -436,11 +382,11 @@ class SyntaxStability extends StabilityTestCase {
             
             node?.child?.child.value = 5
             
-            program.fail("Failed to set node value while safely navigating it", node?.child?.child.value != 5)
+            expectTrue(node?.child?.child.value == 5, "Failed to set node value while safely navigating it")
             
             node.child.child = null
             
-            program.fail("Failed to skip null child", node?.child?.child?.value == 3)
+            expectFalse(node?.child?.child?.value == 3, "Failed to skip null child")
             
             node.child.child = new Node()
             node.child.child.child = new Node()
@@ -455,177 +401,158 @@ class SyntaxStability extends StabilityTestCase {
             Console.write("array access... ")
             array[node?.child?.value] = "hello"
             
-            program.fail("Failed to set correct array index with correct value using the safe navigation operator", array[2] != "hello")
+            expectTrue(array[2] == "hello", "Failed to set correct array index with correct value using the safe navigation operator")
         } else {
-            program.fail("Failed to safely navigate valid children")
+            fail("Failed to safely navigate valid children")
         }
-        
-        Console.writeLine("OK")
     }
     
-    checkArraySafeNavigation() {
-    	Console.write("Checking array safe navigaiton... ")
-    	
+    [Test "Testing array safe navigation"]
+    testArraySafeNavigation() {
     	/*var myArray = [0, 1, 2, 3, 4, 5, 6]
     	
     	program.fail("Failed to access valid index with safe navigation", myArray?[4] != 4)
     	*/
-    	Console.writeLine("OK")
     }
     
-    callMeWithNode(Node n) => program.fail("Failed to call method with correct safely navigated node", n.value != 91)
+    callMeWithNode(Node n) => expectTrue(n.value == 91, "Failed to call method with correct safely navigated node")
     
-    checkSnakeCaseNumbers() {
-    	Console.write("Checking snake case numbers... ")
-    	
+    [Test "Testing snake case numbers"]
+    testSnakeCaseNumbers() {
     	Double dPos =  51_325_753.131313
     	Double dNeg = -51_325_753.131313
     	
-    	program.fail("Positive snake case double failed to parse", dPos !=  51325753.131313)
-    	program.fail("Negative snake case double failed to parse", dNeg != -51325753.131313)
+    	expectTrue(dPos ==  51325753.131313, "Positive snake case double failed to parse")
+    	expectTrue(dNeg == -51325753.131313, "Negative snake case double failed to parse")
     	
     	Long lPos =  922_547_211
     	Long lNeg = -922_547_211
     	
-    	program.fail("Negative snake case long failed to parse", lPos !=  922547211)
-    	program.fail("Negative snake case long failed to parse", lNeg != -922547211)
-    	
-    	Console.writeLine("OK")
+    	expectTrue(lPos ==  922547211, "Negative snake case long failed to parse")
+    	expectTrue(lNeg == -922547211, "Negative snake case long failed to parse")
     }
     
-    checkArrayInitializers() {
-    	Console.write("Checking array initializers... ")
-    	
+    [Test "Testing array initializers"]
+    testArrayInitializers() {
     	Int num1 = 1
     	Int num2 = 2
     	
     	var myInts = [0, 0, num1, num2, 0]
     	
-    	program.fail("Failed to ", myInts[2] != num1 || myInts[3] != num2)
-    	
-    	Console.writeLine("OK")
+    	expectTrue(myInts[2] == num1 && myInts[3] == num2, "Failed to ")
     }
     
     Bool funcSwitch = false
     Int funcCount, chainCount
     
-    checkFunctionReturnType() {
-        Console.write("Checking calling a function returned by a function... ")
-        
+    [Test "Testing calling a function returned by a function"]
+    testFunctionReturnedByFunction() {
         let func = getFunc()
         
         func()
         
-        program.fail("Failed to call first class function returned from function", !funcSwitch)
-        
-        Console.writeLine("OK")
-        
+        expectTrue(funcSwitch, "Failed to call first class function returned from function")
+    }
+    
+    [Test "Testing calling a function returned by an inline function"]
+    testFunctionReturnedByInlineFunction() {
         funcSwitch = false
-        
-        Console.write("Checking calling a function returned by an inline function... ")
         
         let func2 = inlineGetFunc()
         
         func2()
         
-        program.fail("Failed to call first class function returned from inline function", !funcSwitch)
-        
-        Console.writeLine("OK")
-        
+        expectTrue(funcSwitch, "Failed to call first class function returned from inline function")
+    }
+    
+    [Test "Testing calling a function returned by an inline function with type specified"]
+    testFunctionReturnedByInlineFunctionWithTypeSpecified() {
         funcSwitch = false
-        
-        Console.write("Checking calling a function returned by an inline function with type specified... ")
         
         let func3 = inlineGetFunc2()
         
         func3()
         
-        program.fail("Failed to call first class function returned from inline function with type specified", !funcSwitch)
-        
-        Console.writeLine("OK")
-        
+        expectTrue(funcSwitch, "Failed to call first class function returned from inline function with type specified")
+    }
+    
+    [Test "Testing calling a chained function returned by a function"]
+    testCallingChainedFunctionReturnedByFunction() {
         funcCount = 0
         funcSwitch = false
-        
-        Console.write("Checking calling a chained function returned by a function... ")
         
         let chained = chainedFuncReference()
         
         chained()()
         
-        program.fail("Failed to call first class chained function returned from function: #funcSwitch, #funcCount", !funcSwitch || funcCount != 1)
-        
-        Console.writeLine("OK")
-        
+        expectTrue(funcSwitch && funcCount == 1, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
+    }
+    
+    [Test "Testing calling an assigned chained function returned by a function"]
+    testCallingAssignedChainFunction() {
         funcCount = 0
         funcSwitch = false
         
-        Console.write("Checking calling an assigned chained function returned by a function... ")
+        let chained = chainedFuncReference()
         
         let c = chained()
         c()
         c()
         c()
         
-        program.fail("Failed to call first class chained function returned from function: #funcSwitch, #funcCount", !funcSwitch || funcCount != 3)
-        
-        Console.writeLine("OK")
-        
+        expectTrue(funcSwitch && funcCount == 3, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
+    }
+    
+    [Test "Testing calling a chained function x3 returned by a function"]
+    testCallingChainedFunctionX3() {
         funcCount = 0
         funcSwitch = false
         chainCount = 0
-        
-        Console.write("Checking calling a chained function x3 returned by a function... ")
         
         let chainX3 = chainedFuncReference3()
         
         chainX3()()()
         
-        program.fail("Failed to call first class chained function x3 returned from function: #funcSwitch, #funcCount, x#chainCount", !funcSwitch || funcCount != 1 || chainCount != 3)
-        
-        Console.writeLine("OK")
-        
+        expectTrue(funcSwitch && funcCount == 1 && chainCount == 3, "Failed to call first class chained function x3 returned from function: #funcSwitch, #funcCount, x#chainCount")
+    }
+    
+    [Test "Testing calling a chained function x4 returned by a function"]
+    testCallingChainedFunctionX4() {
         funcCount = 0
         funcSwitch = false
         chainCount = 0
-        
-        Console.write("Checking calling a chained function x4 returned by a function... ")
         
         let chainX4 = chainedFuncReference4()
         
         chainX4()()()()
         
-        program.fail("Failed to call first class chained function x4 returned from function: #funcSwitch, #funcCount, x#chainCount", !funcSwitch || funcCount != 1 || chainCount != 4)
-        
-        Console.writeLine("OK")
-        
+        expectTrue(funcSwitch && funcCount == 1 && chainCount == 4, "Failed to call first class chained function x4 returned from function: #funcSwitch, #funcCount, x#chainCount")
+    }
+    
+    [Test "Testing calling a chained function x5 returned by a function"]
+    testCallingChainedFunctionX5() {
         funcCount = 0
         funcSwitch = false
         chainCount = 0
-        
-        Console.write("Checking calling a chained function x5 returned by a function... ")
         
         let chainX5 = chainedFuncReference5()
         
         chainX5()()()()()
         
-        program.fail("Failed to call first class chained function x5 returned from function: #funcSwitch, #funcCount, x#chainCount", !funcSwitch || funcCount != 1 || chainCount != 5)
-        
-        Console.writeLine("OK")
-        
+        expectTrue(funcSwitch && funcCount == 1 && chainCount == 5, "Failed to call first class chained function x5 returned from function: #funcSwitch, #funcCount, x#chainCount")
+    }
+    
+    [Test "Testing calling a chained function x6 returned by a function"]
+    testCallingChainedFunctionX6() {
         funcCount = 0
         funcSwitch = false
         chainCount = 0
-        
-        Console.write("Checking calling a chained function x6 returned by a function... ")
         
         let chainX6 = chainedFuncReference6()
         
         chainX6()()()()()()
         
-        program.fail("Failed to call first class chained function x6 returned from function: #funcSwitch, #funcCount, x#chainCount", !funcSwitch || funcCount != 1 || chainCount != 6)
-        
-        Console.writeLine("OK")
+        expectTrue(funcSwitch && funcCount == 1 && chainCount == 6, "Failed to call first class chained function x6 returned from function: #funcSwitch, #funcCount, x#chainCount")
     }
     
     refFunc() {
@@ -646,4 +573,24 @@ class SyntaxStability extends StabilityTestCase {
     chainedFuncReference4() => chainedFuncReference3 { chainCount++ }
     chainedFuncReference5() => chainedFuncReference4 { chainCount++ }
     chainedFuncReference6() => chainedFuncReference5 { chainCount++ }
+    
+    [Test "Testing single function in Array"]
+    testSingleFunctionInArray() {
+        let array = new Array<func()>()
+        
+        array.add(refFunc)
+    }
+    
+    [Test "Testing calling a single function from Array"]
+    testCallingFunctionFromCollection() {
+        let array = new Array<func()>()
+        
+        array.add(refFunc)
+        
+        funcSwitch = false
+        
+        // array.first()
+        
+        // program.fail("Failed to call single function from collection", !funcSwitch)
+    }
 }
