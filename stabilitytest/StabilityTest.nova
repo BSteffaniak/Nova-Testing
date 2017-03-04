@@ -31,7 +31,7 @@ class StabilityTest extends StabilityTestCase {
         try {
             new ExceptionStability(this).test()
             new SyntaxStability().runTests()
-            new ClosureStability(this).test()
+            new ClosureStability().runTests()
             new PolymorphismStability(this).test()
             new LambdaStability(this).test()
             new ToStringStability(this).test()
