@@ -3,32 +3,29 @@ package "stabilitytest"
 import "nova/datastruct/list/LinkedList"
 import "nova/time/Time"
 
-class AssignmentStability extends StabilityTestCase {
-    public construct(StabilityTest program) {
-        super(program)
-    }
-    
-    public test() {
-        Console.write("Checking embedded property assignments... ")
-        
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class AssignmentStability {
+    [Test "Testing embedded property assignments"]
+    testEmbeddedPropertyAssignments() {
         var props = new ClassWithProperties()
         
         var num = props.prop1 = props.prop2 = 1
         
-        program.fail("Did not return mutated property value correctly. Expected 1, 1, 1 but received #num, #props.prop1, #props.prop2", num != 1 || props.prop1 != 1 || props.prop2 != 1)
-        
-        Console.writeLine("OK")
-        
-        Console.write("Checking embedded primitive assignments... ")
-        
+        expectTrue(num == 1 && props.prop1 == 1 && props.prop2 == 1, "Did not return mutated property value correctly. Expected 1, 1, 1 but received #num, #props.prop1, #props.prop2")
+    }
+    
+    [Test "Testing embedded primitive assignments"]
+    testEmbeddedPrimitiveAssignments() {
         var a
         var b
         var c
         
         a = b = c = 1
         
-        program.fail("Did not set assigned primitive values correctly. Expected 1, 1, 1 but received #a, #b, #c", a != 1 || b != 1 || c != 1)
-        
-        Console.writeLine("OK")
+        expectTrue(a == 1 && b == 1 && c == 1, "Did not set assigned primitive values correctly. Expected 1, 1, 1 but received #a, #b, #c")
     }
 }
