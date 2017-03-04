@@ -1,16 +1,16 @@
 package "stabilitytest"
 
-class InnerClassStability extends StabilityTestCase {
-    public construct(StabilityTest program) => super(program)
-    
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class InnerClassStability {
+    [Test "Checking inner classes"]
     public test() {
-        Console.write("Checking inner classes... ")
-        
         let instance = new MyInner(3, 5)
         
-        program.fail("did not set values correctly", instance.x != 3 || instance.y != 5)
-        
-        Console.writeLine("OK")
+        expectTrue(instance.x == 3 && instance.y == 5, "did not set values correctly")
     }
     
     class MyInner {
