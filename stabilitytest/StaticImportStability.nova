@@ -1,19 +1,18 @@
 package "stabilitytest"
 
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
 import static "nova/math/Math"
 
-class StaticImportStability extends StabilityTestCase {
-    public construct(StabilityTest program) => super(program)
-    
+testable class StaticImportStability {
+    [Test "Testing math static imports"]
     public test() {
-        Console.write("Checking math static imports... ")
-        
-        program.fail("Did not call abs correctly", abs(-5) != 5)
-        program.fail("Did not call max correctly", max(-5, -6) != -5)
-        program.fail("Did not call min correctly", min(-5, -6) != -6)
-        program.fail("Did not call sign correctly", sign(-5) != -1)
-        program.fail("Did not call round correctly", round(5.6) != 6)
-        
-        Console.writeLine("OK")
+        expectTrue(abs(-5) == 5, "Did not call abs correctly")
+        expectTrue(max(-5, -6) == -5, "Did not call max correctly")
+        expectTrue(min(-5, -6) == -6, "Did not call min correctly")
+        expectTrue(sign(-5) == -1, "Did not call sign correctly")
+        expectTrue(round(5.6) == 6, "Did not call round correctly")
     }
 }
