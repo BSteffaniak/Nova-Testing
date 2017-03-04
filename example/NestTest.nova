@@ -1,0 +1,48 @@
+package "example"
+
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+test_suite class NestTest {
+    public static main(String[] args) {
+        let test = new NestTest()
+        
+        test.runTests()
+        
+        Console.waitForEnter()
+    }
+    
+    [Test "Testing primitive comparison"]
+    public testPrimitiveComparison() {
+        let Int x = 5
+        
+        expect(x).toBe(5)
+    }
+    
+    [Test "Testing primitive not comparison"]
+    public testPrimitiveNotComparison() {
+        let Int x = 5
+        
+        expect(x).toNotBe(6)
+    }
+    
+    public test testNoMessageGiven() {}
+    
+    public init_test beforeTest() {
+        Console.log("-- Before test --")
+    }
+    
+    public clean_test afterTest() {
+        Console.log("-- After test --")
+    }
+    
+    public init_test_class beforeClass() {
+        Console.log("-- Before test class --")
+    }
+    
+    public clean_test_class afterClass() {
+        Console.log("-- After test class --")
+    }
+}
