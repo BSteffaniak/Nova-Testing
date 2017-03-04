@@ -3,14 +3,14 @@ package "stabilitytest"
 import "nova/time/Timer"
 import "nova/thread/Thread"
 
-class TimeStability extends StabilityTestCase {
-    public construct(StabilityTest program) {
-        super(program)
-    }
-    
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class TimeStability {
+    [Test "Testing Time.nova"]
     public test() {
-        Console.write("Checking Time.nova... ")
-        
         Timer timer = new Timer()
         timer.start()
         
@@ -18,8 +18,6 @@ class TimeStability extends StabilityTestCase {
         
         timer.stop()
         
-        program.fail("Failed; expected 100ms, found #{timer.duration}ms", timer.duration < 99 || timer.duration >= 130)
-        
-        Console.writeLine("OK")
+        expectTrue(timer.duration >= 99 && timer.duration < 130, "Failed; expected 100ms, found #{timer.duration}ms")
     }
 }
