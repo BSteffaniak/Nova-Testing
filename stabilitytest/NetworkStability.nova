@@ -4,56 +4,56 @@ import "nova/network/ServerSocket"
 import "nova/network/ClientSocket"
 import "nova/network/ConnectionSocket"
 
-class NetworkStability extends StabilityTestCase {
-    visible static String received = "THIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVED"
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class NetworkStability {
+    visible static final String received = "THIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVEDTHIS IS THE STRING THAT SHOULD BE RECEIVED"
     
-    public construct(StabilityTest program) => super(program)
+    visible static final Int PORT = 24243
     
+    [Test "Testing creating a ServerSocket"]
+    createServer() -> ServerSocket {
+        let socket = new ServerSocket()
+        
+        expectValue(socket.start(PORT), "Unable to start server on port #PORT")
+        expectTrue(socket.close(), "Failed to close server socket on port #PORT")
+    }
+    
+    [Test message: false]
     public test() {
-        Console.writeLine("Checking network stability...")
+        Console.writeLine("Testing network stability")
         
-        Int port = 24243
+        ServerSocket server = new ServerSocket().start(PORT)
         
-        ServerSocket server = createServer(port)
-        
-        ClientThread thread = new ClientThread(program, port)
+        ClientThread thread = new ClientThread(PORT)
         
         thread.start()
         
-        Console.writeLine("Accepting ClientSocket connection... ")
+        Console.writeLine("Accepting ClientSocket connection")
         
         ConnectionSocket connection = server.acceptClient()
         
-        program.fail("Failed to accept the client", connection == null)
+        expectValue(connection, "Failed to accept the client")
         
         Console.writeLine("Sending String to ClientSocket... ")
         
-        program.fail("Server unable to send data to client", !connection.out.write(received))
+        expectValue(connection.out.write(received), "Server unable to send data to client")
         
         Console.writeLine("Waiting for String from ClientSocket... ")
         
         String s = connection.in.readString()
         
-        program.fail("Server unable to receive correct message from client. Expected message of size #received.count, but received of size #s.count", s.count != received.count || !s.equals(received))
+        expectTrue(s.count == received.count && s == received, "Server unable to receive correct message from client. Expected message of size #received.count, but received of size #s.count")
         
         thread.join()
         
         Console.write("Attempting to close ServerSocket connection... ")
         
-        program.fail("Unable to close server", !server.close())
+        expectTrue(server.close(), "Unable to close server")
 
-        Console.writeLine("OK")
-    }
-    
-    createServer(Int port) -> ServerSocket {
-        ServerSocket server = new ServerSocket()
-        
-        Console.write("Attempting to start ServerSocket on port #{port}... ")
-        
-        program.fail("Unable to start server on port #port", !server.start(port))
-        
-        Console.writeLine("OK")
-        
-        return server
+        Console.writeLine("Success")
     }
 }
