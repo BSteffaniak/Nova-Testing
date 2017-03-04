@@ -1,11 +1,13 @@
 package "stabilitytest"
 
-class ToStringStability extends StabilityTestCase {
-    public construct(StabilityTest program) => super(program)
-    
-    public test() {
-        Console.write("Checking toString implementations... ")
-        
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class ToStringStability {
+    // [Test "Testing toString implementations"]
+    testToString() {
         Double d = 5.232
         
         checkToString("Double", d, "5.232")
@@ -21,10 +23,8 @@ class ToStringStability extends StabilityTestCase {
         Long l = -9223372036854775808
         
         checkToString("Long", l, "-9223372036854775808")
-        
-        Console.writeLine("OK")
     }
     
     checkToString(String type, Number number, String expected) =>
-        program.fail("#{type}.toString failed. expected #expected but received #number", !number.toString().equals(expected))
+        expectTrue(number.toString() == expected, "#{type}.toString failed. expected #expected but received #number #{number.toString().compareTo(expected)}")
 }
