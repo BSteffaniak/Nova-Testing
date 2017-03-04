@@ -5,66 +5,52 @@ import "nova/io/FileReader"
 import "nova/io/FileWriter"
 import "nova/time/Time"
 
-class FileStability extends StabilityTestCase {
-    static String inputString
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class FileStability {
+    static final String inputString = "This is test input..."
     
-    static Int lines
+    static final Int lines = 100
     
-    public construct(StabilityTest program) => super(program)
+    File f
+    FileWriter writer
+    FileReader reader
     
-    public test() {
-        Console.writeLine("Checking File IO...")
+    init_test_class initClass() {
+        f = new File("temp#Time.currentTimeMillis")
         
-        inputString = "This is test input..."
-        lines       = 100
-        
-        try {
-            File f = new File("temp#Time.currentTimeMillis")
-            
-            var writer = new FileWriter(f)
-            var reader = new FileReader(f)
-            
-            createFile(writer)
-            writeToFile(writer)
-            readFromFile(reader)
-            deleteFile(writer)
-        } catch (Exception e) {
-            program.fail("Failed; Exception thrown")
-        }
+        writer = new FileWriter(f)
+        reader = new FileReader(f)
     }
     
-    createFile(FileWriter writer) {
-        Console.write("Creating file... ")
-        
-        program.fail("Failed to create file", !writer.create())
-        
-        Console.writeLine("OK")
+    [Test "Testing file creation"]
+    createFile() {
+        expectTrue(writer.create(), "Failed to create file")
     }
     
-    writeToFile(FileWriter writer) {
-        Console.write("Writing #{lines} lines of data to file... ")
-        
+    [Test "Testing writing lines of data to file"]
+    writeToFile() {
         for (i in 0..lines) {
             writer.writeLine(inputString)
         }
-        
-        Console.writeLine("OK")
     }
     
-    readFromFile(FileReader reader) {
-        Console.write("Reading lines from file... ")
-        
+    [Test "Testing reading lines from file"]
+    readFromFile() {
         if (!reader.isOpen) {
             reader.open()
         }
         
-        program.fail("File reader failed to open", !reader.isOpen)
+        expectTrue(reader.isOpen, "File reader failed to open")
         
         Int    times = 0
         String line  = reader.readLine()
         
         while (line) {
-            program.fail("Reading from file failed: '#line' != '#inputString'", !line.equals(inputString))
+            expectTrue(line == inputString, "Reading from file failed: '#line' != '#inputString'")
             
             line = reader.readLine()
             
@@ -73,16 +59,10 @@ class FileStability extends StabilityTestCase {
         
         reader.close()
         
-        program.fail("Failed; only read #{times}/100 lines", times != lines)
-        
-        Console.writeLine("OK")
+        expectFalse(times != lines, "Failed; only read #{times}/100 lines")
     }
     
-    deleteFile(FileWriter writer) {
-        Console.write("Deleting file... ")
-        
-        program.fail("Failed to delete file", !writer.delete())
-        
-        Console.writeLine("OK")
+    clean_test_class deleteFile() {
+        expectTrue(writer.delete(), "Failed to delete file")
     }
 }
