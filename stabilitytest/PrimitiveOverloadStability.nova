@@ -2,12 +2,14 @@ package "stabilitytest"
 
 import "nova/datastruct/HashMap"
 
-class PrimitiveOverloadStability extends StabilityTestCase {
-    public construct(StabilityTest program) => super(program)
-    
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class PrimitiveOverloadStability {
+    [Test "Testing primitive key for HashMap<Int, String>"]
     public test() {
-        Console.write("Checking primitive key for HashMap<Int, String>... ")
-        
         let map1 = new HashMap<Int, String>()
         
         map1[5] = "test"
@@ -22,16 +24,16 @@ class PrimitiveOverloadStability extends StabilityTestCase {
             counter++
         }
         
-        program.fail("Failed to iterator over map values. Expected counter value of 2, but got #counter", counter != 2)
-        program.fail("Failed to get valid key values. Expected a sum of 15, but got #sum", sum != 15)
-        
-        Console.log("OK")
-        Console.write("Checking primitive key and value for HashMap<Int, Int>... ")
-        
+        expectTrue(counter == 2, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
+        expectTrue(sum == 15, "Failed to get valid key values. Expected a sum of 15, but got #sum")
+    }
+    
+    [Test "Testing primitive key and value for HashMap<Int, Int>"]
+    testPrimitiveKeyAndValue() {
         let map2 = new HashMap<Int, Int>()
         
-        sum = 0
-        counter = 0
+        var sum = 0
+        var counter = 0
         
         map2[1] = 49
         map2[3] = 2
@@ -43,14 +45,19 @@ class PrimitiveOverloadStability extends StabilityTestCase {
             counter++
         }
         
-        program.fail("Failed to iterator over map values. Expected counter value of 2, but got #counter", counter != 3)
-        program.fail("Failed to get valid key values. Expected a sum of #{49 + 6 - 22}, but got #sum", sum != 49 + 6 - 22)
+        expectTrue(counter == 3, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
+        expectTrue(sum == 49 + 6 - 22, "Failed to get valid key values. Expected a sum of #{49 + 6 - 22}, but got #sum")
+    }
+    
+    [Test "Testing functional primitive key for HashMap<Int, String>"]
+    testFunctionalPrimitiveKey() {
+        let map1 = new HashMap<Int, String>()
         
-        Console.log("OK")
-        Console.write("Checking functional primitive key for HashMap<Int, String>... ")
+        map1[5] = "test"
+        map1[10] = "test2"
         
-        sum = 0
-        counter = 0
+        var sum = 0
+        var counter = 0
         
         map1.forEach(entry => {
             sum += entry.key
@@ -58,14 +65,16 @@ class PrimitiveOverloadStability extends StabilityTestCase {
             counter++
         })
         
-        program.fail("Failed to iterator over map values. Expected counter value of 2, but got #counter", counter != 2)
-        program.fail("Failed to get valid key values. Expected a sum of 15, but got #sum", sum != 15)
+        expectTrue(counter == 2, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
+        expectTrue(sum == 15, "Failed to get valid key values. Expected a sum of 15, but got #sum")
+    }
+    
+    [Test "Testing functional primitive key and value for HashMap<Int, Int>"]
+    testFunctionalPrimitiveKeyAndValue() {
+        let map2 = new HashMap<Int, Int>()
         
-        Console.log("OK")
-        Console.write("Checking functional primitive key and value for HashMap<Int, Int>... ")
-        
-        sum = 0
-        counter = 0
+        var sum = 0
+        var counter = 0
         
         map2[1] = 49
         map2[3] = 2
@@ -77,9 +86,7 @@ class PrimitiveOverloadStability extends StabilityTestCase {
             counter++
         })
         
-        program.fail("Failed to iterator over map values. Expected counter value of 2, but got #counter", counter != 3)
-        program.fail("Failed to get valid key values. Expected a sum of #{49 + 6 - 22}, but got #sum", sum != 49 + 6 - 22)
-        
-        Console.log("OK")
+        expectTrue(counter == 3, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
+        expectTrue(sum == 49 + 6 - 22, "Failed to get valid key values. Expected a sum of #{49 + 6 - 22}, but got #sum")
     }
 }
