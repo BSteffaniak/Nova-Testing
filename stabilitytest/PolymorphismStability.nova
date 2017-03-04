@@ -1,56 +1,42 @@
 package "stabilitytest"
 
-class PolymorphismStability extends StabilityTestCase {
-    public construct(StabilityTest program) => super(program)
-    
-    public test() {
-        Console.writeLine("Checking Polymorphism stability...")
-        
-        testCalls()
-        testClosure()
-        testProperty()
-    }
-    
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class PolymorphismStability {
+    [Test "Testing polymorphic method calls"]
     testCalls() {
-        Console.write("Checking polymorphic method calls... ")
-        
         PolymorphicSuperClass obj1 = new PolymorphicSuperClass()
         PolymorphicSubClass   obj2 = new PolymorphicSubClass()
         
-        program.fail("Did not call sub class method", !testSubCall(obj2))
-        
-        Console.writeLine("OK")
+        expectTrue(testSubCall(obj2), "Did not call sub class method")
     }
     
     static testSubCall(PolymorphicSuperClass obj) => obj.toString() == "sub class"
     
+    [Test "Testing polymorphic closure method calls"]
     testClosure() {
-        Console.write("Checking polymorphic closure method calls... ")
-        
         PolymorphicSuperClass obj = new PolymorphicSubClass()
         
-        program.fail("Did not call sub class method as closure", !callPolymorphicClosure(obj.toString))
+        expectTrue(callPolymorphicClosure(obj.toString), "Did not call sub class method as closure")
         
         obj.giveBirth()
         
         String child = obj.child + "!"
         
-        program.fail("Did not call sub class method as closure", !callPolymorphicClosure(obj.child.toString))
-        
-        Console.writeLine("OK")
+        expectTrue(callPolymorphicClosure(obj.child.toString), "Did not call sub class method as closure")
     }
     
     static callPolymorphicClosure(closure() -> String) => closure() == "sub class"
     
+    [Test "Testing polymorphic properties"]
     testProperty() {
-        Console.write("Checking polymorphic properties... ")
-        
         PolymorphicSuperClass obj1 = new PolymorphicSuperClass()
         PolymorphicSuperClass obj2 = new PolymorphicSubClass()
         
-        program.fail("Did not call super polymorphic property accessor correctly", obj1.myProperty != 1)
-        program.fail("Did not call sub polymorphic property accessor correctly", obj2.myProperty != 2)
-        
-        Console.writeLine("OK")
+        expectTrue(obj1.myProperty == 1, "Did not call super polymorphic property accessor correctly")
+        expectTrue(obj2.myProperty == 2, "Did not call sub polymorphic property accessor correctly")
     }
 }
