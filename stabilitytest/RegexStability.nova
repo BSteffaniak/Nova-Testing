@@ -3,18 +3,16 @@ package "stabilitytest"
 import "nova/regex/Regex"
 import "nova/regex/Match"
 
-class RegexStability extends StabilityTestCase {
-    public construct(StabilityTest program) => super(program)
-    
-    public test() {
-        match()
-    }
-    
-    match() {
-        Console.write("Checking Regex match... ")
-        
-        program.fail("Failed to find valid match", !Regex.containsMatch(/a[bd]c/, "hello adc goodbye"))
-        program.fail("Failed to not find match", Regex.containsMatch(/a[bd]c/, "no match here..."))
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class RegexStability {
+    [Test "Testing Regex match"]
+    testMatch() {
+        expectTrue(Regex.containsMatch(/a[bd]c/, "hello adc goodbye"), "Failed to find valid match")
+        expectFalse(Regex.containsMatch(/a[bd]c/, "no match here..."), "Failed to not find match")
         
         var matches = Regex.getMatches(/a[bd]c/, "this is abc test adc adc hello")
         
@@ -27,7 +25,5 @@ class RegexStability extends StabilityTestCase {
         Console.write("#matches2.count match#{matches2.count != 1 ? "es" : ""}: ")
         
         matches2.forEach({ Console.write("#_, ") })
-        
-        Console.writeLine("OK")
     }
 }
