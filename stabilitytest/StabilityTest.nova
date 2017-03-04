@@ -4,14 +4,20 @@ import "nova/time/Timer"
 import "nova/thread/Thread"
 import "nova/io/File"
 
-class StabilityTest extends StabilityTestCase {
+[TestSuite [ExceptionStability, SyntaxStability, ClosureStability,
+        PolymorphismStability, LambdaStability, ToStringStability,
+        AssignmentStability, RegexStability, StaticImportStability,
+        InnerClassStability, ExternalInnerClassStability, PrimitiveOverloadStability]]
+[Target c]
+[TestSuite [TimeStability, ThreadStability, FileStability, NetworkStability]]
+class StabilityTest {
     public static main(String args[]) {
-        StabilityTest n = null
-        StabilityTest test = new StabilityTest(n)
+        let test = new StabilityTest()
         
         Timer timer = new Timer().start()
         
-        test.test()
+        // test.test()
+        test.runTests()
         
         timer.stop()
         
@@ -21,40 +27,5 @@ class StabilityTest extends StabilityTestCase {
         Console.writeLine("Took " + timer.duration + "ms")
         
         Console.waitForEnter()
-    }
-    
-    public construct(StabilityTest program) {
-        super(program)
-    }
-    
-    public test() {
-        try {
-            new ExceptionStability().runTests()
-            new SyntaxStability().runTests()
-            new ClosureStability().runTests()
-            new PolymorphismStability().runTests()
-            new LambdaStability().runTests()
-            new ToStringStability().runTests()
-            new AssignmentStability().runTests()
-            new RegexStability().runTests()
-            new StaticImportStability().runTests()
-            new InnerClassStability().runTests()
-            new ExternalInnerClassStability().runTests()
-            new PrimitiveOverloadStability().runTests()
-            
-            [Target c] new TimeStability().runTests()
-            [Target c] new ThreadStability().runTests()
-            [Target c] new FileStability().runTests()
-            [Target c] new NetworkStability().runTests()
-            
-            Console.writeLine("All OK")
-        }
-        catch (UnstableException e) {
-            Console.writeLine("Unstable exception thrown: " + e.message)
-        }
-    }
-    
-    public fail(String message = "Failed", Bool condition = true) {
-        if (condition) throw new UnstableException(message)
     }
 }
