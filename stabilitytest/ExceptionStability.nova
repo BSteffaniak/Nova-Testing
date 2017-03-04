@@ -1,11 +1,13 @@
 package "stabilitytest"
 
-class ExceptionStability extends StabilityTestCase {
-    public construct(StabilityTest program) => super(program)
-    
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class ExceptionStability {
+    [Test message: false]
     public test() {
-        Console.writeLine("Checking Exception handling...")
-        
         Bool worked = false
         
         try {
@@ -14,7 +16,7 @@ class ExceptionStability extends StabilityTestCase {
             worked = e.class == Exception // Make sure not a sub-class
         }
         
-        program.fail("Failed to catch Exception", !worked)
+        expectTrue(worked, "Failed to catch Exception")
         
         worked = false
         
@@ -23,15 +25,15 @@ class ExceptionStability extends StabilityTestCase {
         } catch all (DivideByZeroException e) {
             worked = true
             
-            Console.writeLine("OK")
+            Console.writeLine("- Success")
         }
         
-        program.fail("Failed to catch soft Exception", !worked)
+        expectTrue(worked, "Failed to catch soft Exception")
     }
     
     testException() {
         try {
-            Console.write("Checking DivideByZeroException... ")
+            Console.write("Testing DivideByZeroException ")
             
             try {
                 // Int den = 0
@@ -39,43 +41,43 @@ class ExceptionStability extends StabilityTestCase {
                 
                 throw new DivideByZeroException()
             } catch (DivideByZeroException e) {
-                Console.writeLine("OK")
-                Console.write("Checking StabilityTestException... ")
+                Console.writeLine("- Success")
+                Console.write("Testing StabilityTestException ")
                 
                 throw new StabilityTestException()
             }
             
-            program.fail("Failed to catch DivideByZeroException")
+            fail("Failed to catch DivideByZeroException")
         } catch (StabilityTestException e) {
-            Console.writeLine("OK")
+            Console.writeLine("- Success")
             
             throw new Exception()
         }
         
-        program.fail("Failed to catch StabilityTestException")
+        fail("Failed to catch StabilityTestException")
     }
     
     testSoftExceptions() {
-        Bool worked = false
+        var worked = false
         
         try {
-            Console.write("Checking soft exception without a soft catch... ")
+            Console.write("Testing soft exception without a soft catch ")
             
             toss new StabilityTestException()
             
             worked = true
             
-            Console.writeLine("OK")
+            Console.writeLine("- Success")
         } catch (StabilityTestException e) {
-            program.fail("Caught soft exception without soft keyword")
+            fail("Caught soft exception without soft keyword")
         }
         
-        program.fail("Failed to throw soft without corresponding catch", !worked)
+        expectTrue(worked, "Failed to throw soft without corresponding catch")
         
-        Console.write("Checking soft exception with a soft catch... ")
+        Console.write("Testing soft exception with a soft catch ")
         
         toss new DivideByZeroException()
         
-        program.fail("Failed to exit subroutine after throwing soft Exception")
+        fail("Failed to exit subroutine after throwing soft Exception")
     }
 }
