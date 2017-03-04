@@ -29,23 +29,23 @@ class StabilityTest extends StabilityTestCase {
     
     public test() {
         try {
-            new ExceptionStability(this).test()
+            new ExceptionStability().runTests()
             new SyntaxStability().runTests()
             new ClosureStability().runTests()
-            new PolymorphismStability(this).test()
-            new LambdaStability(this).test()
-            new ToStringStability(this).test()
-            new AssignmentStability(this).test()
-            new RegexStability(this).test()
-            new StaticImportStability(this).test()
-            new InnerClassStability(this).test()
-            new ExternalInnerClassStability(this).test()
-            new PrimitiveOverloadStability(this).test()
+            new PolymorphismStability().runTests()
+            new LambdaStability().runTests()
+            new ToStringStability().runTests()
+            new AssignmentStability().runTests()
+            new RegexStability().runTests()
+            new StaticImportStability().runTests()
+            new InnerClassStability().runTests()
+            new ExternalInnerClassStability().runTests()
+            new PrimitiveOverloadStability().runTests()
             
-            [Target c] new TimeStability(this).test()
-            [Target c] new ThreadStability(this).test()
-            [Target c] new FileStability(this).test()
-            [Target c] new NetworkStability(this).test()
+            [Target c] new TimeStability().runTests()
+            [Target c] new ThreadStability().runTests()
+            [Target c] new FileStability().runTests()
+            [Target c] new NetworkStability().runTests()
             
             Console.writeLine("All OK")
         }
