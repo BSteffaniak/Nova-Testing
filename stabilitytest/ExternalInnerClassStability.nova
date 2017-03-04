@@ -2,19 +2,19 @@ package "stabilitytest"
 
 import "stabilitytest/InnerClassStability.MyInner"
 
-class ExternalInnerClassStability extends StabilityTestCase {
-    public construct(StabilityTest program) => super(program)
-    
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class ExternalInnerClassStability {
+    [Test "Testing external inner class access"]
     public test() {
-        Console.write("Checking external inner class access... ")
-        
         let instance = new MyInner(3, 5)
         
         // [ExpectCompileError InvalidAccessError]
         // instance.y = 45
         
-        program.fail("did not set values correctly", instance.x != 3)
-        
-        Console.writeLine("OK")
+        expectTrue(instance.x == 3, "did not set values correctly")
     }
 }
