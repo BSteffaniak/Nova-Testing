@@ -3,6 +3,10 @@ package "stabilitytest"
 import "nova/time/Timer"
 import "nova/thread/Thread"
 import "nova/io/File"
+import "nova/star/Button"
+import "nova/star/Label"
+
+import "novex/nest/ui/ResultWindow"
 
 [TestSuite [ExceptionStability, SyntaxStability, ClosureStability,
         PolymorphismStability, LambdaStability, ToStringStability,
@@ -13,6 +17,21 @@ import "nova/io/File"
 class StabilityTest {
     public static main(String args[]) {
         let test = new StabilityTest()
+        
+        let results = new ResultWindow().create()
+        
+        
+        let button = new Button(200, 200, 100, 20, state: Button.PUSH)
+        let button2 = new Button(200, 300, 30, 30, type: Button.TITLE_BAR, state: Button.CLOSE)
+        let label = new Label("testsetset", 50, 100)
+        
+        button.addActionListener({
+            Console.log("Pressed byuttton")
+        })
+        
+        results.frame.addChild(button)
+        results.frame.addChild(button2)
+        results.frame.addChild(label)
         
         Timer timer = new Timer().start()
         
