@@ -63,7 +63,7 @@ class StabilityTest {
         Console.waitForEnter()
     }
     
-    onTestResult(TestResult result) {
+    test_result onTestResult(TestResult result) {
         Console.log(result)
     }
 }
