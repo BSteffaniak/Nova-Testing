@@ -5,8 +5,12 @@ import "nova/thread/Thread"
 import "nova/io/File"
 import "nova/star/Button"
 import "nova/star/Label"
+import "nova/star/Panel"
+import "nova/star/Color"
 
 import "novex/nest/ui/ResultWindow"
+import "novex/nest/ui/ResultBar"
+import "novex/nest/TestResult"
 
 [TestSuite [ExceptionStability, SyntaxStability, ClosureStability,
         PolymorphismStability, LambdaStability, ToStringStability,
@@ -20,8 +24,19 @@ class StabilityTest {
         
         let results = new ResultWindow().create()
         
+        let resultBar = new ResultBar()
+        resultBar.testCount = 5
+        resultBar.successCount = 2
         
-        let button = new Button(200, 200, 100, 20, state: Button.PUSH)
+        Async.execute({
+            Thread.sleep(1500)
+            
+            resultBar.successCount = 3
+        })
+        
+        results.frame.addChild(resultBar)
+        
+        let button = new Button(200, 200, 100, 20, text: "hello", state: Button.PUSH)
         let button2 = new Button(200, 300, 30, 30, type: Button.TITLE_BAR, state: Button.CLOSE)
         let label = new Label("testsetset", 50, 100)
         
@@ -46,5 +61,9 @@ class StabilityTest {
         Console.writeLine("Took " + timer.duration + "ms")
         
         Console.waitForEnter()
+    }
+    
+    onTestResult(TestResult result) {
+        Console.log(result)
     }
 }
