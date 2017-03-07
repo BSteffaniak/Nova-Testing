@@ -22,7 +22,7 @@ class StabilityTest {
     public static main(String args[]) {
         let test = new StabilityTest()
         
-        let results = new ResultWindow().create()
+        let results = new ResultWindow(test).create()
         
         let resultBar = new ResultBar()
         resultBar.testCount = 5
@@ -51,7 +51,7 @@ class StabilityTest {
         Timer timer = new Timer().start()
         
         // test.test()
-        test.runTests()
+        // test.runTests()
         
         timer.stop()
         
@@ -61,9 +61,5 @@ class StabilityTest {
         Console.writeLine("Took " + timer.duration + "ms")
         
         Console.waitForEnter()
-    }
-    
-    test_result onTestResult(TestResult result) {
-        Console.log(result)
     }
 }
