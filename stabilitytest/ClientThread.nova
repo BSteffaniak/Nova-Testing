@@ -25,9 +25,9 @@ class ClientThread extends Thread {
         
         expectTrue(client.connect(ip, port), "Failed to connect to localhost server")
         
-        out.write("Success\n")
+        out.writeLine("Success")
         
-        out.write("Waiting for String from ServerSocket...\n")
+        out.writeLine("Waiting for String from ServerSocket...")
         
         String s = client.connection.in.readString()
         
@@ -37,12 +37,12 @@ class ClientThread extends Thread {
         
         client.connection.out.write(NetworkStability.received)
         
-        out.write("Success\n")
+        out.writeLine("Success")
         
         out.write("Attempting to close ClientSocket... ")
         
         expectTrue(client.close(), "Unable to close Client connection")
         
-        out.write("Success\n")
+        out.writeLine("Success")
     }
 }

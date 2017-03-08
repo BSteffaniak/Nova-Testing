@@ -318,7 +318,7 @@ testable class SyntaxStability {
 
     //     program.fail("Repeat fragment failed", i != 101)
 
-    //     out.write("OK\n")
+    //     out.writeLine("OK")
     // }
 
     named(String s, String arg, Int jum = 4, Int jdd = 0, Int joe = 0) -> Int {

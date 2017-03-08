@@ -24,7 +24,7 @@ testable class NetworkStability {
     
     [Test message: false]
     public test() {
-        out.write("Testing network stability\n")
+        out.writeLine("Testing network stability")
         
         ServerSocket server = new ServerSocket().start(PORT)
         
@@ -32,17 +32,17 @@ testable class NetworkStability {
         
         thread.start()
         
-        out.write("Accepting ClientSocket connection\n")
+        out.writeLine("Accepting ClientSocket connection")
         
         ConnectionSocket connection = server.acceptClient()
         
         expectValue(connection, "Failed to accept the client")
         
-        out.write("Sending String to ClientSocket...\n")
+        out.writeLine("Sending String to ClientSocket...")
         
         expectValue(connection.out.write(received), "Server unable to send data to client")
         
-        out.write("Waiting for String from ClientSocket...\n")
+        out.writeLine("Waiting for String from ClientSocket...")
         
         String s = connection.in.readString()
         
@@ -54,6 +54,6 @@ testable class NetworkStability {
         
         expectTrue(server.close(), "Unable to close server")
 
-        out.write("Success\n")
+        out.writeLine("Success")
     }
 }

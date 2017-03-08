@@ -25,7 +25,7 @@ testable class ExceptionStability {
         } catch all (DivideByZeroException e) {
             worked = true
             
-            out.write("- Success\n")
+            out.writeLine("- Success")
         }
         
         expectTrue(worked, "Failed to catch soft Exception")
@@ -41,7 +41,7 @@ testable class ExceptionStability {
                 
                 throw new DivideByZeroException()
             } catch (DivideByZeroException e) {
-                out.write("- Success\n")
+                out.writeLine("- Success")
                 out.write("Testing StabilityTestException ")
                 
                 throw new StabilityTestException()
@@ -49,7 +49,7 @@ testable class ExceptionStability {
             
             fail("Failed to catch DivideByZeroException")
         } catch (StabilityTestException e) {
-            out.write("- Success\n")
+            out.writeLine("- Success")
             
             throw new Exception()
         }
@@ -67,7 +67,7 @@ testable class ExceptionStability {
             
             worked = true
             
-            out.write("- Success\n")
+            out.writeLine("- Success")
         } catch (StabilityTestException e) {
             fail("Caught soft exception without soft keyword")
         }
