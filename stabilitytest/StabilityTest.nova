@@ -22,7 +22,7 @@ class StabilityTest {
     public static main(String args[]) {
         let test = new StabilityTest()
         
-        let results = new ResultWindow(test).create()
+        let results = new ResultWindow(test).show()
         
         let resultBar = new ResultBar()
         resultBar.testCount = 5
