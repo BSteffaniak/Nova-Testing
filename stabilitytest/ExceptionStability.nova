@@ -11,7 +11,7 @@ testable class ExceptionStability {
         Bool worked = false
         
         try {
-            testException()
+            testException(out)
         } catch (Exception e) {
             worked = e.class == Exception // Make sure not a sub-class
         }
@@ -21,19 +21,19 @@ testable class ExceptionStability {
         worked = false
         
         try {
-            testSoftExceptions()
+            testSoftExceptions(out)
         } catch all (DivideByZeroException e) {
             worked = true
             
-            Console.writeLine("- Success")
+            out.write("- Success\n")
         }
         
         expectTrue(worked, "Failed to catch soft Exception")
     }
     
-    testException() {
+    testException(OutputStream out) {
         try {
-            Console.write("Testing DivideByZeroException ")
+            out.write("Testing DivideByZeroException ")
             
             try {
                 // Int den = 0
@@ -41,15 +41,15 @@ testable class ExceptionStability {
                 
                 throw new DivideByZeroException()
             } catch (DivideByZeroException e) {
-                Console.writeLine("- Success")
-                Console.write("Testing StabilityTestException ")
+                out.write("- Success\n")
+                out.write("Testing StabilityTestException ")
                 
                 throw new StabilityTestException()
             }
             
             fail("Failed to catch DivideByZeroException")
         } catch (StabilityTestException e) {
-            Console.writeLine("- Success")
+            out.write("- Success\n")
             
             throw new Exception()
         }
@@ -57,24 +57,24 @@ testable class ExceptionStability {
         fail("Failed to catch StabilityTestException")
     }
     
-    testSoftExceptions() {
+    testSoftExceptions(OutputStream out) {
         var worked = false
         
         try {
-            Console.write("Testing soft exception without a soft catch ")
+            out.write("Testing soft exception without a soft catch ")
             
             toss new StabilityTestException()
             
             worked = true
             
-            Console.writeLine("- Success")
+            out.write("- Success\n")
         } catch (StabilityTestException e) {
             fail("Caught soft exception without soft keyword")
         }
         
         expectTrue(worked, "Failed to throw soft without corresponding catch")
         
-        Console.write("Testing soft exception with a soft catch ")
+        out.write("Testing soft exception with a soft catch ")
         
         toss new DivideByZeroException()
         

@@ -1,5 +1,6 @@
 package "stabilitytest"
 
+import "nova/io/OutputStream"
 import "nova/network/ClientSocket"
 import "nova/thread/Thread"
 
@@ -11,35 +12,37 @@ import static "novex/nest/Nest"
 class ClientThread extends Thread {
     Int port
     
-    public construct(private Int port) {}
+    OutputStream out
+    
+    public construct(private Int port, private OutputStream out) {}
     
     public run() {
         ClientSocket client = new ClientSocket()
         
         String ip = "127.0.0.1"
         
-        Console.write("ClientSocket attempting to connect to #ip:#{port}... ")
+        out.write("ClientSocket attempting to connect to #ip:#{port}... ")
         
         expectTrue(client.connect(ip, port), "Failed to connect to localhost server")
         
-        Console.writeLine("Success")
+        out.write("Success\n")
         
-        Console.writeLine("Waiting for String from ServerSocket... ")
+        out.write("Waiting for String from ServerSocket...\n")
         
         String s = client.connection.in.readString()
         
         expectTrue(s.count == NetworkStability.received.count && s == NetworkStability.received, "Client unable to receive the correct message from server")
         
-        Console.write("Attempting to send String to ServerSocket... ")
+        out.write("Attempting to send String to ServerSocket... ")
         
         client.connection.out.write(NetworkStability.received)
         
-        Console.writeLine("Success")
+        out.write("Success\n")
         
-        Console.write("Attempting to close ClientSocket... ")
+        out.write("Attempting to close ClientSocket... ")
         
         expectTrue(client.close(), "Unable to close Client connection")
         
-        Console.writeLine("Success")
+        out.write("Success\n")
     }
 }

@@ -280,7 +280,7 @@ testable class SyntaxStability {
     }
 
     // checkRepeat() {
-    //     Console.write("Checking repeat functionality... ")
+    //     out.write("Checking repeat functionality... ")
 
     //     Int i = 0
 
@@ -318,7 +318,7 @@ testable class SyntaxStability {
 
     //     program.fail("Repeat fragment failed", i != 101)
 
-    //     Console.writeLine("OK")
+    //     out.write("OK\n")
     // }
 
     named(String s, String arg, Int jum = 4, Int jdd = 0, Int joe = 0) -> Int {
@@ -361,7 +361,7 @@ testable class SyntaxStability {
         var array2 = ["one", "two", "three", "four"]//[1, 2, 4, 3]
 
         var zipped = array1.zip(array2, (x, y) => "#x #y")
-        Console.write("Zipped: #zipped ")
+        out.write("Zipped: #zipped ")
     }
     
     [Test "Testing safe navigation operator"]
@@ -375,10 +375,10 @@ testable class SyntaxStability {
         node.child.child = new Node()
         node.child.child.value = 3
         
-        Console.write("if statement... ")
+        out.write("if statement... ")
         
         if (node?.child?.child?.value == 3 && node?.child?.value == 2 && node?.value == 1) {
-            Console.write("assignment... ")
+            out.write("assignment... ")
             
             node?.child?.child.value = 5
             
@@ -393,12 +393,12 @@ testable class SyntaxStability {
             node.child.child.child.child = new Node()
             node.child.child.child.child.value = 91
             
-            Console.write("function call... ")
+            out.write("function call... ")
             callMeWithNode(node?.child?.child?.child?.child)
             
             var array = ["1", "2", "3", "4", "5"]
             
-            Console.write("array access... ")
+            out.write("array access... ")
             array[node?.child?.value] = "hello"
             
             expectTrue(array[2] == "hello", "Failed to set correct array index with correct value using the safe navigation operator")
