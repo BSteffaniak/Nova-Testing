@@ -15,7 +15,8 @@ import "novex/nest/TestResult"
 [TestSuite [ExceptionStability, SyntaxStability, ClosureStability,
         PolymorphismStability, LambdaStability, ToStringStability,
         AssignmentStability, RegexStability, StaticImportStability,
-        InnerClassStability, ExternalInnerClassStability, PrimitiveOverloadStability]]
+        InnerClassStability, ExternalInnerClassStability, PrimitiveOverloadStability,
+        FancyOutputStreamTests]]
 [Target c]
 [TestSuite [TimeStability, ThreadStability, FileStability, NetworkStability]]
 class StabilityTest {
