@@ -593,4 +593,17 @@ testable class SyntaxStability {
         
         // program.fail("Failed to call single function from collection", !funcSwitch)
     }
+    
+    [Test "Testing parameterless lambda variable assignments"]
+    testLambdaVariableAssignments() {
+        var worked = false
+        
+        let func = {
+            worked = true
+        }
+        
+        expect(worked).toBe(false)
+        func()
+        expect(worked).toBe(true)
+    }
 }

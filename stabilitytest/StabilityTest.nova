@@ -3,6 +3,7 @@ package "stabilitytest"
 import "nova/time/Timer"
 import "nova/thread/Thread"
 import "nova/io/File"
+import "nova/io/FancyOutputStream"
 import "nova/star/Button"
 import "nova/star/Label"
 import "nova/star/Panel"
@@ -59,7 +60,13 @@ class StabilityTest {
 //        if (args[1] == "test")
 //        System.execute("Executable.exe a")
         
-        Console.writeLine("Took " + timer.duration + "ms")
+        // Console.writeLine("Took " + timer.duration + "ms")
+        
+        let fancy = new FancyOutputStream(headerPattern: "/\\")
+        fancy.writeHeader("Hello", "=")
+        fancy.writeHeader("Hello")
+        fancy.writeLine("hi")
+        fancy.writeLine("!!!")
         
         Console.waitForEnter()
     }
