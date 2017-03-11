@@ -654,8 +654,14 @@ testable class SyntaxStability {
         expect(worked).toBe(true)
     }
     
+    returnLambda(Int input) -> func() -> Int {
+        return {
+            input * 2
+        }
+    }
+    
     [Test "Testing returning a lambda"]
-    testLocalFunctionWithParameters() {
+    testReturningLambda() {
         let func = returnLambda(5)
         
         let returned = func()
