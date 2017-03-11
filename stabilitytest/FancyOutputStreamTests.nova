@@ -9,8 +9,8 @@ import "novex/nest/TestSuite"
 import static "novex/nest/Nest"
 
 testable class FancyOutputStreamTests {
-    FancyOutputStream stream
-    StringBuilder builder
+    var FancyOutputStream stream
+    var StringBuilder builder
     
     init_test init() {
         builder = new StringBuilder()
