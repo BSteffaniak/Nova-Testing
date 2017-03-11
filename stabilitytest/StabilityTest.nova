@@ -8,6 +8,7 @@ import "nova/star/Button"
 import "nova/star/Label"
 import "nova/star/Panel"
 import "nova/star/Color"
+import "nova/star/ScrollBar"
 
 import "novex/nest/ui/ResultWindow"
 import "novex/nest/ui/ResultBar"
@@ -24,38 +25,41 @@ class StabilityTest {
     public static main(String args[]) {
         let test = new StabilityTest()
         
-        let results = new ResultWindow(test).show()
+        // let results = new ResultWindow(test, Console.out)
         
-        let resultBar = new ResultBar()
-        resultBar.testCount = 5
-        resultBar.successCount = 2
+        // let resultBar = new ResultBar()
+        // resultBar.testCount = 5
+        // resultBar.successCount = 2
         
-        Async.execute({
-            Thread.sleep(1500)
+        // Async.execute({
+        //     Thread.sleep(1500)
             
-            resultBar.successCount = 3
-        })
+        //     resultBar.successCount = 3
+        // })
         
-        results.frame.addChild(resultBar)
+        // results.frame.addChild(resultBar)
+        // results.show()
         
-        let button = new Button(200, 200, 100, 20, text: "hello", state: Button.PUSH)
-        let button2 = new Button(200, 300, 30, 30, type: Button.TITLE_BAR, state: Button.CLOSE)
-        let label = new Label("testsetset", 50, 100)
+        // let button = new Button(200, 200, 100, 20, text: "hello", state: Button.PUSH)
+        // let button2 = new Button(200, 300, 30, 30, type: Button.TITLE_BAR, state: Button.CLOSE)
+        // let label = new Label("testsetset", 50, 100)
+        // let scroll = new ScrollBar(0, 0)
         
-        button.addActionListener({
-            Console.log("Pressed byuttton")
-        })
+        // button.addActionListener({
+        //     Console.log("Pressed byuttton")
+        // })
         
-        results.frame.addChild(button)
-        results.frame.addChild(button2)
-        results.frame.addChild(label)
+        // results.frame.addChild(button)
+        // results.frame.addChild(button2)
+        // results.frame.addChild(scroll)
+        // results.frame.addChild(label)
         
-        Timer timer = new Timer().start()
+        // Timer timer = new Timer().start()
         
         // test.test()
-        // test.runTests()
+        test.runTests()
         
-        timer.stop()
+        // timer.stop()
         
 //        if (args[1] == "test")
 //        System.execute("Executable.exe a")
