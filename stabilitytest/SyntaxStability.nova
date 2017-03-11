@@ -627,4 +627,39 @@ testable class SyntaxStability {
         func()
         expect(worked).toBe(true)
     }
+    
+    [Test "Testing lambda variable with parameters functionality"]
+    testLambdaVariableWithParameters() {
+        var worked = false
+        
+        let func = (Int x) => {
+            worked = x * 2 == 6
+        }
+        
+        expect(worked).toBe(false)
+        func(3)
+        expect(worked).toBe(true)
+    }
+    
+    [Test "Testing local function with parameters"]
+    testLocalFunctionWithParameters() {
+        var worked = false
+        
+        let func(Int x) {
+            worked = x * 2 == 6
+        }
+        
+        expect(worked).toBe(false)
+        func(3)
+        expect(worked).toBe(true)
+    }
+    
+    [Test "Testing returning a lambda"]
+    testLocalFunctionWithParameters() {
+        let func = returnLambda(5)
+        
+        let returned = func()
+        
+        expect(returned).toBe(10, "Expected 10, but received #returned")
+    }
 }
