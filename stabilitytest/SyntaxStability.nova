@@ -605,6 +605,12 @@ testable class SyntaxStability {
         expect(worked).toBe(false)
         func()
         expect(worked).toBe(true)
+        
+        worked = false
+        
+        expect(worked).toBe(false)
+        callFunc(func)
+        expect(worked).toBe(true)
     }
     
     callFunc(func()) => func()
