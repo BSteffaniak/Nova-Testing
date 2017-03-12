@@ -589,10 +589,23 @@ testable class SyntaxStability {
         
         funcSwitch = false
         
-        // array.first()
+        array.first()
         
-        // program.fail("Failed to call single function from collection", !funcSwitch)
+        expectTrue(funcSwitch, "Failed to call single function from collection")
     }
+    
+    [Test "Testing calling a single function with parameters from Array"]
+    testCallingFunctionWithParametersFromCollection() {
+        let array = new Array<func(Int, String) -> Int>()
+        
+        array.add(paramFunc)
+        
+        let result = array[0](5, "a")
+        
+        expect(result).toBe(5 + 1, "Failed to call single function with parameters from collection (#result)")
+    }
+    
+    paramFunc(Int x, String y) => x + y.count
     
     [Test "Testing parameterless lambda variable functionality"]
     testParameterlessLambdaVariableFunctionality() {
@@ -707,6 +720,19 @@ testable class SyntaxStability {
     }
     
     inlineReturnLambdaWithParameters(Int input) => (Int x, Int y) => {
+        x * y + input
+    }
+    
+    [Test "Testing inline returning a lambda with parameters and type predefined"]
+    testInlineReturningLambdaWithParametersAndType() {
+        let func = inlineReturnLambdaWithParametersAndType(5)
+        
+        let returned = func(3, 6)
+        
+        expect(returned).toBe(3 * 6 + 5, "Expected #{3 * 6 + 5}, but received #returned")
+    }
+    
+    inlineReturnLambdaWithParametersAndType(Int input) -> afunc(Int, Int) -> Int => (Int x, Int y) => {
         x * y + input
     }
 }
