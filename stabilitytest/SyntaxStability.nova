@@ -735,4 +735,25 @@ testable class SyntaxStability {
     inlineReturnLambdaWithParametersAndType(Int input) -> afunc(Int, Int) -> Int => (Int x, Int y) => {
         x * y + input
     }
+    
+    [Test "Testing inline returning a lambda with parameters and type predefined with body"]
+    testInlineReturningLambdaWithParametersAndTypeWithBody() {
+        expect(bodyWorked).toBe(false)
+        
+        let func = inlineReturnLambdaWithParametersAndTypeWithBody(5)
+        
+        expect(bodyWorked).toBe(true)
+        
+        let returned = func(3, 6)
+        
+        expect(returned).toBe(3 * 6 + 5, "Expected #{3 * 6 + 5}, but received #returned")
+    }
+    
+    Bool bodyWorked = false
+    
+    inlineReturnLambdaWithParametersAndTypeWithBody(Int input) -> afunc(Int, Int) -> Int => (Int x, Int y) => {
+        x * y + input
+    } {
+        bodyWorked = true
+    }
 }
