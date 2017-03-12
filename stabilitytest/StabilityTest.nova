@@ -56,8 +56,26 @@ class StabilityTest {
         
         // Timer timer = new Timer().start()
         
+        let unsucessful = new TestResult[]
+        
         // test.test()
-        test.runTests()
+        test.runTests(result => {
+            if (!result.success) {
+                unsucessful.add(result)
+            }
+        })
+        
+        let fancy = new FancyOutputStream(headerPattern: "/\\")
+        
+        if (unsucessful.count > 0) {
+            fancy.writeHeader("#unsucessful.count Failure#{unsucessful.count == 1 ? "" : "s"}:", pattern: ":'( ", rightPattern: " )':")
+            
+            unsucessful.forEach({
+                Console.log("#_")
+            })
+        } else {
+            fancy.writeHeader("All Success", pattern: ":) ", rightPattern: " (:")
+        }
         
         // timer.stop()
         
@@ -65,8 +83,6 @@ class StabilityTest {
 //        System.execute("Executable.exe a")
         
         // Console.writeLine("Took " + timer.duration + "ms")
-        
-        let fancy = new FancyOutputStream(headerPattern: "/\\")
         fancy.writeHeader("Hello", "=")
         fancy.writeHeader("Hello")
         fancy.writeLine("hi")
