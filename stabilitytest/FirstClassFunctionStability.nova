@@ -1,0 +1,327 @@
+package "stabilitytest"
+
+import "nova/datastruct/list/Iterator"
+
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class FirstClassFunctionStability {
+    Bool funcSwitch = false
+    Int funcCount, chainCount
+    
+    [Test "Testing calling a function returned by a function"]
+    testFunctionReturnedByFunction() {
+        let func = getFunc()
+        
+        func()
+        
+        expectTrue(funcSwitch, "Failed to call first class function returned from function")
+    }
+    
+    [Test "Testing calling a function returned by an inline function"]
+    testFunctionReturnedByInlineFunction() {
+        funcSwitch = false
+        
+        let func2 = inlineGetFunc()
+        
+        func2()
+        
+        expectTrue(funcSwitch, "Failed to call first class function returned from inline function")
+    }
+    
+    [Test "Testing calling a function returned by an inline function with type specified"]
+    testFunctionReturnedByInlineFunctionWithTypeSpecified() {
+        funcSwitch = false
+        
+        let func3 = inlineGetFunc2()
+        
+        func3()
+        
+        expectTrue(funcSwitch, "Failed to call first class function returned from inline function with type specified")
+    }
+    
+    [Test "Testing calling a chained function returned by a function"]
+    testCallingChainedFunctionReturnedByFunction() {
+        funcCount = 0
+        funcSwitch = false
+        
+        let chained = chainedFuncReference()
+        
+        chained()()
+        
+        expectTrue(funcSwitch && funcCount == 1, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
+    }
+    
+    [Test "Testing calling an assigned chained function returned by a function"]
+    testCallingAssignedChainFunction() {
+        funcCount = 0
+        funcSwitch = false
+        
+        let chained = chainedFuncReference()
+        
+        let c = chained()
+        c()
+        c()
+        c()
+        
+        expectTrue(funcSwitch && funcCount == 3, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
+    }
+    
+    [Test "Testing calling a chained function x3 returned by a function"]
+    testCallingChainedFunctionX3() {
+        funcCount = 0
+        funcSwitch = false
+        chainCount = 0
+        
+        let chainX3 = chainedFuncReference3()
+        
+        chainX3()()()
+        
+        expectTrue(funcSwitch && funcCount == 1 && chainCount == 3, "Failed to call first class chained function x3 returned from function: #funcSwitch, #funcCount, x#chainCount")
+    }
+    
+    [Test "Testing calling a chained function x4 returned by a function"]
+    testCallingChainedFunctionX4() {
+        funcCount = 0
+        funcSwitch = false
+        chainCount = 0
+        
+        let chainX4 = chainedFuncReference4()
+        
+        chainX4()()()()
+        
+        expectTrue(funcSwitch && funcCount == 1 && chainCount == 4, "Failed to call first class chained function x4 returned from function: #funcSwitch, #funcCount, x#chainCount")
+    }
+    
+    [Test "Testing calling a chained function x5 returned by a function"]
+    testCallingChainedFunctionX5() {
+        funcCount = 0
+        funcSwitch = false
+        chainCount = 0
+        
+        let chainX5 = chainedFuncReference5()
+        
+        chainX5()()()()()
+        
+        expectTrue(funcSwitch && funcCount == 1 && chainCount == 5, "Failed to call first class chained function x5 returned from function: #funcSwitch, #funcCount, x#chainCount")
+    }
+    
+    [Test "Testing calling a chained function x6 returned by a function"]
+    testCallingChainedFunctionX6() {
+        funcCount = 0
+        funcSwitch = false
+        chainCount = 0
+        
+        let chainX6 = chainedFuncReference6()
+        
+        chainX6()()()()()()
+        
+        expectTrue(funcSwitch && funcCount == 1 && chainCount == 6, "Failed to call first class chained function x6 returned from function: #funcSwitch, #funcCount, x#chainCount")
+    }
+    
+    refFunc() {
+        funcSwitch = true
+        funcCount++
+    }
+    
+    getFunc() -> func() {
+        return refFunc
+    }
+    
+    inlineGetFunc() => refFunc { chainCount++ }
+    
+    inlineGetFunc2() -> f() => refFunc
+    
+    chainedFuncReference() => inlineGetFunc { chainCount++ }
+    chainedFuncReference3() => chainedFuncReference { chainCount++ }
+    chainedFuncReference4() => chainedFuncReference3 { chainCount++ }
+    chainedFuncReference5() => chainedFuncReference4 { chainCount++ }
+    chainedFuncReference6() => chainedFuncReference5 { chainCount++ }
+    
+    [Test "Testing single function in Array"]
+    testSingleFunctionInArray() {
+        let array = new Array<func()>()
+        
+        array.add(refFunc)
+    }
+    
+    [Test "Testing calling a single function from Array"]
+    testCallingFunctionFromCollection() {
+        let array = new Array<func()>()
+        
+        array.add(refFunc)
+        
+        funcSwitch = false
+        
+        array.first()
+        
+        expectTrue(funcSwitch, "Failed to call single function from collection")
+    }
+    
+    [Test "Testing calling a single function with parameters from Array"]
+    testCallingFunctionWithParametersFromCollection() {
+        let array = new Array<func(Int, String) -> Int>()
+        
+        array.add(paramFunc)
+        
+        var result = array[0](5, "a")
+        
+        expect(result).toBe(5 + 1, "Failed to call single function with parameters from collection by array access (#result)")
+        
+        result = array.first(2, "4a")
+        
+        expect(result).toBe(2 + 2, "Failed to call single function with parameters from collection (#result)")
+    }
+    
+    paramFunc(Int x, String y) => x + y.count
+    
+    [Test "Testing parameterless lambda variable functionality"]
+    testParameterlessLambdaVariableFunctionality() {
+        var worked = false
+        
+        let func = {
+            worked = true
+        }
+        
+        expect(worked).toBe(false)
+        func()
+        expect(worked).toBe(true)
+        
+        worked = false
+        
+        expect(worked).toBe(false)
+        callFunc(func)
+        expect(worked).toBe(true)
+    }
+    
+    callFunc(func()) => func()
+    
+    [Test "Testing parameterless local function"]
+    testParameterlessLocalFunction() {
+        var worked = false
+        
+        let func() {
+            worked = true
+        }
+        
+        expect(worked).toBe(false)
+        func()
+        expect(worked).toBe(true)
+    }
+    
+    [Test "Testing lambda variable with parameters functionality"]
+    testLambdaVariableWithParameters() {
+        var worked = false
+        
+        let func = (Int x) => {
+            worked = x * 2 == 6
+        }
+        
+        expect(worked).toBe(false)
+        func(3)
+        expect(worked).toBe(true)
+    }
+    
+    [Test "Testing local function with parameters"]
+    testLocalFunctionWithParameters() {
+        var worked = false
+        
+        let func(Int x) {
+            worked = x * 2 == 6
+        }
+        
+        expect(worked).toBe(false)
+        func(3)
+        expect(worked).toBe(true)
+    }
+    
+    [Test "Testing returning a lambda"]
+    testReturningLambda() {
+        let func = returnLambda(5)
+        
+        let returned = func()
+        
+        expect(returned).toBe(10, "Expected 10, but received #returned")
+    }
+    
+    returnLambda(Int input) -> func() -> Int {
+        return {
+            input * 2
+        }
+    }
+    
+    [Test "Testing returning a lambda with parameters"]
+    testReturningLambdaWithParameters() {
+        let func = returnLambdaWithParameters(5)
+        
+        let returned = func(3, 6)
+        
+        expect(returned).toBe(3 * 6 + 5, "Expected #{3 * 6 + 5}, but received #returned")
+    }
+    
+    returnLambdaWithParameters(Int input) -> func(Int, Int) -> Int {
+        return (x, y) => {
+            x * y + input
+        }
+    }
+    
+    [Test "Testing inline returning a lambda"]
+    testInlineReturningLambda() {
+        let func = inlineReturnLambda(5)
+        
+        let returned = func()
+        
+        expect(returned).toBe(10, "Expected 10, but received #returned")
+    }
+    
+    inlineReturnLambda(Int input) => { input * 2 }
+    
+    [Test "Testing inline returning a lambda with parameters"]
+    testInlineReturningLambdaWithParameters() {
+        let func = inlineReturnLambdaWithParameters(5)
+        
+        let returned = func(3, 6)
+        
+        expect(returned).toBe(3 * 6 + 5, "Expected #{3 * 6 + 5}, but received #returned")
+    }
+    
+    inlineReturnLambdaWithParameters(Int input) => (Int x, Int y) => {
+        x * y + input
+    }
+    
+    [Test "Testing inline returning a lambda with parameters and type predefined"]
+    testInlineReturningLambdaWithParametersAndType() {
+        let func = inlineReturnLambdaWithParametersAndType(5)
+        
+        let returned = func(3, 6)
+        
+        expect(returned).toBe(3 * 6 + 5, "Expected #{3 * 6 + 5}, but received #returned")
+    }
+    
+    inlineReturnLambdaWithParametersAndType(Int input) -> afunc(Int, Int) -> Int => (Int x, Int y) => {
+        x * y + input
+    }
+    
+    [Test "Testing inline returning a lambda with parameters and type predefined with body"]
+    testInlineReturningLambdaWithParametersAndTypeWithBody() {
+        expect(bodyWorked).toBe(false)
+        
+        let func = inlineReturnLambdaWithParametersAndTypeWithBody(5)
+        
+        expect(bodyWorked).toBe(true)
+        
+        let returned = func(3, 6)
+        
+        expect(returned).toBe(3 * 6 + 5, "Expected #{3 * 6 + 5}, but received #returned")
+    }
+    
+    Bool bodyWorked = false
+    
+    inlineReturnLambdaWithParametersAndTypeWithBody(Int input) -> afunc(Int, Int) -> Int => (Int x, Int y) => {
+        x * y + input
+    } {
+        bodyWorked = true
+    }
+}

@@ -18,7 +18,7 @@ import "novex/nest/TestResult"
         PolymorphismStability, LambdaStability, ToStringStability,
         AssignmentStability, RegexStability, StaticImportStability,
         InnerClassStability, ExternalInnerClassStability, PrimitiveOverloadStability,
-        FancyOutputStreamTests]]
+        FancyOutputStreamTests, FirstClassFunctionStability]]
 [Target c]
 [TestSuite [TimeStability, ThreadStability, FileStability, NetworkStability]]
 class StabilityTest {
@@ -74,7 +74,7 @@ class StabilityTest {
                 Console.log("#_")
             })
         } else {
-            fancy.writeHeader("All Success", pattern: ":) ", rightPattern: " (:")
+            fancy.writeHeader("All Success", pattern: ":) ", symmetrical: true)
         }
         
         // timer.stop()
