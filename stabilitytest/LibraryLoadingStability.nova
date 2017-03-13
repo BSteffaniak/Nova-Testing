@@ -33,4 +33,12 @@ testable class LibraryLoadingStability {
         
         expect(returned).toBe(10, "Expected return value of 10, but received #returned")
     }
+    
+    test nonExistentFunction() {
+        let func = lib.getFunction("thisFunctionDoesNotExist", "nova/test/Test")
+        
+        let nullFunc = nullFunc()
+        
+        expectTrue(func == nullFunc, "found non-existent function")
+    }
 }
