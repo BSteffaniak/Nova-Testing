@@ -324,4 +324,27 @@ testable class FirstClassFunctionStability {
     } {
         bodyWorked = true
     }
+    
+    [Test "Testing implicit null function reference"]
+    testImplicitNullFunctionReference() {
+        let func()
+        
+        expectNull(func, "func was not null")
+    }
+    
+    [Test "Testing explicit null function reference"]
+    testExplicitNullFunctionReference() {
+        let func() = null
+        
+        expectNull(func, "func was not null")
+    }
+    
+    [Test "Testing non-null function reference"]
+    testNonNullFunctionReference() {
+        let func() {
+            
+        }
+        
+        expectValue(func, "func was null")
+    }
 }
