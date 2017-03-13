@@ -8,8 +8,8 @@ import "novex/nest/TestSuite"
 import static "novex/nest/Nest"
 
 testable class FirstClassFunctionStability {
-    Bool funcSwitch = false
-    Int funcCount, chainCount
+    var Bool funcSwitch = false
+    var Int funcCount, chainCount
     
     [Test "Testing calling a function returned by a function"]
     testFunctionReturnedByFunction() {
@@ -317,7 +317,7 @@ testable class FirstClassFunctionStability {
         expect(returned).toBe(3 * 6 + 5, "Expected #{3 * 6 + 5}, but received #returned")
     }
     
-    Bool bodyWorked = false
+    var Bool bodyWorked = false
     
     inlineReturnLambdaWithParametersAndTypeWithBody(Int input) -> afunc(Int, Int) -> Int => (Int x, Int y) => {
         x * y + input

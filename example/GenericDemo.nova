@@ -28,7 +28,7 @@ class GenericDemo {
 //        strs.push(o)
         
         while (!strs.isEmpty) {
-            String popped = strs.pop()
+            var popped = strs.pop()
             
             if (popped) {
                 popped = "\"" + popped + "\""

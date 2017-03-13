@@ -25,7 +25,7 @@ class ClosureDemo {
     static pow(Int base, Int pow) -> Int {
         Console.writeLine("pow was called with " + base + " and " + pow)
         
-        Int value = base
+        var Int value = base
         
         for (i in 0..(pow - 1)) {
             value = value * base

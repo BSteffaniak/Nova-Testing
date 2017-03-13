@@ -23,7 +23,7 @@ import "nova/thread/ThreadLocal"
 import "nova/time/Timer"
 
 class Lab {
-    static thread_local Int local = 122
+    static thread_local var Int local = 122
     
     public static main(String[] args) {
         //var v = new Vector2D(2, 3)
@@ -50,8 +50,8 @@ class Lab {
         Console.writeLine("Postorder: #{tree.postorder().join(", ")}")
         Console.writeLine("Levelorder: #{tree.levelorder().join(", ")}")
         
-        Int num1 = 4
-        Int num2
+        var Int num1 = 4
+        var Int num2
         
         num2 = num1 = 7
         
@@ -253,8 +253,8 @@ class Lab {
         Console.waitForEnter()
     }
     
-    static thread_local Int bench1
-    static Int bench2
+    static thread_local var Int bench1
+    static var Int bench2
     
     static benchmarkThreadLocals() {
         let timer = new Timer()

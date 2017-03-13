@@ -8,7 +8,7 @@ import "nova/gc/GC"
 
 class IntegerTest {
     public static main(String args[]) {
-        Char c = 'y'
+        var c = 'y'
         
         while (c == 'y' || c == 'Y') {
             Timer timer = new Timer().start()

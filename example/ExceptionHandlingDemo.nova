@@ -3,7 +3,7 @@ package "example"
 class ExceptionHandlingDemo {
     public static main(String[] args) {
         try {
-            Int result = divide(100, 5)
+            var Int result = divide(100, 5)
             
             Console.writeLine("After working example: " + result)
             

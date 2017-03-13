@@ -10,8 +10,8 @@ import static "novex/nest/Nest"
 testable class SyntaxStability {
     [Test "Testing simple match statement"]
     testSimpleMatchStatement() {
-        Int  num    = 3
-        Bool worked = false
+        let num    = 3
+        var worked = false
 
         match (num) {
             1 => fail("Match accepted incorrect case")
@@ -26,8 +26,8 @@ testable class SyntaxStability {
 
     [Test "Testing simple match statement with indentation"]
     testSimpleMatchStatementWithIndentation() {
-        Int  num    = 3
-        Bool worked = false
+        let num    = 3
+        var worked = false
 
         switch (num)
             1 =>
@@ -45,8 +45,8 @@ testable class SyntaxStability {
     
     [Test "Testing simple match statement with scopes"]
     testSimpleMatchStatementWithScopes() {
-        Int  num    = 3
-        Bool worked = false
+        let num    = 3
+        var worked = false
 
         match (num) {
             1 => {
@@ -71,9 +71,9 @@ testable class SyntaxStability {
     
     [Test "Testing match statement with variable case values"]
     testMatchStatementWithVariableCaseValues() {
-        Int  val    = 1
-        Int  num    = 3
-        Bool worked = false
+        var val    = 1
+        var num    = 3
+        var worked = false
 
         match (num) {
             val++ => {
@@ -95,11 +95,11 @@ testable class SyntaxStability {
     
     [Test "Testing match statement with variable case values and fallthrough"]
     testMatchStatementWithVariableCaseValuesAndFallthrough() {
-        Int  val    = 1
-        Int  num    = 3
-        Bool worked = false
+        var val    = 1
+        var num    = 3
+        var worked = false
 
-        Bool worked2 = false
+        var worked2 = false
 
         match (num++) {
             val++ => {
@@ -121,9 +121,9 @@ testable class SyntaxStability {
     
     [Test "Testing inline while loop"]
     testWhileLoops() {
-        Int num  = 0
-        Int num2 = 0
-        Int num3 = 0
+        var num  = 0
+        var num2 = 0
+        var num3 = 0
 
         while (num < 100) num++
 
@@ -141,9 +141,9 @@ testable class SyntaxStability {
     
     [Test "Testing inline for loop"]
     testForLoops() {
-        Int num  = 0
-        Int num2 = 0
-        Int num3 = 0
+        var num  = 0
+        var num2 = 0
+        var num3 = 0
 
         for (i in 0..100) num++
 
@@ -161,7 +161,7 @@ testable class SyntaxStability {
     
     [Test "Testing until statement"]
     testUntil() {
-        Object obj
+        var obj
 
         until (obj) {
             obj = test1()

@@ -8,7 +8,7 @@ import static "novex/nest/Nest"
 testable class ExceptionStability {
     [Test message: false]
     public test() {
-        Bool worked = false
+        var worked = false
         
         try {
             testException(out)

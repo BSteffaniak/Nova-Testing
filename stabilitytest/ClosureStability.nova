@@ -8,7 +8,7 @@ import static "novex/nest/Nest"
 testable class ClosureStability {
     static final Double TOLERANCE = 0.0000000001
     
-    Int    number
+    var Int number
     
     incrementNumber() => number++
     

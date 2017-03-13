@@ -17,7 +17,7 @@ class ServerDemo {
             Console.writeLine("Started server on port " + port)
             Console.writeLine("Waiting on client...")
             
-            ConnectionSocket request = socket.acceptClient()
+            var request = socket.acceptClient()
             
             if (!request) {
                 Console.writeLine("Failed to accept client")

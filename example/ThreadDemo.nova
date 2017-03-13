@@ -5,7 +5,7 @@ import "nova/time/Timer"
 
 class ThreadDemo {
     public static main(String args[]) {
-        Char c = 'y'
+        var Char c = 'y'
         
         while (c == 'y' || c == 'Y') {
             Thread thread  = new ThreadDemoImplementation(100, "Thread1")

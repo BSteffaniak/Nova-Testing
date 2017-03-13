@@ -2,7 +2,7 @@ package "example"
 
 class ArrayDemo {
     public static main(String[] args) {
-        Char c = 'y'
+        var Char c = 'y'
         
         while (c == 'y' || c == 'Y') {
             Animal[] list = new Array()

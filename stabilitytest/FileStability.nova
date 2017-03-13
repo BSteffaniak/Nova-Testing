@@ -15,9 +15,9 @@ testable class FileStability {
     
     static final Int lines = 100
     
-    File f
-    FileWriter writer
-    FileReader reader
+    var File f
+    var FileWriter writer
+    var FileReader reader
     
     init_test_class initClass() {
         f = new File("temp#Time.currentTimeMillis")
@@ -46,8 +46,8 @@ testable class FileStability {
         
         expectTrue(reader.isOpen, "File reader failed to open")
         
-        Int    times = 0
-        String line  = reader.readLine()
+        var Int times = 0
+        var line = reader.readLine()
         
         while (line) {
             expectTrue(line == inputString, "Reading from file failed: '#line' != '#inputString'")

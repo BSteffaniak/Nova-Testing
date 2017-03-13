@@ -1,7 +1,6 @@
 package "stabilitytest"
 
 class Node {
-    public Node child
-    
-    public Int value
+    public var Node child
+    public var Int value
 }

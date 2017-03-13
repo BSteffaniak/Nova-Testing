@@ -45,8 +45,8 @@ class SvgFractal {
             s.root.children.addChild(circle2)
         }
         
-        Double cx = radius + 10
-        Double cy = radius + 10
+        var Double cx = radius + 10
+        var Double cy = radius + 10
         
         for (p in 0..numPoints) {
             Int rand = Math.random(numVerts)
