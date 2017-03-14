@@ -51,11 +51,11 @@ testable class FancyOutputStreamTests {
         stream.writeHeader("Test")
         
         let string = builder.toString()
-        let expected = "/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\ "
+        let expected = "/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/ "
         
-        expect(string.count).toBe(79, "Header count expected 79, but received #string.count")
+        expect(string.count).toBe(81, "Header count expected 81, but received #string.count")
         expect(string.last).toBe('\n', "Expected new line at end of header, received '#string.last'")
-        expect(string.trim().count).toBe(78, "Trimmed header count expected 78, but received #string.trim().count")
+        expect(string.trim().count).toBe(80, "Trimmed header count expected 80, but received #string.trim().count")
         expectTrue(string.startsWith(expected), "Header width not correct (#string.count chars)\n#expected\n#string")
     }
 }

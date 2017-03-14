@@ -68,13 +68,13 @@ class StabilityTest {
         let fancy = new FancyOutputStream(headerPattern: "/\\")
         
         if (unsucessful.count > 0) {
-            fancy.writeHeader("#unsucessful.count Failure#{unsucessful.count == 1 ? "" : "s"}:", pattern: ":'( ", symmetrical: true)
+            fancy.writeHeader("#unsucessful.count Failure#{unsucessful.count == 1 ? "" : "s"}", pattern: ":'( ", symmetrical: true)
             
             unsucessful.forEach({
                 Console.log("#_")
             })
         } else {
-            fancy.writeHeader("All Success", pattern: ":) ", symmetrical: true)
+            fancy.writeHeader("All Successful", pattern: ":) ", symmetrical: true)
         }
         
         // timer.stop()
