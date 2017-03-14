@@ -19,12 +19,8 @@ testable class LibraryLoadingStability {
     test getStaticFunction() {
         let func = lib.getFunction("staticFunc", "nova/test/Test")
         
-        let nullFunc = nullFunc()
-        
-        expectTrue(func != nullFunc, "staticFunc not found")
+        expectValue(func, "staticFunc not found")
     }
-    
-    nullFunc() -> func() => null
     
     test callStaticFunction() {
         let func(Int x) -> Int = lib.getFunction("staticFuncInt", "nova/test/Test")
@@ -37,8 +33,6 @@ testable class LibraryLoadingStability {
     test nonExistentFunction() {
         let func = lib.getFunction("thisFunctionDoesNotExist", "nova/test/Test")
         
-        let nullFunc = nullFunc()
-        
-        expectTrue(func == nullFunc, "found non-existent function")
+        expectNull(func, "found non-existent function")
     }
 }
