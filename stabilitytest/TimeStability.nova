@@ -1,6 +1,8 @@
 package "stabilitytest"
 
 import "nova/time/Timer"
+import "nova/time/DateTime"
+import "nova/time/DateTime.InvalidDateException"
 import "nova/thread/Thread"
 
 import "novex/nest/Nest"
@@ -11,7 +13,7 @@ import static "novex/nest/Nest"
 testable class TimeStability {
     [Test "Testing Time.nova"]
     public test() {
-        Timer timer = new Timer()
+        let timer = new Timer()
         timer.start()
         
         Thread.sleep(100)
@@ -19,5 +21,53 @@ testable class TimeStability {
         timer.stop()
         
         expectTrue(timer.duration >= 99 && timer.duration < 130, "Failed; expected 100ms, found #{timer.duration}ms")
+    }
+    
+    test leapYear() {
+        expect(new DateTime(1900).isLeapYear).toBe(false)
+        expect(new DateTime(2016).isLeapYear).toBe(true)
+        expect(new DateTime(2017).isLeapYear).toBe(false)
+        expect(new DateTime(2018).isLeapYear).toBe(false)
+        expect(new DateTime(2019).isLeapYear).toBe(false)
+        expect(new DateTime(2020).isLeapYear).toBe(true)
+        
+        expect({ new DateTime(2017, 2, 29) }).toThrow(InvalidDateException)
+        expect({ new DateTime(2016, 2, 29) }).toNotThrow(InvalidDateException)
+    }
+    
+    test invalidDateTimeYear() {
+        expect({ new DateTime(0) }).toNotThrow(InvalidDateException)
+    }
+    
+    test invalidDateTimeMonth() {
+        expect({ new DateTime(month: 0) }).toThrow(InvalidDateException)
+        
+        var m = 1
+        
+        for (i in 0..12) {
+            expect({ new DateTime(month: /*100+*/m++) }).toNotThrow(InvalidDateException)
+        }
+        
+        expect({ new DateTime(month: 13) }).toThrow(InvalidDateException)
+        expect({ new DateTime(month: -1) }).toThrow(InvalidDateException)
+    }
+    
+    test invalidDateTimeDay() {
+        expect({ new DateTime(month: 12, dayOfMonth: 31) }).toNotThrow(InvalidDateException)
+        expect({ new DateTime(month: 11, dayOfMonth: 31) }).toThrow(InvalidDateException)
+        expect({ new DateTime(2020, 2, 29) }).toNotThrow(InvalidDateException)
+        expect({ new DateTime(2021, 2, 29) }).toThrow(InvalidDateException)
+        
+        DateTime.MONTH_DAYS.forEach((days, month) => {
+            var d = 1
+            
+            for (i in 0..days) {
+                expect({ new DateTime(2020, month + 1, d++) }).toNotThrow(InvalidDateException)
+            }
+            
+            expect({ new DateTime(2020, month + 1, -1) }).toThrow(InvalidDateException)
+            expect({ new DateTime(2020, month + 1, 0) }).toThrow(InvalidDateException)
+            expect({ new DateTime(2020, month + 1, days + 1) }).toThrow(InvalidDateException)
+        })
     }
 }
