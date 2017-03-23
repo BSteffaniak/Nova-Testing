@@ -56,25 +56,25 @@ class StabilityTest {
         
         // Timer timer = new Timer().start()
         
-        let unsucessful = new TestResult[]
+        let results = new TestResult[]
         
         // test.test()
         test.runTests(result => {
-            if (!result.success) {
-                unsucessful.add(result)
-            }
+            results.add(result)
         })
         
         let fancy = new FancyOutputStream(headerPattern: "/\\")
         
+        let unsucessful = results.filter({ !_.success })
+        
         if (unsucessful.count > 0) {
-            fancy.writeHeader("#unsucessful.count Failure#{unsucessful.count == 1 ? "" : "s"}", pattern: ":'( ", symmetrical: true)
+            fancy.writeHeader("#unsucessful.count Failure#{unsucessful.count == 1 ? "" : "s"} out of #results.count tests", pattern: ":'( ", symmetrical: true)
             
             unsucessful.forEach({
                 Console.log("#_")
             })
         } else {
-            fancy.writeHeader("All Successful", pattern: ":) ", symmetrical: true)
+            fancy.writeHeader("All #results.count Successful", pattern: ":) ", symmetrical: true)
         }
         
         // timer.stop()
