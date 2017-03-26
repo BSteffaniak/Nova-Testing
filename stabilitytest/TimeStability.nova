@@ -20,23 +20,23 @@ testable class TimeStability {
         
         timer.stop()
         
-        expectTrue(timer.duration >= 99 && timer.duration < 130, "Failed; expected 100ms, found #{timer.duration}ms")
+        expect(timer.duration >= 99 && timer.duration < 130).toBe(true, "Failed; expected 100ms, found #{timer.duration}ms")
     }
     
     test leapYear() {
-        expect(new DateTime(1900).isLeapYear).toBe(false)
-        expect(new DateTime(2016).isLeapYear).toBe(true)
-        expect(new DateTime(2017).isLeapYear).toBe(false)
-        expect(new DateTime(2018).isLeapYear).toBe(false)
-        expect(new DateTime(2019).isLeapYear).toBe(false)
-        expect(new DateTime(2020).isLeapYear).toBe(true)
+        expect(new DateTime(year: 1900).isLeapYear).toBe(false, "1900 is not a leap year")
+        expect(new DateTime(year: 2016).isLeapYear).toBe(true, "2016 is a leap year")
+        expect(new DateTime(year: 2017).isLeapYear).toBe(false, "2017 is not a leap year")
+        expect(new DateTime(year: 2018).isLeapYear).toBe(false, "2018 is not a leap year")
+        expect(new DateTime(year: 2019).isLeapYear).toBe(false, "2019 is not a leap year")
+        expect(new DateTime(year: 2020).isLeapYear).toBe(true, "2020 is a leap year")
         
         expect({ new DateTime(2017, 2, 29) }).toThrow(InvalidDateException)
         expect({ new DateTime(2016, 2, 29) }).toNotThrow(InvalidDateException)
     }
     
     test invalidDateTimeYear() {
-        expect({ new DateTime(0) }).toNotThrow(InvalidDateException)
+        expect({ new DateTime(year: 0) }).toNotThrow(InvalidDateException)
     }
     
     test invalidDateTimeMonth() {
