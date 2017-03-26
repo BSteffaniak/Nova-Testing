@@ -70,4 +70,14 @@ testable class TimeStability {
             expect({ new DateTime(2020, month + 1, days + 1) }).toThrow(InvalidDateException)
         })
     }
+    
+    test basicEpochTime() {
+        let millis = 1490227200000
+        let fromEpoch = new DateTime(millis: millis)
+        
+        expect(fromEpoch.millis).toBe(millis)
+        expect(fromEpoch.year).toBe(2017)
+        expect(fromEpoch.month).toBe(3)
+        expect(fromEpoch.dayOfMonth).toBe(23)
+    }
 }
