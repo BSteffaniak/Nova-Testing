@@ -90,4 +90,14 @@ testable class TimeStability {
         expect(newYear.month).toBe(1)
         expect(newYear.dayOfMonth).toBe(1)
     }
+    
+    test newYearEveEpochTime() {
+        let newYearEveMillis = 1483142400000
+        let newYearEve = new DateTime(millis: newYearEveMillis)
+        
+        expect(newYearEve.millis).toBe(newYearEveMillis)
+        expect(newYearEve.year).toBe(2016)
+        expect(newYearEve.month).toBe(12)
+        expect(newYearEve.dayOfMonth).toBe(31)
+    }
 }
