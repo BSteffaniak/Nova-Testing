@@ -100,4 +100,14 @@ testable class TimeStability {
         expect(newYearEve.month).toBe(12)
         expect(newYearEve.dayOfMonth).toBe(31)
     }
+    
+    test leapYearEpochTime() {
+        let leapYear2016Millis = 1456722000000
+        let leapYear2016 = new DateTime(millis: leapYear2016Millis)
+        
+        expect(leapYear2016.millis).toBe(leapYear2016Millis)
+        expect(leapYear2016.year).toBe(2016)
+        expect(leapYear2016.month).toBe(2)
+        expect(leapYear2016.dayOfMonth).toBe(29)
+    }
 }
