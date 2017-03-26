@@ -19,11 +19,11 @@ testable class ClosureStability {
         
         Double value = 0.5
         
-        expectTrue(callClosure(multiply, a, b) == multiply(a, b), "Failed to call multiply(Int, Int) closure")
-        expectTrue(callClosure(pow, a, b) == pow(a, b), "Failed to call pow(Int, Int) closure")
+        expect(callClosure(multiply, a, b)).toBe(multiply(a, b), "Failed to call multiply(Int, Int) closure")
+        expect(callClosure(pow, a, b)).toBe(pow(a, b), "Failed to call pow(Int, Int) closure")
         
-        expectTrue(mathClosure(Math.sin, value) - Math.sin(value) < TOLERANCE, "Failed to call Math.sin(Double) closure")
-        expectTrue(mathClosure(Math.tan, value) - Math.tan(value) < TOLERANCE, "Failed to call Math.tan(Double) closure")
+        expect(mathClosure(Math.sin, value) - Math.sin(value) < TOLERANCE).toBe(true, "Failed to call Math.sin(Double) closure")
+        expect(mathClosure(Math.tan, value) - Math.tan(value) < TOLERANCE).toBe(true, "Failed to call Math.tan(Double) closure")
     }
     
     [Test "Testing instance closures"]
@@ -32,7 +32,7 @@ testable class ClosureStability {
         
         instanceClosure(c.incrementNumber)
         
-        expectFalse(c.number == 0, "Failed to call incrementNumber() instance closure")
+        expect(c.number == 0).toBe(false, "Failed to call incrementNumber() instance closure")
         
         instanceClosure(new ClosureStability().incrementNumber)
         instanceClosure(c.incrementNumber)

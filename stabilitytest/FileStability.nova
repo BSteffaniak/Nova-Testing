@@ -28,7 +28,7 @@ testable class FileStability {
     
     [Test "Testing file creation"]
     createFile() {
-        expectTrue(writer.create(), "Failed to create file")
+        expect(writer.create()).toBe(true, "Failed to create file")
     }
     
     [Test "Testing writing lines of data to file"]
@@ -44,13 +44,13 @@ testable class FileStability {
             reader.open()
         }
         
-        expectTrue(reader.isOpen, "File reader failed to open")
+        expect(reader.isOpen).toBe(true, "File reader failed to open")
         
         var Int times = 0
         var line = reader.readLine()
         
         while (line) {
-            expectTrue(line == inputString, "Reading from file failed: '#line' != '#inputString'")
+            expect(line == inputString).toBe(true, "Reading from file failed: '#line' != '#inputString'")
             
             line = reader.readLine()
             
@@ -59,10 +59,10 @@ testable class FileStability {
         
         reader.close()
         
-        expectFalse(times != lines, "Failed; only read #{times}/100 lines")
+        expect(times != lines).toBe(false, "Failed; only read #{times}/100 lines")
     }
     
     clean_test_class deleteFile() {
-        expectTrue(writer.delete(), "Failed to delete file")
+        expect(writer.delete()).toBe(true, "Failed to delete file")
     }
 }

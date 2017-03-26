@@ -11,7 +11,7 @@ testable class PolymorphismStability {
         PolymorphicSuperClass obj1 = new PolymorphicSuperClass()
         PolymorphicSubClass   obj2 = new PolymorphicSubClass()
         
-        expectTrue(testSubCall(obj2), "Did not call sub class method")
+        expect(testSubCall(obj2)).toBe(true, "Did not call sub class method")
     }
     
     static testSubCall(PolymorphicSuperClass obj) => obj.toString() == "sub class"
@@ -20,13 +20,13 @@ testable class PolymorphismStability {
     testClosure() {
         PolymorphicSuperClass obj = new PolymorphicSubClass()
         
-        expectTrue(callPolymorphicClosure(obj.toString), "Did not call sub class method as closure")
+        expect(callPolymorphicClosure(obj.toString)).toBe(true, "Did not call sub class method as closure")
         
         obj.giveBirth()
         
         String child = obj.child + "!"
         
-        expectTrue(callPolymorphicClosure(obj.child.toString), "Did not call sub class method as closure")
+        expect(callPolymorphicClosure(obj.child.toString)).toBe(true, "Did not call sub class method as closure")
     }
     
     static callPolymorphicClosure(closure() -> String) => closure() == "sub class"
@@ -36,7 +36,7 @@ testable class PolymorphismStability {
         PolymorphicSuperClass obj1 = new PolymorphicSuperClass()
         PolymorphicSuperClass obj2 = new PolymorphicSubClass()
         
-        expectTrue(obj1.myProperty == 1, "Did not call super polymorphic property accessor correctly")
-        expectTrue(obj2.myProperty == 2, "Did not call sub polymorphic property accessor correctly")
+        expect(obj1.myProperty == 1).toBe(true, "Did not call super polymorphic property accessor correctly")
+        expect(obj2.myProperty == 2).toBe(true, "Did not call sub polymorphic property accessor correctly")
     }
 }

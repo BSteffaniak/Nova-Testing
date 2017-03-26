@@ -16,7 +16,7 @@ testable class ExceptionStability {
             worked = e.class == Exception // Make sure not a sub-class
         }
         
-        expectTrue(worked, "Failed to catch Exception")
+        expect(worked).toBe(true, "Failed to catch Exception")
         
         worked = false
         
@@ -28,7 +28,7 @@ testable class ExceptionStability {
             out.writeLine("- Success")
         }
         
-        expectTrue(worked, "Failed to catch soft Exception")
+        expect(worked).toBe(true, "Failed to catch soft Exception")
     }
     
     testException(OutputStream out) {
@@ -72,7 +72,7 @@ testable class ExceptionStability {
             fail("Caught soft exception without soft keyword")
         }
         
-        expectTrue(worked, "Failed to throw soft without corresponding catch")
+        expect(worked).toBe(true, "Failed to throw soft without corresponding catch")
         
         out.write("Testing soft exception with a soft catch ")
         

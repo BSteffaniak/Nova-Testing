@@ -24,8 +24,8 @@ testable class PrimitiveOverloadStability {
             counter++
         }
         
-        expectTrue(counter == 2, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
-        expectTrue(sum == 15, "Failed to get valid key values. Expected a sum of 15, but got #sum")
+        expect(counter == 2).toBe(true, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
+        expect(sum == 15).toBe(true, "Failed to get valid key values. Expected a sum of 15, but got #sum")
     }
     
     [Test "Testing primitive key and value for HashMap<Int, Int>"]
@@ -45,8 +45,8 @@ testable class PrimitiveOverloadStability {
             counter++
         }
         
-        expectTrue(counter == 3, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
-        expectTrue(sum == 49 + 6 - 22, "Failed to get valid key values. Expected a sum of #{49 + 6 - 22}, but got #sum")
+        expect(counter == 3).toBe(true, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
+        expect(sum == 49 + 6 - 22).toBe(true, "Failed to get valid key values. Expected a sum of #{49 + 6 - 22}, but got #sum")
     }
     
     [Test "Testing functional primitive key for HashMap<Int, String>"]
@@ -65,8 +65,8 @@ testable class PrimitiveOverloadStability {
             counter++
         })
         
-        expectTrue(counter == 2, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
-        expectTrue(sum == 15, "Failed to get valid key values. Expected a sum of 15, but got #sum")
+        expect(counter == 2).toBe(true, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
+        expect(sum == 15).toBe(true, "Failed to get valid key values. Expected a sum of 15, but got #sum")
     }
     
     [Test "Testing functional primitive key and value for HashMap<Int, Int>"]
@@ -86,7 +86,7 @@ testable class PrimitiveOverloadStability {
             counter++
         })
         
-        expectTrue(counter == 3, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
-        expectTrue(sum == 49 + 6 - 22, "Failed to get valid key values. Expected a sum of #{49 + 6 - 22}, but got #sum")
+        expect(counter == 3).toBe(true, "Failed to iterator over map values. Expected counter value of 2, but got #counter")
+        expect(sum == 49 + 6 - 22).toBe(true, "Failed to get valid key values. Expected a sum of #{49 + 6 - 22}, but got #sum")
     }
 }

@@ -17,7 +17,7 @@ testable class FirstClassFunctionStability {
         
         func()
         
-        expectTrue(funcSwitch, "Failed to call first class function returned from function")
+        expect(funcSwitch).toBe(true, "Failed to call first class function returned from function")
     }
     
     [Test "Testing calling a function returned by an inline function"]
@@ -28,7 +28,7 @@ testable class FirstClassFunctionStability {
         
         func2()
         
-        expectTrue(funcSwitch, "Failed to call first class function returned from inline function")
+        expect(funcSwitch).toBe(true, "Failed to call first class function returned from inline function")
     }
     
     [Test "Testing calling a function returned by an inline function with type specified"]
@@ -39,7 +39,7 @@ testable class FirstClassFunctionStability {
         
         func3()
         
-        expectTrue(funcSwitch, "Failed to call first class function returned from inline function with type specified")
+        expect(funcSwitch).toBe(true, "Failed to call first class function returned from inline function with type specified")
     }
     
     [Test "Testing calling a chained function returned by a function"]
@@ -51,7 +51,7 @@ testable class FirstClassFunctionStability {
         
         chained()()
         
-        expectTrue(funcSwitch && funcCount == 1, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
+        expect(funcSwitch && funcCount == 1).toBe(true, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
     }
     
     [Test "Testing calling an assigned chained function returned by a function"]
@@ -66,7 +66,7 @@ testable class FirstClassFunctionStability {
         c()
         c()
         
-        expectTrue(funcSwitch && funcCount == 3, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
+        expect(funcSwitch && funcCount == 3).toBe(true, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
     }
     
     [Test "Testing calling a chained function x3 returned by a function"]
@@ -79,7 +79,7 @@ testable class FirstClassFunctionStability {
         
         chainX3()()()
         
-        expectTrue(funcSwitch && funcCount == 1 && chainCount == 3, "Failed to call first class chained function x3 returned from function: #funcSwitch, #funcCount, x#chainCount")
+        expect(funcSwitch && funcCount == 1 && chainCount == 3).toBe(true, "Failed to call first class chained function x3 returned from function: #funcSwitch, #funcCount, x#chainCount")
     }
     
     [Test "Testing calling a chained function x4 returned by a function"]
@@ -92,7 +92,7 @@ testable class FirstClassFunctionStability {
         
         chainX4()()()()
         
-        expectTrue(funcSwitch && funcCount == 1 && chainCount == 4, "Failed to call first class chained function x4 returned from function: #funcSwitch, #funcCount, x#chainCount")
+        expect(funcSwitch && funcCount == 1 && chainCount == 4).toBe(true, "Failed to call first class chained function x4 returned from function: #funcSwitch, #funcCount, x#chainCount")
     }
     
     [Test "Testing calling a chained function x5 returned by a function"]
@@ -105,7 +105,7 @@ testable class FirstClassFunctionStability {
         
         chainX5()()()()()
         
-        expectTrue(funcSwitch && funcCount == 1 && chainCount == 5, "Failed to call first class chained function x5 returned from function: #funcSwitch, #funcCount, x#chainCount")
+        expect(funcSwitch && funcCount == 1 && chainCount == 5).toBe(true, "Failed to call first class chained function x5 returned from function: #funcSwitch, #funcCount, x#chainCount")
     }
     
     [Test "Testing calling a chained function x6 returned by a function"]
@@ -118,7 +118,7 @@ testable class FirstClassFunctionStability {
         
         chainX6()()()()()()
         
-        expectTrue(funcSwitch && funcCount == 1 && chainCount == 6, "Failed to call first class chained function x6 returned from function: #funcSwitch, #funcCount, x#chainCount")
+        expect(funcSwitch && funcCount == 1 && chainCount == 6).toBe(true, "Failed to call first class chained function x6 returned from function: #funcSwitch, #funcCount, x#chainCount")
     }
     
     refFunc() {
@@ -157,7 +157,7 @@ testable class FirstClassFunctionStability {
         
         array.first()
         
-        expectTrue(funcSwitch, "Failed to call single function from collection")
+        expect(funcSwitch).toBe(true, "Failed to call single function from collection")
     }
     
     [Test "Testing calling a single function with parameters from Array"]
@@ -329,14 +329,14 @@ testable class FirstClassFunctionStability {
     testImplicitNullFunctionReference() {
         let func()
         
-        expectNull(func, "func was not null")
+        // expectNull(func, "func was not null")
     }
     
     [Test "Testing explicit null function reference"]
     testExplicitNullFunctionReference() {
         let func() = null
         
-        expectNull(func, "func was not null")
+        // expectNull(func, "func was not null")
     }
     
     [Test "Testing non-null function reference"]
@@ -345,6 +345,6 @@ testable class FirstClassFunctionStability {
             
         }
         
-        expectValue(func, "func was null")
+        // expectValue(func, "func was null")
     }
 }

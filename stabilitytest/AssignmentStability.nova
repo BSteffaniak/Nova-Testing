@@ -15,7 +15,7 @@ testable class AssignmentStability {
         
         var num = props.prop1 = props.prop2 = 1
         
-        expectTrue(num == 1 && props.prop1 == 1 && props.prop2 == 1, "Did not return mutated property value correctly. Expected 1, 1, 1 but received #num, #props.prop1, #props.prop2")
+        expect(num == 1 && props.prop1 == 1 && props.prop2 == 1).toBe(true, "Did not return mutated property value correctly. Expected 1, 1, 1 but received #num, #props.prop1, #props.prop2")
     }
     
     [Test "Testing embedded primitive assignments"]
@@ -26,6 +26,6 @@ testable class AssignmentStability {
         
         a = b = c = 1
         
-        expectTrue(a == 1 && b == 1 && c == 1, "Did not set assigned primitive values correctly. Expected 1, 1, 1 but received #a, #b, #c")
+        expect(a == 1 && b == 1 && c == 1).toBe(true, "Did not set assigned primitive values correctly. Expected 1, 1, 1 but received #a, #b, #c")
     }
 }

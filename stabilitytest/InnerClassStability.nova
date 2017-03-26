@@ -10,7 +10,7 @@ testable class InnerClassStability {
     public test() {
         let instance = new MyInner(3, 5)
         
-        expectTrue(instance.x == 3 && instance.y == 5, "did not set values correctly")
+        expect(instance.x == 3 && instance.y == 5).toBe(true, "did not set values correctly")
     }
     
     class MyInner {

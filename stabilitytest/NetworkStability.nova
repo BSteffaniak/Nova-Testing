@@ -18,8 +18,8 @@ testable class NetworkStability {
     createServer() -> ServerSocket {
         let socket = new ServerSocket()
         
-        expectValue(socket.start(PORT), "Unable to start server on port #PORT")
-        expectTrue(socket.close(), "Failed to close server socket on port #PORT")
+        expect(socket.start(PORT)).toNotBe(null, "Unable to start server on port #PORT")
+        expect(socket.close()).toBe(true, "Failed to close server socket on port #PORT")
     }
     
     [Test message: false]
@@ -36,23 +36,23 @@ testable class NetworkStability {
         
         ConnectionSocket connection = server.acceptClient()
         
-        expectValue(connection, "Failed to accept the client")
+        expect(connection).toNotBe(null, "Failed to accept the client")
         
         out.writeLine("Sending String to ClientSocket...")
         
-        expectValue(connection.out.write(received), "Server unable to send data to client")
+        expect(connection.out.write(received)).toNotBe(null, "Server unable to send data to client")
         
         out.writeLine("Waiting for String from ClientSocket...")
         
         String s = connection.in.readString()
         
-        expectTrue(s.count == received.count && s == received, "Server unable to receive correct message from client. Expected message of size #received.count, but received of size #s.count")
+        expect(s.count == received.count && s == received).toBe(true, "Server unable to receive correct message from client. Expected message of size #received.count, but received of size #s.count")
         
         thread.join()
         
         out.write("Attempting to close ServerSocket connection... ")
         
-        expectTrue(server.close(), "Unable to close server")
+        expect(server.close()).toBe(true, "Unable to close server")
 
         out.writeLine("Success")
     }

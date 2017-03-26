@@ -26,5 +26,5 @@ testable class ToStringStability {
     }
     
     checkToString(String type, Number number, String expected) =>
-        expectTrue(number.toString() == expected, "#{type}.toString failed. expected #expected but received #number #{number.toString().compareTo(expected)}")
+        expect(number.toString() == expected).toBe(true, "#{type}.toString failed. expected #expected but received #number #{number.toString().compareTo(expected)}")
 }

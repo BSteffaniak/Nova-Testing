@@ -23,7 +23,7 @@ class ClientThread extends Thread {
         
         out.write("ClientSocket attempting to connect to #ip:#{port}... ")
         
-        expectTrue(client.connect(ip, port), "Failed to connect to localhost server")
+        expect(client.connect(ip, port)).toBe(true, "Failed to connect to localhost server")
         
         out.writeLine("Success")
         
@@ -31,7 +31,7 @@ class ClientThread extends Thread {
         
         String s = client.connection.in.readString()
         
-        expectTrue(s.count == NetworkStability.received.count && s == NetworkStability.received, "Client unable to receive the correct message from server")
+        expect(s.count == NetworkStability.received.count && s == NetworkStability.received).toBe(true, "Client unable to receive the correct message from server")
         
         out.write("Attempting to send String to ServerSocket... ")
         
@@ -41,7 +41,7 @@ class ClientThread extends Thread {
         
         out.write("Attempting to close ClientSocket... ")
         
-        expectTrue(client.close(), "Unable to close Client connection")
+        expect(client.close()).toBe(true, "Unable to close Client connection")
         
         out.writeLine("Success")
     }

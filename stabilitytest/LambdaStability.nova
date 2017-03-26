@@ -17,7 +17,7 @@ testable class LambdaStability {
         String mappedOutput = list.filter(x => x.count >= 4).map((x, i) => i + ": " + x + "?").join(", ")
         String mappedExpected = "0: this?, 1: test?, 2: what shows up?"
         
-        expectTrue(mappedOutput == mappedExpected, "Failed first list map with 2 args. Expected '#mappedExpected' but received '#mappedOutput'")
+        expect(mappedOutput == mappedExpected).toBe(true, "Failed first list map with 2 args. Expected '#mappedExpected' but received '#mappedOutput'")
         //Console.writeLine("Mapped backwards: " + list.filter(x => x.count >= 4).map(x => x + "?").reverse().join(", "))
         //if (list2.map(x => x + "!").join(", ") != "")
         
@@ -25,13 +25,13 @@ testable class LambdaStability {
         
         linked.add("test").add("test2").add("test3")
         
-        expectTrue(linked.reverse().join(", ") == "test3, test2, test", "Failed reverse linked list")
-        expectTrue(linked.join(", ") == "test, test2, test3", "Failed forward linked list")
+        expect(linked.reverse().join(", ") == "test3, test2, test").toBe(true, "Failed reverse linked list")
+        expect(linked.join(", ") == "test, test2, test3").toBe(true, "Failed forward linked list")
         
         String[] repeated = list.map({ "test" })
         
         for (item in repeated) {
-            expectTrue(item == "test", "Map with no arguments failed")
+            expect(item == "test").toBe(true, "Map with no arguments failed")
         }
     }
 }

@@ -21,7 +21,7 @@ testable class SyntaxStability {
             default => fail("Match failed to accept the correct case")
         }
 
-        expectTrue(worked, "FAIL")
+        expect(worked).toBe(true)
     }
 
     [Test "Testing simple match statement with indentation"]
@@ -40,7 +40,7 @@ testable class SyntaxStability {
             default =>
                 fail("Match failed to accept the correct case")
         
-        expectTrue(worked, "FAIL")
+        expect(worked).toBe(true)
     }
     
     [Test "Testing simple match statement with scopes"]
@@ -66,7 +66,7 @@ testable class SyntaxStability {
             }
         }
 
-        expectTrue(worked, "FAIL")
+        expect(worked).toBe(true)
     }
     
     [Test "Testing match statement with variable case values"]
@@ -90,7 +90,7 @@ testable class SyntaxStability {
             }
         }
         
-        expectTrue(worked, "FAIL")
+        expect(worked).toBe(true)
     }
     
     [Test "Testing match statement with variable case values and fallthrough"]
@@ -116,7 +116,7 @@ testable class SyntaxStability {
             }
         }
 
-        expectTrue(worked && worked2, "FAIL")
+        expect(worked && worked2).toBe(true)
     }
     
     [Test "Testing inline while loop"]
@@ -136,7 +136,7 @@ testable class SyntaxStability {
                     num3++
                 }
 
-        expectTrue(num == 100 && num2 == 100 && num3 == 100, "Inline while loop failed.")
+        expect(num == 100 && num2 == 100 && num3 == 100).toBe(true, "Inline while loop failed.")
     }
     
     [Test "Testing inline for loop"]
@@ -156,7 +156,7 @@ testable class SyntaxStability {
                     num3++
                 }
 
-        expectTrue(num == 100 && num2 == 100 && num3 == 100, "Inline for loop failed. Expected 100, 100, 100 received #{num}, #{num2}, #{num3}")
+        expect(num == 100 && num2 == 100 && num3 == 100).toBe(true, "Inline for loop failed. Expected 100, 100, 100 received #{num}, #{num2}, #{num3}")
     }
     
     [Test "Testing until statement"]
@@ -184,7 +184,7 @@ testable class SyntaxStability {
 //            }
 //        }
 
-        expectFalse(obj == null, "Failed to reach correct condition")
+        expect(obj).toNotBe(null, "Failed to reach correct condition")
     }
 
     static test1() => null
@@ -213,7 +213,7 @@ testable class SyntaxStability {
         }
 
         for (n in 0..list2.count) {
-            expectTrue(list2[n].count >= 4, "Failed to filter data correctly")
+            expect(list2[n].count >= 4).toBe(true, "Failed to filter data correctly")
         }
 
         /*if (list2.any(x -> x.count < 4)) {
@@ -232,7 +232,7 @@ testable class SyntaxStability {
         Iterator<String> iter = list2.iterator
         
         while (iter.hasNext) {
-            expectTrue(iter.next.count >= 4, "Failed to run iterator")
+            expect(iter.next.count >= 4).toBe(true, "Failed to run iterator")
         }
     }
     
@@ -242,7 +242,7 @@ testable class SyntaxStability {
         String[] list2 = list.filter(filterFunc)
         
         for (string in list2) {
-            expectTrue(string.count >= 4, "Failed to run foreach loop")
+            expect(string.count >= 4).toBe(true, "Failed to run foreach loop")
         }
     }
 
@@ -250,11 +250,11 @@ testable class SyntaxStability {
     testTernary() {
         var first = trueValue() ? "hey" == "hey" : "hey" == "hey2"
 
-        expectTrue(first, "Failed first ternary test")
+        expect(first).toBe(true, "Failed first ternary test")
 
         var second = falseValue() ? "one" : "two"
 
-        expectTrue(second == "two", "Failed second ternary test")
+        expect(second == "two").toBe(true, "Failed second ternary test")
     }
 
     [Test "Testing elvis functionality"]
@@ -264,11 +264,11 @@ testable class SyntaxStability {
 
         var result1 = str ?: "wtf"
 
-        expectFalse(result1 == "wtf", "Failed first elvis test")
+        expect(result1 == "wtf").toBe(false, "Failed first elvis test")
 
         var result2 = str2 ?: "this is null"
 
-        expectTrue(result2 == "this is null", "Failed second elvis test")
+        expect(result2 == "this is null").toBe(true, "Failed second elvis test")
     }
 
     trueValue() -> Bool {
@@ -333,15 +333,15 @@ testable class SyntaxStability {
     testNamedArguments() {
         var num = named("", arg: "yo", num: 4)
         
-        expectTrue(num == 8, "Default argument failed. Expected 8, received #num")
+        expect(num == 8).toBe(true, "Default argument failed. Expected 8, received #num")
         
         num = named("", add: 2, arg: "heyasdf", num: 5)
         
-        expectTrue(num == 37, "Named arguments failed. Expeced 37, received #num first")
+        expect(num == 37).toBe(true, "Named arguments failed. Expeced 37, received #num first")
         
         num = named(add: 2, num: 5, arg: "heyasdf", s: "")
         
-        expectTrue(num == 37, "Named arguments failed. Expeced 37, received #num second")
+        expect(num == 37).toBe(true, "Named arguments failed. Expeced 37, received #num second")
     }
     
     func1(Int a) -> Int => a * 2
@@ -351,8 +351,8 @@ testable class SyntaxStability {
     
     [Test "Testing default closure arguments"]
     checkDefaultClosureArguments() {
-    	expectTrue(myFunc() == 20, "Failed to call default closure")
-    	expectTrue(myFunc(func1) == 10, "Failed to call overrided default closure")
+    	expect(myFunc() == 20).toBe(true, "Failed to call default closure")
+    	expect(myFunc(func1) == 10).toBe(true, "Failed to call overrided default closure")
     }
     
     [Test "Testing zip function"]
@@ -382,11 +382,11 @@ testable class SyntaxStability {
             
             node?.child?.child.value = 5
             
-            expectTrue(node?.child?.child.value == 5, "Failed to set node value while safely navigating it")
+            expect(node?.child?.child.value == 5).toBe(true, "Failed to set node value while safely navigating it")
             
             node.child.child = null
             
-            expectFalse(node?.child?.child?.value == 3, "Failed to skip null child")
+            expect(node?.child?.child?.value == 3).toBe(false, "Failed to skip null child")
             
             node.child.child = new Node()
             node.child.child.child = new Node()
@@ -401,7 +401,7 @@ testable class SyntaxStability {
             out.write("array access... ")
             array[node?.child?.value] = "hello"
             
-            expectTrue(array[2] == "hello", "Failed to set correct array index with correct value using the safe navigation operator")
+            expect(array[2] == "hello").toBe(true, "Failed to set correct array index with correct value using the safe navigation operator")
         } else {
             fail("Failed to safely navigate valid children")
         }
@@ -415,21 +415,21 @@ testable class SyntaxStability {
     	*/
     }
     
-    callMeWithNode(Node n) => expectTrue(n.value == 91, "Failed to call method with correct safely navigated node")
+    callMeWithNode(Node n) => expect(n.value == 91).toBe(true, "Failed to call method with correct safely navigated node")
     
     [Test "Testing snake case numbers"]
     testSnakeCaseNumbers() {
     	Double dPos =  51_325_753.131313
     	Double dNeg = -51_325_753.131313
     	
-    	expectTrue(dPos ==  51325753.131313, "Positive snake case double failed to parse")
-    	expectTrue(dNeg == -51325753.131313, "Negative snake case double failed to parse")
+    	expect(dPos ==  51325753.131313).toBe(true, "Positive snake case double failed to parse")
+    	expect(dNeg == -51325753.131313).toBe(true, "Negative snake case double failed to parse")
     	
     	Long lPos =  922_547_211
     	Long lNeg = -922_547_211
     	
-    	expectTrue(lPos ==  922547211, "Negative snake case long failed to parse")
-    	expectTrue(lNeg == -922547211, "Negative snake case long failed to parse")
+    	expect(lPos ==  922547211).toBe(true, "Positive snake case long failed to parse")
+    	expect(lNeg == -922547211).toBe(true, "Negative snake case long failed to parse")
     }
     
     [Test "Testing array initializers"]
@@ -439,6 +439,6 @@ testable class SyntaxStability {
     	
     	var myInts = [0, 0, num1, num2, 0]
     	
-    	expectTrue(myInts[2] == num1 && myInts[3] == num2, "Failed to ")
+    	expect(myInts[2] == num1 && myInts[3] == num2).toBe(true)
     }
 }

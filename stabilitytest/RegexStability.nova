@@ -11,8 +11,8 @@ import static "novex/nest/Nest"
 testable class RegexStability {
     [Test "Testing Regex match"]
     testMatch() {
-        expectTrue(Regex.containsMatch(/a[bd]c/, "hello adc goodbye"), "Failed to find valid match")
-        expectFalse(Regex.containsMatch(/a[bd]c/, "no match here..."), "Failed to not find match")
+        expect(Regex.containsMatch(/a[bd]c/, "hello adc goodbye")).toBe(true, "Failed to find valid match")
+        expect(Regex.containsMatch(/a[bd]c/, "no match here...")).toBe(false, "Failed to not find match")
         
         var matches = Regex.getMatches(/a[bd]c/, "this is abc test adc adc hello")
         
