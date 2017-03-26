@@ -1,0 +1,26 @@
+package "stabilitytest"
+
+import "nova/time/Timer"
+import "nova/time/DateTime"
+import "nova/time/DateTime.InvalidDateException"
+import "nova/time/Interval"
+import "nova/thread/Thread"
+
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class IntervalStability {
+    test oneDayInterval() {
+        let oneDay = new Interval(new DateTime(2017, 3, 26), new DateTime(2017, 3, 27))
+        
+        expect(oneDay.days).toBe(1)
+    }
+    
+    test twoDayInterval() {
+        let twoDays = new Interval(new DateTime(2017, 3, 26), new DateTime(2017, 3, 28))
+        
+        expect(twoDays.days).toBe(2)
+    }
+}
