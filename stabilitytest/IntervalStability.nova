@@ -37,4 +37,17 @@ testable class IntervalStability {
         expect(twoDays.remainingMonths).toBe(0, "Invalid remainingMonths: #twoDays.remainingMonths != 0")
         expect(twoDays.years).toBe(0, "Invalid years: #twoDays.years != 0")
     }
+    
+    test twoAndAHalfDayInterval() {
+        let interval = new Interval(new DateTime(2017, 3, 26), new DateTime(2017, 3, 28, 12))
+        
+        expect(interval.days).toBe(2, "Invalid days: #interval.days != 2")
+        expect(interval.seconds).toBe((Int)(86400 * 2.5), "Invalid seconds: #interval.seconds != #{(Int)(86400 * 2.5)}")
+        expect(interval.remainingSeconds).toBe(0, "Invalid remaining seconds: #interval.remainingSeconds != 0")
+        expect(interval.milliseconds).toBe((Int)(86400 * 2.5 * 1000), "Invalid milliseconds: #interval.milliseconds != #{(Int)(86400 * 2.5 * 1000)}")
+        expect(interval.remainingMilliseconds).toBe(0, "Invalid remainingMilliseconds: #interval.remainingMilliseconds != 0")
+        expect(interval.months).toBe(0, "Invalid months: #interval.months != 0")
+        expect(interval.remainingMonths).toBe(0, "Invalid remainingMonths: #interval.remainingMonths != 0")
+        expect(interval.years).toBe(0, "Invalid years: #interval.years != 0")
+    }
 }
