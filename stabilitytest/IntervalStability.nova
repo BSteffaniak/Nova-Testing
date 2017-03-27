@@ -15,12 +15,26 @@ testable class IntervalStability {
     test oneDayInterval() {
         let oneDay = new Interval(new DateTime(2017, 3, 26), new DateTime(2017, 3, 27))
         
-        expect(oneDay.days).toBe(1)
+        expect(oneDay.days).toBe(1, "Invalid days: #oneDay.days != 1")
+        expect(oneDay.seconds).toBe(86400, "Invalid seconds: #oneDay.seconds != 86400")
+        expect(oneDay.remainingSeconds).toBe(0, "Invalid remaining seconds: #oneDay.remainingSeconds != 0")
+        expect(oneDay.milliseconds).toBe(86400 * 1000, "Invalid milliseconds: #oneDay.milliseconds != #{86400 * 1000}")
+        expect(oneDay.remainingMilliseconds).toBe(0, "Invalid remainingMilliseconds: #oneDay.remainingMilliseconds != 0")
+        expect(oneDay.months).toBe(0, "Invalid months: #oneDay.months != 0")
+        expect(oneDay.remainingMonths).toBe(0, "Invalid remainingMonths: #oneDay.remainingMonths != 0")
+        expect(oneDay.years).toBe(0, "Invalid years: #oneDay.years != 0")
     }
     
     test twoDayInterval() {
         let twoDays = new Interval(new DateTime(2017, 3, 26), new DateTime(2017, 3, 28))
         
-        expect(twoDays.days).toBe(2)
+        expect(twoDays.days).toBe(2, "Invalid days: #twoDays.days != 2")
+        expect(twoDays.seconds).toBe(86400 * 2, "Invalid seconds: #twoDays.seconds != #{86400 * 2}")
+        expect(twoDays.remainingSeconds).toBe(0, "Invalid remaining seconds: #twoDays.remainingSeconds != 0")
+        expect(twoDays.milliseconds).toBe(86400 * 2 * 1000, "Invalid milliseconds: #twoDays.milliseconds != #{86400 * 2 * 1000}")
+        expect(twoDays.remainingMilliseconds).toBe(0, "Invalid remainingMilliseconds: #twoDays.remainingMilliseconds != 0")
+        expect(twoDays.months).toBe(0, "Invalid months: #twoDays.months != 0")
+        expect(twoDays.remainingMonths).toBe(0, "Invalid remainingMonths: #twoDays.remainingMonths != 0")
+        expect(twoDays.years).toBe(0, "Invalid years: #twoDays.years != 0")
     }
 }
