@@ -31,6 +31,7 @@ testable class BoundedIntervalStability {
     }
     
     test validIntervalBounds() {
+        expect({ new Interval(new DateTime(0), new DateTime(0)) }).toNotThrow(InvalidIntervalException)
         expect({ new Interval(new DateTime(2016), new DateTime(2017)) }).toNotThrow(InvalidIntervalException)
         expect({ new Interval(new DateTime(2017, 5), new DateTime(2017, 6)) }).toNotThrow(InvalidIntervalException)
         expect({ new Interval(new DateTime(2017, 6, 4), new DateTime(2017, 6, 5)) }).toNotThrow(InvalidIntervalException)
