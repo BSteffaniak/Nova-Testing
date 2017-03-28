@@ -8,31 +8,31 @@ import "novex/nest/TestSuite"
 import static "novex/nest/Nest"
 
 testable class LibraryLoadingStability {
-    var Library lib
+    // var Library lib
     
-    init_test_class initClass() {
-        lib = new Library("C:/Users/Braden/GitHub/NovaWorkspace/testlib").load()
+    // init_test_class initClass() {
+    //     lib = new Library("C:/Users/Braden/GitHub/NovaWorkspace/testlib").load()
         
-        expectValue(lib, "Failed to load library")
-    }
+    //     expectValue(lib, "Failed to load library")
+    // }
     
-    test getStaticFunction() {
-        let func = lib.getFunction("staticFunc", "nova/test/Test")
+    // test getStaticFunction() {
+    //     let func = lib.getFunction("staticFunc", "nova/test/Test")
         
-        expectValue(func, "staticFunc not found")
-    }
+    //     expectValue(func, "staticFunc not found")
+    // }
     
-    test callStaticFunction() {
-        let func(Int x) -> Int = lib.getFunction("staticFuncInt", "nova/test/Test")
+    // test callStaticFunction() {
+    //     let func(Int x) -> Int = lib.getFunction("staticFuncInt", "nova/test/Test")
         
-        let returned = func(5)
+    //     let returned = func(5)
         
-        expect(returned).toBe(10, "Expected return value of 10, but received #returned")
-    }
+    //     expect(returned).toBe(10, "Expected return value of 10, but received #returned")
+    // }
     
-    test nonExistentFunction() {
-        let func = lib.getFunction("thisFunctionDoesNotExist", "nova/test/Test")
+    // test nonExistentFunction() {
+    //     let func = lib.getFunction("thisFunctionDoesNotExist", "nova/test/Test")
         
-        expectNull(func, "found non-existent function")
-    }
+    //     expectNull(func, "found non-existent function")
+    // }
 }
