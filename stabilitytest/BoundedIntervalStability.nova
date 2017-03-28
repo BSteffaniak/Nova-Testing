@@ -29,4 +29,14 @@ testable class BoundedIntervalStability {
         expect({ new Interval(new DateTime(2017, 6, 5, 4, 3, 2), new DateTime(2017, 6, 5, 4, 3, 1)) }).toThrow(InvalidIntervalException)
         expect({ new Interval(new DateTime(2017, 6, 5, 4, 3, 2, 1), new DateTime(2017, 6, 5, 4, 3, 2, 0)) }).toThrow(InvalidIntervalException)
     }
+    
+    test validIntervalBounds() {
+        expect({ new Interval(new DateTime(2016), new DateTime(2017)) }).toNotThrow(InvalidIntervalException)
+        expect({ new Interval(new DateTime(2017, 5), new DateTime(2017, 6)) }).toNotThrow(InvalidIntervalException)
+        expect({ new Interval(new DateTime(2017, 6, 4), new DateTime(2017, 6, 5)) }).toNotThrow(InvalidIntervalException)
+        expect({ new Interval(new DateTime(2017, 6, 5, 3), new DateTime(2017, 6, 5, 4)) }).toNotThrow(InvalidIntervalException)
+        expect({ new Interval(new DateTime(2017, 6, 5, 4, 2), new DateTime(2017, 6, 5, 4, 3)) }).toNotThrow(InvalidIntervalException)
+        expect({ new Interval(new DateTime(2017, 6, 5, 4, 3, 1), new DateTime(2017, 6, 5, 4, 3, 2)) }).toNotThrow(InvalidIntervalException)
+        expect({ new Interval(new DateTime(2017, 6, 5, 4, 3, 2, 0), new DateTime(2017, 6, 5, 4, 3, 2, 1)) }).toNotThrow(InvalidIntervalException)
+    }
 }
