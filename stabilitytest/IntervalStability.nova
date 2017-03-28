@@ -27,6 +27,23 @@ testable class IntervalStability {
         expect(interval.years).toBe(0, "Invalid years: #interval.years != 0")
     }
     
+    test threeHourTwentyMinuteInterval() {
+        let interval = new Interval(new DateTime(2017, 3, 27, 5, 10), new DateTime(2017, 3, 27, 8, 30))
+        
+        expect(interval.days).toBe(0, "Invalid days: #interval.days != 0")
+        expect(interval.hours).toBe(3, "Invalid hours: #interval.hours != 3")
+        expect(interval.remainingHours).toBe(3, "Invalid remainingHours: #interval.remainingHours != 3")
+        expect(interval.minutes).toBe(20 + 60 * 3, "Invalid minutes: #interval.minutes != #{20 + 60 * 3}")
+        expect(interval.remainingMinutes).toBe(20, "Invalid remainingMinutes: #interval.remainingMinutes != 20")
+        expect(interval.seconds).toBe(3600 * 3 + 20 * 60, "Invalid seconds: #interval.seconds != #{3600 * 3 + 20 * 60}")
+        expect(interval.remainingSeconds).toBe(0, "Invalid remaining seconds: #interval.remainingSeconds != 0")
+        expect(interval.milliseconds).toBe((3600 * 3 + 20 * 60) * 1000, "Invalid milliseconds: #interval.milliseconds != #{(3600 * 3 + 20 * 60) * 1000}")
+        expect(interval.remainingMilliseconds).toBe(0, "Invalid remainingMilliseconds: #interval.remainingMilliseconds != 0")
+        expect(interval.months).toBe(0, "Invalid months: #interval.months != 0")
+        expect(interval.remainingMonths).toBe(0, "Invalid remainingMonths: #interval.remainingMonths != 0")
+        expect(interval.years).toBe(0, "Invalid years: #interval.years != 0")
+    }
+    
     test oneDayInterval() {
         let oneDay = new Interval(new DateTime(2017, 3, 26), new DateTime(2017, 3, 27))
         
