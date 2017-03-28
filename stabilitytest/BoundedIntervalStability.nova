@@ -14,7 +14,7 @@ import "novex/nest/TestSuite"
 import static "novex/nest/Nest"
 
 testable class BoundedIntervalStability {
-    test invalidIntervalBounds() {
+    test invalidUnboundedIntervalBounds() {
         expect({ new BoundedInterval(null, null) }).toThrow(InvalidIntervalException)
         expect({ new BoundedInterval(null, new DateTime(5)) }).toThrow(InvalidIntervalException)
         expect({ new BoundedInterval(new DateTime(5), null) }).toThrow(InvalidIntervalException)
