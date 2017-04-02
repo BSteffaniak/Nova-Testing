@@ -16,28 +16,115 @@ import static "novex/nest/Nest"
 testable class BoundedIntervalStability {
     test invalidUnboundedIntervalBounds() {
         expect({ new BoundedInterval(null, null) }).toThrow(InvalidIntervalException)
-        expect({ new BoundedInterval(null, new DateTime(5)) }).toThrow(InvalidIntervalException)
-        expect({ new BoundedInterval(new DateTime(5), null) }).toThrow(InvalidIntervalException)
+        expect({ new BoundedInterval(null, new DateTime(year: 5)) }).toThrow(InvalidIntervalException)
+        expect({ new BoundedInterval(new DateTime(year: 5), null) }).toThrow(InvalidIntervalException)
     }
     
     test invalidIntervalBounds() {
-        expect({ new Interval(new DateTime(2017), new DateTime(2016)) }).toThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6), new DateTime(2017, 5)) }).toThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 5), new DateTime(2017, 6, 4)) }).toThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 5, 4), new DateTime(2017, 6, 5, 3)) }).toThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 5, 4, 3), new DateTime(2017, 6, 5, 4, 2)) }).toThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 5, 4, 3, 2), new DateTime(2017, 6, 5, 4, 3, 1)) }).toThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 5, 4, 3, 2, 1), new DateTime(2017, 6, 5, 4, 3, 2, 0)) }).toThrow(InvalidIntervalException)
+        expect({
+            new Interval(
+                new DateTime(year: 2017),
+                new DateTime(year: 2016))
+        }).toThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6),
+                new DateTime(year: 2017, month: 5))
+        }).toThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5),
+                new DateTime(year: 2017, month: 6, dayOfMonth: 4))
+        }).toThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4),
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 3))
+        }).toThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 3),
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 2))
+        }).toThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 3, second: 2),
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 3, second: 1))
+        }).toThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(
+                    year: 2017,
+                    month: 6,
+                    dayOfMonth: 5,
+                    hour: 4,
+                    minute: 3,
+                    second: 2,
+                    millisecond: 1),
+                new DateTime(
+                    year: 2017,
+                    month: 6,
+                    dayOfMonth: 5,
+                    hour: 4,
+                    minute: 3,
+                    second: 2,
+                    millisecond: 0))
+        }).toThrow(InvalidIntervalException)
     }
     
     test validIntervalBounds() {
-        expect({ new Interval(new DateTime(0), new DateTime(0)) }).toNotThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2016), new DateTime(2017)) }).toNotThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 5), new DateTime(2017, 6)) }).toNotThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 4), new DateTime(2017, 6, 5)) }).toNotThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 5, 3), new DateTime(2017, 6, 5, 4)) }).toNotThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 5, 4, 2), new DateTime(2017, 6, 5, 4, 3)) }).toNotThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 5, 4, 3, 1), new DateTime(2017, 6, 5, 4, 3, 2)) }).toNotThrow(InvalidIntervalException)
-        expect({ new Interval(new DateTime(2017, 6, 5, 4, 3, 2, 0), new DateTime(2017, 6, 5, 4, 3, 2, 1)) }).toNotThrow(InvalidIntervalException)
+        expect({
+            new Interval(
+                new DateTime(year: 0),
+                new DateTime(year: 0))
+        }).toNotThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2016),
+                new DateTime(year: 2017))
+        }).toNotThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 5),
+                new DateTime(year: 2017, month: 6))
+        }).toNotThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6, dayOfMonth: 4),
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5))
+        }).toNotThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 3),
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4))
+        }).toNotThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 2),
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 3))
+        }).toNotThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 3, second: 1),
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 3, second: 2))
+        }).toNotThrow(InvalidIntervalException)
+        
+        expect({
+            new Interval(
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 3, second: 2, millisecond: 0),
+                new DateTime(year: 2017, month: 6, dayOfMonth: 5, hour: 4, minute: 3, second: 2, millisecond: 1))
+        }).toNotThrow(InvalidIntervalException)
     }
 }
