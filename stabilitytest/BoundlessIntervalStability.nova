@@ -1,0 +1,18 @@
+package "stabilitytest"
+
+import "nova/time/Timer"
+import "nova/time/DateTime"
+import "nova/time/DateTime.InvalidDateException"
+import "nova/time/Interval"
+import "nova/time/BoundedInterval"
+import "nova/time/BoundlessInterval"
+import "nova/time/Interval.InvalidIntervalException"
+import "nova/thread/Thread"
+
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class BoundlessIntervalStability {
+}
