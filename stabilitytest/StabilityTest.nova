@@ -19,7 +19,7 @@ import "novex/nest/TestResult"
         AssignmentStability, RegexStability, StaticImportStability,
         InnerClassStability, ExternalInnerClassStability, PrimitiveOverloadStability,
         FancyOutputStreamTests, FirstClassFunctionStability, LibraryLoadingStability,
-        IntervalStability, BoundedIntervalStability]]
+        IntervalStability, BoundedIntervalStability, BoundlessIntervalStability]]
 [Target c]
 [TestSuite [TimeStability, ThreadStability, FileStability, NetworkStability]]
 class StabilityTest {

@@ -15,4 +15,7 @@ import "novex/nest/TestSuite"
 import static "novex/nest/Nest"
 
 testable class BoundlessIntervalStability {
+    test invalidBoundlessIntervalBounds() {
+        expect({ new BoundlessInterval(new DateTime(year: 4), new DateTime(year: 5)) }).toThrow(InvalidIntervalException)
+    }
 }
