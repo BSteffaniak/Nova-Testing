@@ -20,7 +20,9 @@ testable class BoundlessIntervalStability {
     }
     
     test validIntervalBounds() {
-        expect({ new BoundlessInterval(null, null) }).toNotThrow(InvalidIntervalException)
+        expect({ new BoundlessInterval() }).toNotThrow(InvalidIntervalException)
+        expect({ new BoundlessInterval(new DateTime(year: 5)) }).toNotThrow(InvalidIntervalException)
+        expect({ new BoundlessInterval(end: new DateTime(year: 5)) }).toNotThrow(InvalidIntervalException)
         expect({ new BoundlessInterval(null, new DateTime(year: 5)) }).toNotThrow(InvalidIntervalException)
         expect({ new BoundlessInterval(new DateTime(year: 4), null) }).toNotThrow(InvalidIntervalException)
     }
