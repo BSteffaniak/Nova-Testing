@@ -7,6 +7,7 @@ import "nova/time/Interval"
 import "nova/time/BoundedInterval"
 import "nova/time/BoundlessInterval"
 import "nova/time/Interval.InvalidIntervalException"
+import "nova/time/BoundlessInterval.InfiniteIntervalException"
 import "nova/thread/Thread"
 
 import "novex/nest/Nest"
@@ -25,5 +26,11 @@ testable class BoundlessIntervalStability {
         expect({ new BoundlessInterval(end: new DateTime(year: 5)) }).toNotThrow(InvalidIntervalException)
         expect({ new BoundlessInterval(null, new DateTime(year: 5)) }).toNotThrow(InvalidIntervalException)
         expect({ new BoundlessInterval(new DateTime(year: 4), null) }).toNotThrow(InvalidIntervalException)
+    }
+    
+    test infiniteIntervalValues() {
+        let interval = new Interval(null, new DateTime(year: 5))
+        
+        expect({ interval.years }).toThrow(InfiniteIntervalException)
     }
 }
