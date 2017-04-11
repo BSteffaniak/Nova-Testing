@@ -4,6 +4,7 @@ import "nova/time/Timer"
 import "nova/time/DateTime"
 import "nova/time/DateTime.InvalidDateException"
 import "nova/time/Interval"
+import "nova/time/Interval.NoGapException"
 import "nova/thread/Thread"
 
 import "novex/nest/Nest"
@@ -156,5 +157,12 @@ testable class IntervalStability {
         expect(interval.months).toBe(30, "Invalid months: #interval.months != 30")
         expect(interval.remainingMonths).toBe(6, "Invalid remainingMonths: #interval.remainingMonths != 6")
         expect(interval.years).toBe(2, "Invalid years: #interval.years != 2")
+    }
+    
+    test invalidIntervalGap() {
+        let interval1 = new Interval(new DateTime(year: 2017, month: 4, dayOfMonth: 10), new DateTime(year: 2018, month: 4, dayOfMonth: 10))
+        let interval2 = new Interval(new DateTime(year: 2015, month: 4, dayOfMonth: 10), new DateTime(year: 2019, month: 4, dayOfMonth: 10))
+        
+        expect({ interval1.getGap(interval2) }).toThrow(NoGapException)
     }
 }
