@@ -165,4 +165,11 @@ testable class IntervalStability {
         
         expect({ interval1.getGap(interval2) }).toThrow(NoGapException)
     }
+    
+    test validIntervalGap() {
+        let interval1 = new Interval(new DateTime(year: 2017, month: 4, dayOfMonth: 10), new DateTime(year: 2018, month: 4, dayOfMonth: 10))
+        let interval2 = new Interval(new DateTime(year: 2015, month: 4, dayOfMonth: 10), new DateTime(year: 2016, month: 4, dayOfMonth: 10))
+        
+        expect({ interval1.getGap(interval2) }).toNotThrow(NoGapException)
+    }
 }
