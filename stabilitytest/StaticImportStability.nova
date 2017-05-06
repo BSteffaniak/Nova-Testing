@@ -6,6 +6,9 @@ import "novex/nest/TestSuite"
 import static "novex/nest/Nest"
 import static "nova/math/Math"
 
+[ExpectCompileError SyntaxErrorException]
+import static nova/math/Math
+
 testable class StaticImportStability {
     [Test "Testing math static imports"]
     public test() {
