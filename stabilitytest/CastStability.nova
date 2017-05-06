@@ -1,0 +1,32 @@
+package "stabilitytest"
+
+import "nova/datastruct/list/Iterator"
+
+import "novex/nest/Nest"
+import "novex/nest/TestSuite"
+
+import static "novex/nest/Nest"
+
+testable class CastStability {
+    test validPrimitveNumericCasts() {
+        Int x = 100
+        
+        Long y = (Long)x
+        Byte z = (Byte)x
+    }
+    
+    test validArrayTypeCast() {
+        let array = [10000, 1212121]
+        
+        Long x = (Long)array[0]
+        
+        expect(x).toBe(10000)
+    }
+    
+    test incompatibleCast() {
+        let x = null
+        
+        // [ExpectCompileError SyntaxErrorException]
+        let y = (Int)x
+    }
+}
