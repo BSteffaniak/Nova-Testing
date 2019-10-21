@@ -160,20 +160,20 @@ testable class FirstClassFunctionStability {
         expect(funcSwitch).toBe(true, "Failed to call single function from collection")
     }
     
-    [Test "Testing calling a single function with parameters from Array"]
-    testCallingFunctionWithParametersFromCollection() {
-        let array = new Array<func(Int, String) -> Int>()
-        
-        array.add(paramFunc)
-        
-        var result = array[0](5, "a")
-        
-        expect(result).toBe(5 + 1, "Failed to call single function with parameters from collection by array access (#result)")
-        
-        result = array.first(2, "4a")
-        
-        expect(result).toBe(2 + 2, "Failed to call single function with parameters from collection (#result)")
-    }
+//    [Test "Testing calling a single function with parameters from Array"]
+//    testCallingFunctionWithParametersFromCollection() {
+//        let array = new Array<func(Int, String) -> Int>()
+//
+//        array.add(paramFunc)
+//
+//        var result = array[0](5, "a")
+//
+//        expect(result).toBe(5 + 1, "Failed to call single function with parameters from collection by array access (#result)")
+//
+//        result = array.first(2, "4a")
+//
+//        expect(result).toBe(2 + 2, "Failed to call single function with parameters from collection (#result)")
+//    }
     
     paramFunc(Int x, String y) => x + y.count
     
