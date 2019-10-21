@@ -30,7 +30,7 @@ testable class BoundlessIntervalStability {
     
     test infiniteIntervalValues() {
         let interval = new Interval(null, new DateTime(year: 5))
-        
+
         expect({ interval.years }).toThrow(InfiniteIntervalException)
     }
 }

@@ -56,7 +56,7 @@ class StabilityTest {
         // results.frame.addChild(scroll)
         // results.frame.addChild(label)
         
-        // Timer timer = new Timer().start()
+         Timer timer = new Timer().start()
         
         let results = new TestResult[]
         
@@ -67,28 +67,24 @@ class StabilityTest {
         
         let fancy = new FancyOutputStream(headerPattern: "/\\")
         
-        let unsucessful = results.filter({ !_.success })
+        let unsuccessful = results.filter({ !_.success })
         
-        if (unsucessful.count > 0) {
-            fancy.writeHeader("#unsucessful.count Failure#{unsucessful.count == 1 ? "" : "s"} out of #results.count test#{results.count == 1 ? "" : "s"}", pattern: ":'( ", symmetrical: true)
+        if (unsuccessful.count > 0) {
+            fancy.writeHeader("#unsuccessful.count Failure#{unsuccessful.count == 1 ? "" : "s"} out of #results.count test#{results.count == 1 ? "" : "s"}", pattern: ":'( ", symmetrical: true)
             
-            unsucessful.forEach({
+            unsuccessful.forEach({
                 Console.log("#_")
             })
         } else {
             fancy.writeHeader("All #results.count Successful", pattern: ":) ", symmetrical: true)
         }
         
-        // timer.stop()
+         timer.stop()
         
 //        if (args[1] == "test")
 //        System.execute("Executable.exe a")
         
-        // Console.writeLine("Took " + timer.duration + "ms")
-        fancy.writeHeader("Hello", "=")
-        fancy.writeHeader("Hello")
-        fancy.writeLine("hi")
-        fancy.writeLine("!!!")
+         Console.writeLine("Took " + timer.duration + "ms")
         
         Console.waitForEnter()
     }

@@ -15,7 +15,7 @@ import static "novex/nest/Nest"
 testable class IntervalStability {
     test threeHourInterval() {
         let interval = new Interval(new DateTime(year: 2017, month: 3, dayOfMonth: 27, hour: 5), new DateTime(year: 2017, month: 3, dayOfMonth: 27, hour: 8))
-        
+
         expect(interval.days).toBe(0, "Invalid days: #interval.days != 0")
         expect(interval.hours).toBe(3, "Invalid hours: #interval.hours != 3")
         expect(interval.remainingHours).toBe(3, "Invalid remainingHours: #interval.remainingHours != 3")
@@ -30,7 +30,7 @@ testable class IntervalStability {
     
     test threeHourTwentyMinuteInterval() {
         let interval = new Interval(new DateTime(year: 2017, month: 3, dayOfMonth: 27, hour: 5, minute: 10), new DateTime(year: 2017, month: 3, dayOfMonth: 27, hour: 8, minute: 30))
-        
+
         expect(interval.days).toBe(0, "Invalid days: #interval.days != 0")
         expect(interval.hours).toBe(3, "Invalid hours: #interval.hours != 3")
         expect(interval.remainingHours).toBe(3, "Invalid remainingHours: #interval.remainingHours != 3")
@@ -64,7 +64,7 @@ testable class IntervalStability {
     
     test threeHourTwentyMinuteFifteenSecondOneHundredTwentyOneMillisecondInterval() {
         let interval = new Interval(new DateTime(year: 2017, month: 3, dayOfMonth: 27, hour: 5, minute: 10, second: 5, millisecond: 79), new DateTime(year: 2017, month: 3, dayOfMonth: 27, hour: 8, minute: 30, second: 20, millisecond: 200))
-        
+
         expect(interval.days).toBe(0, "Invalid days: #interval.days != 0")
         expect(interval.hours).toBe(3, "Invalid hours: #interval.hours != 3")
         expect(interval.remainingHours).toBe(3, "Invalid remainingHours: #interval.remainingHours != 3")
@@ -81,7 +81,7 @@ testable class IntervalStability {
     
     test oneDayInterval() {
         let oneDay = new Interval(new DateTime(year: 2017, month: 3, dayOfMonth: 26), new DateTime(year: 2017, month: 3, dayOfMonth: 27))
-        
+
         expect(oneDay.days).toBe(1, "Invalid days: #oneDay.days != 1")
         expect(oneDay.seconds).toBe(86400, "Invalid seconds: #oneDay.seconds != 86400")
         expect(oneDay.remainingSeconds).toBe(0, "Invalid remaining seconds: #oneDay.remainingSeconds != 0")
@@ -94,7 +94,7 @@ testable class IntervalStability {
     
     test twoDayInterval() {
         let twoDays = new Interval(new DateTime(year: 2017, month: 3, dayOfMonth: 26), new DateTime(year: 2017, month: 3, dayOfMonth: 28))
-        
+
         expect(twoDays.days).toBe(2, "Invalid days: #twoDays.days != 2")
         expect(twoDays.seconds).toBe(86400 * 2, "Invalid seconds: #twoDays.seconds != #{86400 * 2}")
         expect(twoDays.remainingSeconds).toBe(0, "Invalid remaining seconds: #twoDays.remainingSeconds != 0")
@@ -107,7 +107,7 @@ testable class IntervalStability {
     
     test twoAndAHalfDayInterval() {
         let interval = new Interval(new DateTime(year: 2017, month: 3, dayOfMonth: 26), new DateTime(year: 2017, month: 3, dayOfMonth: 28, hour: 12))
-        
+
         expect(interval.days).toBe(2, "Invalid days: #interval.days != 2")
         expect(interval.seconds).toBe((Int)(86400 * 2.5), "Invalid seconds: #interval.seconds != #{(Int)(86400 * 2.5)}")
         expect(interval.remainingSeconds).toBe(0, "Invalid remaining seconds: #interval.remainingSeconds != 0")
@@ -120,7 +120,7 @@ testable class IntervalStability {
     
     test twoMonthInterval() {
         let interval = new Interval(new DateTime(year: 2017, month: 3, dayOfMonth: 26), new DateTime(year: 2017, month: 5, dayOfMonth: 28))
-        
+
         expect(interval.days).toBe(63, "Invalid days: #interval.days != 63")
         expect(interval.seconds).toBe(86400 * 63, "Invalid seconds: #interval.seconds != #{86400 * 63}")
         expect(interval.remainingSeconds).toBe(0, "Invalid remaining seconds: #interval.remainingSeconds != 0")
@@ -133,7 +133,7 @@ testable class IntervalStability {
     
     test oneYearInterval() {
         let interval = new Interval(new DateTime(year: 2016, month: 3, dayOfMonth: 26), new DateTime(year: 2017, month: 3, dayOfMonth: 26))
-        
+
         expect(interval.days).toBe(365, "Invalid days: #interval.days != 365")
         expect(interval.seconds).toBe(86400 * 365, "Invalid seconds: #interval.seconds != #{86400 * 365}")
         expect(interval.remainingSeconds).toBe(0, "Invalid remaining seconds: #interval.remainingSeconds != 0")
@@ -146,9 +146,9 @@ testable class IntervalStability {
     
     test twoAndAHalfYearInterval() {
         let interval = new Interval(new DateTime(year: 2015, month: 3, dayOfMonth: 26), new DateTime(year: 2017, month: 9, dayOfMonth: 26))
-        
+
         let Int days = 6 + 275 + 366 + 273 - 5
-        
+
         expect(interval.days).toBe(days, "Invalid days: #interval.days != #days")
         expect(interval.seconds).toBe(86400 * days, "Invalid seconds: #interval.seconds != #{86400 * days}")
         expect(interval.remainingSeconds).toBe(0, "Invalid remaining seconds: #interval.remainingSeconds != 0")
@@ -162,14 +162,14 @@ testable class IntervalStability {
     test invalidIntervalGap() {
         let interval1 = new Interval(new DateTime(year: 2017, month: 4, dayOfMonth: 10), new DateTime(year: 2018, month: 4, dayOfMonth: 10))
         let interval2 = new Interval(new DateTime(year: 2015, month: 4, dayOfMonth: 10), new DateTime(year: 2019, month: 4, dayOfMonth: 10))
-        
+
         expect({ interval1.getGap(interval2) }).toThrow(NoGapException)
     }
     
     test validIntervalGap() {
         let interval1 = new Interval(new DateTime(year: 2017, month: 4, dayOfMonth: 10), new DateTime(year: 2018, month: 4, dayOfMonth: 10))
         let interval2 = new Interval(new DateTime(year: 2015, month: 4, dayOfMonth: 10), new DateTime(year: 2016, month: 4, dayOfMonth: 10))
-        
+
         expect({ interval1.getGap(interval2) }).toNotThrow(NoGapException)
     }
 }
