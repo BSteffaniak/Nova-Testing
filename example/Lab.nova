@@ -237,13 +237,7 @@ class Lab {
         Console.log("Modified(#myImmutableArray.count): #myImmutableArray")
         Console.log("Output(#outputArray.count): #outputArray")
         
-        Console.log("Loading library... ")
-        
-        let lib = new Library("C:/Users/Braden/GitHub/NovaWorkspace/testlib").load()
-        
-        let func = lib.getFunction("staticFunc", "nova/test/Test")
-        
-        func()
+        loadLibrary()
         
         Console.log("Main local at end: #local")
         
@@ -252,6 +246,20 @@ class Lab {
         
         Console.waitForEnter()
     }
+    
+    [Target c]
+    static loadLibrary() {
+        Console.log("Loading library... ")
+        
+        let lib = new Library("C:/Users/Braden/GitHub/NovaWorkspace/testlib").load()
+        
+        let func = lib.getFunction("staticFunc", "nova/test/Test")
+        
+        func()
+    }
+    
+    [Target not c]
+    static loadLibrary() {}
     
     static thread_local var Int bench1
     static var Int bench2
