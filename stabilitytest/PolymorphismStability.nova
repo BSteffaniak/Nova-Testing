@@ -39,4 +39,17 @@ testable class PolymorphismStability {
         expect(obj1.myProperty == 1).toBe(true, "Did not call super polymorphic property accessor correctly")
         expect(obj2.myProperty == 2).toBe(true, "Did not call sub polymorphic property accessor correctly")
     }
+
+//    [Test "Testing isOfType"]
+//    testIsOfType() {
+//        PolymorphicSuperClass obj1 = new PolymorphicSuperClass()
+//        PolymorphicSuperClass obj2 = new PolymorphicSubClass()
+//
+//        expect(obj1.class.isOfType(PolymorphicSubClass)).toBe(false, "Superclass should not be isOfType the subclass")
+//        expect(obj2.class.isOfType(PolymorphicSuperClass)).toBe(true, "Subclass should be isOfType the superclass")
+//        expect(obj1.class.isOfType(PolymorphicSuperClass)).toBe(true, "Superclass should be isOfType itself")
+//        expect(obj2.class.isOfType(PolymorphicSubClass)).toBe(true, "Subclass should be isOfType itself")
+//        expect(obj1.class.isOfType(Object)).toBe(true, "Superclass should be isOfType Object")
+//        expect(obj2.class.isOfType(Object)).toBe(true, "Subclass should be isOfType Object")
+//    }
 }
