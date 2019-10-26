@@ -17,6 +17,7 @@ steps:
   - wait
 
   - label: "Test"
+    command: .buildkite/build-scripts/syntax-stability.sh
     plugins:
       - docker-compose#v3.1.0:
           run: app
