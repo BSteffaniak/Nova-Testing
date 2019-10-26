@@ -17,7 +17,6 @@ steps:
   - wait
 
   - label: "Test"
-    command: executable
     plugins:
       - docker-compose#v3.1.0:
           run: app
