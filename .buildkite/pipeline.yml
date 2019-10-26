@@ -17,7 +17,10 @@ steps:
   - wait
 
   - label: "Test"
-    command: test.sh
+    command: executable
     plugins:
+      - docker-login#v2.0.1:
+          username: bsteffaniak
+          password-env: DOCKER_LOGIN_PASSWORD
       - docker-compose#v3.1.0:
           run: app
