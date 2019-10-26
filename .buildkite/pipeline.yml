@@ -4,8 +4,9 @@ steps:
     plugins:
       - docker#v3.3.0:
           image: "node:12.13.0"
-      - docker-compose:
+      - docker-compose#v3.1.0:
           build: app
+          image-repository: index.docker.io/bsteffaniak/nova
           config: docker-compose.buildkite.yml
     env:
       BUILDKITE_DOCKER_COMPOSE_CONTAINER: "app"
