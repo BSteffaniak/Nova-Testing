@@ -86,6 +86,8 @@ class StabilityTest {
         
          Console.writeLine("Took " + timer.duration + "ms")
         
-        Console.waitForEnter()
+        if (unsuccessful.count > 0) {
+            System.exit(1)
+        }
     }
 }
