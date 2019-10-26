@@ -7,7 +7,7 @@ steps:
       - docker-compose#v3.1.0:
           build: app
           config: docker-compose.buildkite.yml
-          image-repository: index.docker.io/bsteffaniak/nova
+          image-repository: registry.hub.docker.com/v1/repositories/bsteffaniak/nova
     env:
       BUILDKITE_DOCKER_COMPOSE_CONTAINER: "app"
       BUILDKITE_DOCKER_COMPOSE_FILE: "docker-compose.buildkite.yml"
