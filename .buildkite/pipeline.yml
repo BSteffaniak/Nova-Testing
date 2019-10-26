@@ -1,8 +1,6 @@
 steps:
   - label: ":docker: Build"
     plugins:
-      - docker#v3.3.0:
-          image: "node:12.13.0"
       - docker-compose#v3.1.0:
           build: app
           image-repository: index.docker.io/bsteffaniak/nova
