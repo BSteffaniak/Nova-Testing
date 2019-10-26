@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  app:
+    build:
+      context: .
+      target: builder
+      args:
+        - NODE_ENV
+      environment:
+        - CI
+        - BUILDKITE_PARALLEL_JOB
+        - BUILDKITE_PARALLEL_JOB_COUNT
+        - BUILDKITE_JOB_ID
+        - BUILDKITE_BUILD_NUMBER
+        - NODE_ENV
+        - APP_NAME
