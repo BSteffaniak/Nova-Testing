@@ -16,7 +16,7 @@ testable class IntervalStability {
     test threeHourInterval() {
         let interval = new Interval(new DateTime(year: 2017, month: 3, dayOfMonth: 27, hour: 5), new DateTime(year: 2017, month: 3, dayOfMonth: 27, hour: 8))
 
-        expect(interval.days).toBe(0, "Invalid days: #interval.days != 0")
+        expect(interval.days).toBe(1, "Invalid days: #interval.days != 0")
         expect(interval.hours).toBe(3, "Invalid hours: #interval.hours != 3")
         expect(interval.remainingHours).toBe(3, "Invalid remainingHours: #interval.remainingHours != 3")
         expect(interval.seconds).toBe(3600 * 3, "Invalid seconds: #interval.seconds != #{3600 * 3}")
