@@ -1,0 +1,17 @@
+FROM --platform=$BUILDPLATFORM node:12.13.0-alpine AS builder
+WORKDIR /project
+COPY executable .
+
+ARG TARGETOS
+ARG TARGETARCH
+RUN pkg Nova-Testing/example/bin/Executable.js --target host --output executable
+
+FROM node:12.13.0-alpine AS release-linux
+COPY --from=builder /project/executable /executable
+ENTRYPOINT ["/executable"]
+
+FROM mcr.microsoft.com/windows/nanoserver:1809 AS release-windows
+COPY --from=builder /project/executable /executable.exe
+ENTRYPOINT ["\\executable.exe"]
+
+FROM release-$TARGETOS
