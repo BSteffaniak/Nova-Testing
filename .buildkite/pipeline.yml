@@ -6,6 +6,11 @@ steps:
         build: app
         config: docker-compose.buildkite.yml
         image-repository: ecr.us-west-2.amazonaws.com/buildkite
+    env:
+      BUILDKITE_DOCKER_COMPOSE_CONTAINER: "app"
+      BUILDKITE_DOCKER_COMPOSE_FILE: "docker-compose.buildkite.yml"
+      COMPOSE_HTTP_TIMEOUT: 600
+    timeout_in_minutes: 10
     retry:
       automatic:
         limit: 1
