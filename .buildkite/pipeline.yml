@@ -3,8 +3,8 @@ steps:
     plugins:
       - docker-compose#v3.1.0:
           build: app
-          image-repository: index.docker.io/bsteffaniak/nova
           config: docker-compose.buildkite.yml
+          image-repository: 442998785547.dkr.ecr.us-west-2.amazonaws.com/buildkite
     env:
       BUILDKITE_DOCKER_COMPOSE_CONTAINER: "app"
       BUILDKITE_DOCKER_COMPOSE_FILE: "docker-compose.buildkite.yml"
