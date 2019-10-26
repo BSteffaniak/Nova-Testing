@@ -6400,7 +6400,7 @@ IntervalStability.prototype.threeHourInterval = function (out) {
 	out = typeof out === 'undefined' ? NovaConsole.out : out;
 	(out || nova_null).write(novaConstructors.newString2("Testing threeHourInterval "));
 	interval = novaConstructors.newInterval(novaConstructors.newDateTime2(2017, 3, 27, 5), novaConstructors.newDateTime2(2017, 3, 27, 8));
-	(Nest.expect66((interval || nova_null).accessor_days()) || nova_null).toBe(1, novaConstructors.newString2("Invalid days: ").plus0(NovaLong.toString((interval.accessor_days())).plus0(novaConstructors.newString2(" != 0"))));
+	(Nest.expect66((interval || nova_null).accessor_days()) || nova_null).toBe(0, novaConstructors.newString2("Invalid days: ").plus0(NovaLong.toString((interval.accessor_days())).plus0(novaConstructors.newString2(" != 0"))));
 	(Nest.expect67((interval || nova_null).accessor_hours()) || nova_null).toBe(3, novaConstructors.newString2("Invalid hours: ").plus0(NovaLong.toString((interval.accessor_hours())).plus0(novaConstructors.newString2(" != 3"))));
 	(Nest.expect68((interval || nova_null).accessor_remainingHours()) || nova_null).toBe(3, novaConstructors.newString2("Invalid remainingHours: ").plus0(NovaInt.toString((interval.accessor_remainingHours())).plus0(novaConstructors.newString2(" != 3"))));
 	(Nest.expect69((interval || nova_null).accessor_seconds()) || nova_null).toBe(3600 * 3, novaConstructors.newString2("Invalid seconds: ").plus0(NovaLong.toString((interval.accessor_seconds())).plus0(novaConstructors.newString2(" != ").plus0(NovaShort.toString((3600 * 3)).plus0(novaConstructors.newString2(""))))));
