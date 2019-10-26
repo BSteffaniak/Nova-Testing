@@ -12,6 +12,3 @@ steps:
       BUILDKITE_DOCKER_COMPOSE_FILE: "docker-compose.buildkite.yml"
       COMPOSE_HTTP_TIMEOUT: 600
     timeout_in_minutes: 10
-    retry:
-      automatic:
-        limit: 1
