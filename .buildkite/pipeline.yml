@@ -1,2 +1,12 @@
 steps:
-  
+  - name: "Syntax Stability"
+    plugins:
+      docker-compose:
+        build: app
+        config: docker-compose.buildkite.yml
+        image-repository: 442998785547.dkr.ecr.us-west-2.amazonaws.com/buildkite
+    agents:
+      queue: docker-build
+    retry:
+      automatic:
+        limit: 1
