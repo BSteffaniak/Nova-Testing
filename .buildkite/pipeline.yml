@@ -1,6 +1,6 @@
 steps:
   - name: "Syntax Stability"
-    command: "syntax-stability.sh"
+    command: ./executable
     plugins:
       docker-compose:
         build: app
