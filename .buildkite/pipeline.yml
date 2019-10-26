@@ -5,7 +5,7 @@ steps:
       docker-compose:
         build: app
         config: docker-compose.buildkite.yml
-        image-repository: 442998785547.dkr.ecr.us-west-2.amazonaws.com/buildkite
+        image-repository: ecr.us-west-2.amazonaws.com/buildkite
     retry:
       automatic:
         limit: 1
