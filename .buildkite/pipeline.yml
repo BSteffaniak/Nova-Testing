@@ -2,9 +2,11 @@ steps:
   - name: "Syntax Stability"
     command: ./executable
     plugins:
-      docker-compose:
-        build: app
-        config: docker-compose.buildkite.yml
+      - docker#v3.3.0:
+          image: "node:12.13.0"
+      - docker-compose:
+          build: app
+          config: docker-compose.buildkite.yml
     env:
       BUILDKITE_DOCKER_COMPOSE_CONTAINER: "app"
       BUILDKITE_DOCKER_COMPOSE_FILE: "docker-compose.buildkite.yml"
