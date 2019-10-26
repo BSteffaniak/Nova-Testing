@@ -8,4 +8,5 @@ ADD . example/bin
 RUN cp example/bin/Executable.js executable.js
 
 FROM node:12.13.0-alpine
-COPY --from=builder /project/executable.js /executable.js
+COPY --from=builder /project .
+RUN find .buildkite/build-scripts -type f -print0 | xargs -0 dos2unix
