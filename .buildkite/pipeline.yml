@@ -5,7 +5,6 @@ steps:
       docker-compose:
         build: app
         config: docker-compose.buildkite.yml
-        image-repository: ecr.us-west-2.amazonaws.com/buildkite
     env:
       BUILDKITE_DOCKER_COMPOSE_CONTAINER: "app"
       BUILDKITE_DOCKER_COMPOSE_FILE: "docker-compose.buildkite.yml"
