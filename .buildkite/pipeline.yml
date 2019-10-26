@@ -1,6 +1,9 @@
 steps:
   - label: ":docker: Build"
     plugins:
+      - docker-login#v2.0.1:
+          username: bsteffaniak
+          password-env: DOCKER_LOGIN_PASSWORD
       - docker-compose#v3.1.0:
           build: app
           config: docker-compose.buildkite.yml
