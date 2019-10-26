@@ -14,3 +14,6 @@ services:
       - BUILDKITE_BUILD_NUMBER
       - NODE_ENV
       - APP_NAME
+    working_dir: /app
+    volumes:
+      - .:/app
