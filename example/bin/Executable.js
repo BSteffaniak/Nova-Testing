@@ -8146,6 +8146,8 @@ StabilityTest.main = function (args) {
 				NovaConsole.log((((_1) || nova_null).toString() || nova_null).plus0(novaConstructors.newString2("")));
 				
 		});
+
+		process.exit(1);
 	} else {
 		(fancy || nova_null).writeHeader1(novaConstructors.newString2("All ").plus0(NovaInt.toString((results.accessor_count())).plus0(novaConstructors.newString2(" Successful"))), novaConstructors.newString2(":) "), undefined, true);
 }
