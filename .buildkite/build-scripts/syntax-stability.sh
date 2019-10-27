@@ -1,4 +1,4 @@
 #!/bin/sh
 
 echo "--- Syntax Stability"
-node executable.js
+node executable.js SyntaxStability

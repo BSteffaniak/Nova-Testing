@@ -16,7 +16,13 @@ steps:
 
   - wait
 
-  - label: "Test"
+  - label: "Exceptions"
+    command: .buildkite/build-scripts/exception-stability.sh
+    plugins:
+      - docker-compose#v3.1.0:
+          run: app
+
+  - label: "Syntax"
     command: .buildkite/build-scripts/syntax-stability.sh
     plugins:
       - docker-compose#v3.1.0:
