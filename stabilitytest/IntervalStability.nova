@@ -18,7 +18,7 @@ testable class IntervalStability {
 
         expect(interval.days).toBe(0, "Invalid days: #interval.days != 0")
         expect(interval.hours).toBe(3, "Invalid hours: #interval.hours != 3")
-        expect(interval.remainingHours).toBe(2, "Invalid remainingHours: #interval.remainingHours != 3")
+        expect(interval.remainingHours).toBe(3, "Invalid remainingHours: #interval.remainingHours != 3")
         expect(interval.seconds).toBe(3600 * 3, "Invalid seconds: #interval.seconds != #{3600 * 3}")
         expect(interval.remainingSeconds).toBe(0, "Invalid remaining seconds: #interval.remainingSeconds != 0")
         expect(interval.milliseconds).toBe(3600 * 3 * 1000, "Invalid milliseconds: #interval.milliseconds != #{3600 * 3 * 1000}")
