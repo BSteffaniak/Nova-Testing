@@ -40,10 +40,8 @@ RUN cd Nova/out/production/Nova && \
 RUN rm Nova-Testing/example/bin/Executable.js
 
 RUN cd Nova && \
-    java -jar Nova.jar && \
+    java -jar Nova.jar ../Nova-Testing/example ../Nova-Testing/stabilitytest -l ../Nest -install-dir ../Nova-Testing/example -d ../NovaCompilerOutput/js -main stabilitytest/StabilityTest -o ../executable.js && \
     cd ..
-
-RUN mv Nova-Testing/example/bin/Executable.js executable.js
 
 FROM node:12.13.0-alpine
 
