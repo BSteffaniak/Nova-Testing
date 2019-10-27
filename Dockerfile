@@ -14,13 +14,13 @@ WORKDIR /project
 COPY . ./Nova-Testing
 
 #ADD https://api.github.com/repos/NovaFoundation/Nova/git/refs/heads/master nova-version.json
-RUN git clone --depth 1 https://github.com/NovaFoundation/Nova
+RUN git clone --depth 1 -b master https://github.com/NovaFoundation/Nova
 #ADD https://api.github.com/repos/NovaFoundation/Nova-JS/git/refs/heads/master js-version.json
-RUN git clone --depth 1 https://github.com/NovaFoundation/Nova-JS
+RUN git clone --depth 1 -b master https://github.com/NovaFoundation/Nova-JS
 #ADD https://api.github.com/repos/NovaFoundation/Nest/git/refs/heads/master nest-version.json
-RUN git clone --depth 1 https://github.com/NovaFoundation/Nest
+RUN git clone --depth 1 -b master https://github.com/NovaFoundation/Nest
 #ADD https://api.github.com/repos/NovaFoundation/Standard-Library/git/refs/heads/master std-lib-version.json
-RUN git clone --depth 1 https://github.com/NovaFoundation/Standard-Library
+RUN git clone --depth 1 -b master https://github.com/NovaFoundation/Standard-Library
 RUN mkdir Nova/out
 RUN mkdir Nova/out/production
 RUN mkdir Nova/out/production/Nova
