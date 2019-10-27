@@ -37,8 +37,6 @@ RUN cd Nova/out/production/Nova && \
     mv Nova.jar ../../../ && \
     cd ../../../../
 
-RUN rm Nova-Testing/example/bin/Executable.js
-
 RUN cd Nova && \
     java -jar Nova.jar ../Nova-Testing/example ../Nova-Testing/stabilitytest -l ../Nest -install-dir ../Nova-Testing/example -d ../NovaCompilerOutput/js -main stabilitytest/StabilityTest -o ../executable.js && \
     cd ..
