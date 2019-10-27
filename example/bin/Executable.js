@@ -832,7 +832,7 @@ ExceptionHandlingDemo.main = function (args) {
 		NovaConsole.writeLine1(novaConstructors.newString2("this output will not show."));
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.5082126817526325);
+			console.log(0.5118936890007906);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -1684,7 +1684,7 @@ MathDemo.main = function (args) {
 			NovaMath.sin(i);
 		} catch (e)  {
 			if (!(e instanceof Exception)) {
-				console.log(0.25440891840703317);
+				console.log(0.32970374472225394);
 				console.error(e);
 				process.exit(1);
 			} else {
@@ -1869,7 +1869,7 @@ NestTest.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.6607828854894171);
+			console.log(0.23731466490051234);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -1894,7 +1894,7 @@ NestTest.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.1909095819384199);
+			console.log(0.38989277115783616);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -1919,7 +1919,7 @@ NestTest.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.850898222257789);
+			console.log(0.5711335983342292);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -2003,7 +2003,7 @@ Exception.catchType = function (func, exceptionType, soft, exact) {
 			func();
 		} catch (e)  {
 			if (!(e instanceof Exception)) {
-				console.log(0.1269413020610206);
+				console.log(0.7297538222129987);
 				console.error(e);
 				process.exit(1);
 			} else {
@@ -2019,7 +2019,7 @@ Exception.catchType = function (func, exceptionType, soft, exact) {
 			func();
 		} catch (e)  {
 			if (!(e instanceof Exception)) {
-				console.log(0.5170253941593612);
+				console.log(0.48194926699891605);
 				console.error(e);
 				process.exit(1);
 			} else {
@@ -2789,7 +2789,7 @@ Thread.prototype.startRun = function () {
 		}
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.782278595478122);
+			console.log(0.6528086912311714);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -3403,7 +3403,7 @@ AssignmentStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.05499951490641697);
+			console.log(0.059129871685073665);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -3426,7 +3426,7 @@ AssignmentStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.36755494304490954);
+			console.log(0.8289572921500813);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -3616,7 +3616,7 @@ BoundedIntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8448881626239348);
+			console.log(0.9066126686040383);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -3639,7 +3639,7 @@ BoundedIntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.2450050471208156);
+			console.log(0.9327302207547972);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -3662,7 +3662,7 @@ BoundedIntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.3068524226567898);
+			console.log(0.10695700233193961);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -3811,7 +3811,7 @@ BoundlessIntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.46048911606812437);
+			console.log(0.10056764842210619);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -3834,7 +3834,7 @@ BoundlessIntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.2672783853593502);
+			console.log(0.7350478476358082);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -3857,7 +3857,7 @@ BoundlessIntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.2396814697632078);
+			console.log(0.8002857163641344);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -3985,7 +3985,7 @@ CastStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.6667610026381051);
+			console.log(0.19516220774987603);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4008,7 +4008,7 @@ CastStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.11476563571694032);
+			console.log(0.05626758354678418);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4031,7 +4031,7 @@ CastStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9114239029600635);
+			console.log(0.40749481887657024);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4328,7 +4328,7 @@ ClosureStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.6348773579129583);
+			console.log(0.07777080819356819);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4351,7 +4351,7 @@ ClosureStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.7564033499207863);
+			console.log(0.644169539420639);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4440,7 +4440,7 @@ ExceptionStability.prototype.test = function (out) {
 		this.testSoftExceptions(out);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8882909049915357);
+			console.log(0.8601168701832982);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4461,7 +4461,7 @@ ExceptionStability.prototype.testException = function (out) {
 			throw novaConstructors.newDivideByZeroException();
 		} catch (e)  {
 			if (!(e instanceof Exception)) {
-				console.log(0.8285908417306002);
+				console.log(0.9393391571950568);
 				console.error(e);
 				process.exit(1);
 			} else {
@@ -4475,7 +4475,7 @@ ExceptionStability.prototype.testException = function (out) {
 		Nest.fail(novaConstructors.newString2("Failed to catch DivideByZeroException"));
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.7419901157163699);
+			console.log(0.3250832220146942);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4499,7 +4499,7 @@ ExceptionStability.prototype.testSoftExceptions = function (out) {
 		(out || nova_null).writeLine(novaConstructors.newString2("- Success"));
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8240154573113914);
+			console.log(0.8179261988238157);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4531,7 +4531,7 @@ ExceptionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.5904701346708693);
+			console.log(0.7338449505378706);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4630,7 +4630,7 @@ ExternalInnerClassStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.14828391645934536);
+			console.log(0.21323323410923156);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4786,7 +4786,7 @@ FancyOutputStreamTests.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9466651373976642);
+			console.log(0.03022541385308053);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4811,7 +4811,7 @@ FancyOutputStreamTests.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.6666318070693094);
+			console.log(0.00102713717904368);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4836,7 +4836,7 @@ FancyOutputStreamTests.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.740707718418464);
+			console.log(0.18135050806927677);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -4988,7 +4988,7 @@ FileStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.16935268185849894);
+			console.log(0.4583826765400617);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5011,7 +5011,7 @@ FileStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.19433540301947327);
+			console.log(0.5952260736535899);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5034,7 +5034,7 @@ FileStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.7802625808119642);
+			console.log(0.06677997756436038);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5579,7 +5579,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.47833229354003504);
+			console.log(0.06906019969092292);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5602,7 +5602,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.4976532139024782);
+			console.log(0.5935422918249531);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5625,7 +5625,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.5462192930156748);
+			console.log(0.10774499920454028);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5648,7 +5648,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.28173941829102433);
+			console.log(0.992148842564103);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5671,7 +5671,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9688986519339355);
+			console.log(0.6388365652481717);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5694,7 +5694,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.028391556024528808);
+			console.log(0.8143671202296083);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5717,7 +5717,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8121550075484657);
+			console.log(0.3192909090007964);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5740,7 +5740,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.6000627711436236);
+			console.log(0.9952424707762094);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5763,7 +5763,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.532483312287406);
+			console.log(0.6014152406617655);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5786,7 +5786,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.04100183806502866);
+			console.log(0.7911161501808133);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5809,7 +5809,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.08793889053554238);
+			console.log(0.21289456382221983);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5832,7 +5832,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.6704357828822171);
+			console.log(0.5719885993972548);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5855,7 +5855,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.4315038387798149);
+			console.log(0.5608902266778371);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5878,7 +5878,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9253879401793891);
+			console.log(0.10930731054258325);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5901,7 +5901,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.877373922744319);
+			console.log(0.03624472088672093);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5924,7 +5924,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.38077111899384175);
+			console.log(0.9908627392855048);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5947,7 +5947,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.49875687369070376);
+			console.log(0.15455501400074667);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5970,7 +5970,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.09058528399204613);
+			console.log(0.13377427760194438);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -5993,7 +5993,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.36302344014083276);
+			console.log(0.7007079132917742);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6016,7 +6016,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.31830849459166444);
+			console.log(0.8680164995810431);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6039,7 +6039,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.5607831972304869);
+			console.log(0.4574464353755012);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6062,7 +6062,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.4203746466029744);
+			console.log(0.3056771950243241);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6085,7 +6085,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.3047050789147159);
+			console.log(0.0023171556658243553);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6108,7 +6108,7 @@ FirstClassFunctionStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.44308259136028894);
+			console.log(0.2898770410214876);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6233,7 +6233,7 @@ InnerClassStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9173328582427013);
+			console.log(0.3972274145480259);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6631,7 +6631,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.23510727996280978);
+			console.log(0.9923708413006592);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6654,7 +6654,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9910478733310207);
+			console.log(0.20772909668597883);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6677,7 +6677,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.17533235396269786);
+			console.log(0.5762655720726233);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6700,7 +6700,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9746168370585825);
+			console.log(0.1525834615979177);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6723,7 +6723,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.09497709839979462);
+			console.log(0.40163507623774086);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6746,7 +6746,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.6469754495052469);
+			console.log(0.16631270809017384);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6769,7 +6769,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.5255443070086873);
+			console.log(0.18430969064535063);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6792,7 +6792,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.4981961461997506);
+			console.log(0.7670971054093443);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6815,7 +6815,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9372015687295839);
+			console.log(0.7446248671421881);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6838,7 +6838,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.7087666569705187);
+			console.log(0.2589469422471995);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6861,7 +6861,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.3186739559769516);
+			console.log(0.441900758511253);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -6884,7 +6884,7 @@ IntervalStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8507735686312186);
+			console.log(0.5006035331494922);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7025,7 +7025,7 @@ LambdaStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9780506590990679);
+			console.log(0.7859974092496951);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7238,7 +7238,7 @@ NetworkStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.41838454702262395);
+			console.log(0.1747691462873351);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7260,7 +7260,7 @@ NetworkStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.2681914232052536);
+			console.log(0.7691740163087429);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7536,7 +7536,7 @@ PolymorphismStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.010816408289272328);
+			console.log(0.7613195086592323);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7559,7 +7559,7 @@ PolymorphismStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.5303886766884548);
+			console.log(0.1550268353461629);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7582,7 +7582,7 @@ PolymorphismStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.2600531518188619);
+			console.log(0.7190289895307449);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7772,7 +7772,7 @@ PrimitiveOverloadStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.640947943337704);
+			console.log(0.7974659681629406);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7795,7 +7795,7 @@ PrimitiveOverloadStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.1298538277920639);
+			console.log(0.8145769265866983);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7818,7 +7818,7 @@ PrimitiveOverloadStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.3883709994296233);
+			console.log(0.308117362195647);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7841,7 +7841,7 @@ PrimitiveOverloadStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8646011868375774);
+			console.log(0.5983684595088212);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -7959,7 +7959,7 @@ RegexStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.5204629035725461);
+			console.log(0.3274296880473522);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -8126,15 +8126,37 @@ StabilityTest.main = function (args) {
 	var test;
 	var timer;
 	var results;
+	var suites;
 	var fancy;
 	var unsuccessful;
 	test = novaConstructors.newStabilityTest();
 	timer = novaConstructors.newTimer().start();
 	results = novaConstructors.newArray();
-	(test || nova_null).runTests((result) => {
-			(results || nova_null).add0(result);
-			
-	});
+	suites = (args || nova_null).skip(2);
+	if ((suites || nova_null).accessor_count() > 0) {
+		(suites || nova_null).forEach0((_1, _2, _3) => {
+				var suiteResults;
+				var count;
+				count = 0;
+				suiteResults = [];
+				var instance = System.jsCreateInstance(_1)
+				instance.runTests((r) => {
+						suiteResults.push(r);
+						count++;
+				});
+				var i;
+				i = 0;
+				for (; i < count; i++) {
+					(results || nova_null).add0(suiteResults[i]);
+				}
+				
+		});
+	} else {
+		(test || nova_null).runTests((result) => {
+				(results || nova_null).add0(result);
+				
+		});
+	}
 	fancy = novaConstructors.newFancyOutputStream(undefined, undefined, novaConstructors.newString2("/\\"));
 	unsuccessful = (results || nova_null).filter0((_1, _2, _3) => {
 			return !(_1 || nova_null).success;
@@ -8412,7 +8434,7 @@ StaticImportStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8794555502714536);
+			console.log(0.8477814861613231);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -8767,7 +8789,7 @@ SyntaxStability.prototype.testFilterFunctionality = function (out) {
 		(list2 || nova_null).forEach0(SyntaxStability.foreachClosure);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.7131641392027679);
+			console.log(0.8309782445056291);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9060,7 +9082,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.140880311699202);
+			console.log(0.40426077726183707);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9083,7 +9105,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.22408118965369095);
+			console.log(0.38146573441947984);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9106,7 +9128,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8633130353866103);
+			console.log(0.38625562478915787);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9129,7 +9151,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.4170340533091672);
+			console.log(0.8478245029036376);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9152,7 +9174,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.558604862756394);
+			console.log(0.8210063419185387);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9175,7 +9197,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.2585532320265582);
+			console.log(0.7003526364356361);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9198,7 +9220,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9255087054153069);
+			console.log(0.5009146017719571);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9221,7 +9243,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8878742516936262);
+			console.log(0.6653202927004606);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9244,7 +9266,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.7032493000247103);
+			console.log(0.42159728434924815);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9267,7 +9289,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.3089411805095549);
+			console.log(0.9099374325702664);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9290,7 +9312,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.27297184614699277);
+			console.log(0.7262628140058295);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9313,7 +9335,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.5222217611848845);
+			console.log(0.4205816057549372);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9336,7 +9358,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.45117803727186057);
+			console.log(0.2829266764508027);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9359,7 +9381,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.14735633519329328);
+			console.log(0.24097375405174082);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9382,7 +9404,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9482852538198214);
+			console.log(0.11598745596499938);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9405,7 +9427,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9420357178604217);
+			console.log(0.4254081560328947);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9428,7 +9450,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.3719721123894617);
+			console.log(0.05123202882292377);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9451,7 +9473,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.020884640616972483);
+			console.log(0.12367060343586722);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9474,7 +9496,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.338419417552445);
+			console.log(0.4034646611228089);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9497,7 +9519,7 @@ SyntaxStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.958989608872547);
+			console.log(0.10301511312578371);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -9789,7 +9811,7 @@ ThreadStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.25495560842618337);
+			console.log(0.01932727787652122);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -10051,7 +10073,7 @@ TimeStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.03215820294575955);
+			console.log(0.1982428144455144);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -10074,7 +10096,7 @@ TimeStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.08563599360835694);
+			console.log(0.8057833492225075);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -10097,7 +10119,7 @@ TimeStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.31975525719527786);
+			console.log(0.8988866035801297);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -10120,7 +10142,7 @@ TimeStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9782142976556613);
+			console.log(0.2390909425136073);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -10143,7 +10165,7 @@ TimeStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.2613830699133983);
+			console.log(0.28372943943928697);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -10166,7 +10188,7 @@ TimeStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.9787160863265096);
+			console.log(0.6124303089850555);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -10189,7 +10211,7 @@ TimeStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.016732525109549923);
+			console.log(0.3139753871485723);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -10212,7 +10234,7 @@ TimeStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.2909376252286474);
+			console.log(0.6858430089298324);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -10235,7 +10257,7 @@ TimeStability.prototype.runTests = function (onResult, out) {
 		onResult(testResult);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.8952342086892952);
+			console.log(0.6295737043011067);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -14170,7 +14192,7 @@ System.runMain = function (argc, argvs, mainFunc, initialize, callStaticBlocks) 
 		mainFunc(args);
 	} catch (e)  {
 		if (!(e instanceof Exception)) {
-			console.log(0.14583272686017645);
+			console.log(0.33356931074375584);
 			console.error(e);
 			process.exit(1);
 		} else {
@@ -14196,6 +14218,36 @@ System.runMain = function (argc, argvs, mainFunc, initialize, callStaticBlocks) 
 };
 
 System.execute1 = function (arguments) {
+	
+};
+
+System.jsStringArrayToNovaArray = function (value) {
+	var self = this;
+	
+	var count;
+	count = 0;
+	count = value.length;
+	return novaConstructors.newArray0(count).map0((x, i, _3) => {
+			var str;
+			str = novaConstructors.newString2("");
+			((str || nova_null).chars || nova_null).data = value[i];
+			return str;
+			
+	});
+	
+};
+
+System.jsCreateInstance = function (className, overloadId) {
+	var instance;
+	var constructorName;
+	overloadId = typeof overloadId === 'undefined' ? -1 : overloadId;
+	instance = null;
+	constructorName = novaConstructors.newString2("new").plus0(((className) || nova_null).plus0(novaConstructors.newString2("")));
+	if (overloadId >= 0) {
+		constructorName = (constructorName || nova_null).concat(NovaInt.toString(overloadId));
+	}
+	instance = novaConstructors[((constructorName || nova_null).chars || nova_null).data]();
+	return instance;
 	
 };
 
@@ -44406,4 +44458,9 @@ Sha2560_Nova_init_static();
 SyntaxStringFunctions0_Nova_init_static();
 Color0_Nova_init_static();
 NovaDateTime0_Nova_init_static();
-StabilityTest.main();
+
+var nova_main_args = process && process.argv ?
+System.jsStringArrayToNovaArray(process.argv) :
+novaConstructors.newArray();
+
+StabilityTest.main(nova_main_args);
