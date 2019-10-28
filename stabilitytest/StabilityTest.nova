@@ -22,7 +22,6 @@ import "novex/nest/TestResult"
     LambdaStability,
     ToStringStability,
     AssignmentStability,
-    RegexStability,
     StaticImportStability,
     InnerClassStability,
     ExternalInnerClassStability,
@@ -34,10 +33,15 @@ import "novex/nest/TestResult"
     BoundedIntervalStability,
     BoundlessIntervalStability,
     CastStability
-    ]
-]
+]]
 [Target c]
-[TestSuite [TimeStability, ThreadStability, FileStability, NetworkStability]]
+[TestSuite [
+    TimeStability,
+    ThreadStability,
+    FileStability,
+    NetworkStability,
+    RegexStability
+]]
 class StabilityTest {
     public static main(String args[]) {
         let test = new StabilityTest()
