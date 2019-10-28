@@ -42,17 +42,17 @@ testable class FirstClassFunctionStability {
         expect(funcSwitch).toBe(true, "Failed to call first class function returned from inline function with type specified")
     }
     
-    [Test "Testing calling a chained function returned by a function"]
-    testCallingChainedFunctionReturnedByFunction() {
-        funcCount = 0
-        funcSwitch = false
-        
-        let chained = chainedFuncReference()
-        
-        chained()()
-        
-        expect(funcSwitch && funcCount == 1).toBe(true, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
-    }
+//    [Test "Testing calling a chained function returned by a function"]
+//    testCallingChainedFunctionReturnedByFunction() {
+//        funcCount = 0
+//        funcSwitch = false
+//
+//        let chained = chainedFuncReference()
+//
+//        chained()()
+//
+//        expect(funcSwitch && funcCount == 1).toBe(true, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
+//    }
     
     [Test "Testing calling an assigned chained function returned by a function"]
     testCallingAssignedChainFunction() {
@@ -69,57 +69,57 @@ testable class FirstClassFunctionStability {
         expect(funcSwitch && funcCount == 3).toBe(true, "Failed to call first class chained function returned from function: #funcSwitch, #funcCount")
     }
     
-    [Test "Testing calling a chained function x3 returned by a function"]
-    testCallingChainedFunctionX3() {
-        funcCount = 0
-        funcSwitch = false
-        chainCount = 0
-        
-        let chainX3 = chainedFuncReference3()
-        
-        chainX3()()()
-        
-        expect(funcSwitch && funcCount == 1 && chainCount == 3).toBe(true, "Failed to call first class chained function x3 returned from function: #funcSwitch, #funcCount, x#chainCount")
-    }
-    
-    [Test "Testing calling a chained function x4 returned by a function"]
-    testCallingChainedFunctionX4() {
-        funcCount = 0
-        funcSwitch = false
-        chainCount = 0
-        
-        let chainX4 = chainedFuncReference4()
-        
-        chainX4()()()()
-        
-        expect(funcSwitch && funcCount == 1 && chainCount == 4).toBe(true, "Failed to call first class chained function x4 returned from function: #funcSwitch, #funcCount, x#chainCount")
-    }
-    
-    [Test "Testing calling a chained function x5 returned by a function"]
-    testCallingChainedFunctionX5() {
-        funcCount = 0
-        funcSwitch = false
-        chainCount = 0
-        
-        let chainX5 = chainedFuncReference5()
-        
-        chainX5()()()()()
-        
-        expect(funcSwitch && funcCount == 1 && chainCount == 5).toBe(true, "Failed to call first class chained function x5 returned from function: #funcSwitch, #funcCount, x#chainCount")
-    }
-    
-    [Test "Testing calling a chained function x6 returned by a function"]
-    testCallingChainedFunctionX6() {
-        funcCount = 0
-        funcSwitch = false
-        chainCount = 0
-        
-        let chainX6 = chainedFuncReference6()
-        
-        chainX6()()()()()()
-        
-        expect(funcSwitch && funcCount == 1 && chainCount == 6).toBe(true, "Failed to call first class chained function x6 returned from function: #funcSwitch, #funcCount, x#chainCount")
-    }
+//    [Test "Testing calling a chained function x3 returned by a function"]
+//    testCallingChainedFunctionX3() {
+//        funcCount = 0
+//        funcSwitch = false
+//        chainCount = 0
+//
+//        let chainX3 = chainedFuncReference3()
+//
+//        chainX3()()()
+//
+//        expect(funcSwitch && funcCount == 1 && chainCount == 3).toBe(true, "Failed to call first class chained function x3 returned from function: #funcSwitch, #funcCount, x#chainCount")
+//    }
+//
+//    [Test "Testing calling a chained function x4 returned by a function"]
+//    testCallingChainedFunctionX4() {
+//        funcCount = 0
+//        funcSwitch = false
+//        chainCount = 0
+//
+//        let chainX4 = chainedFuncReference4()
+//
+//        chainX4()()()()
+//
+//        expect(funcSwitch && funcCount == 1 && chainCount == 4).toBe(true, "Failed to call first class chained function x4 returned from function: #funcSwitch, #funcCount, x#chainCount")
+//    }
+//
+//    [Test "Testing calling a chained function x5 returned by a function"]
+//    testCallingChainedFunctionX5() {
+//        funcCount = 0
+//        funcSwitch = false
+//        chainCount = 0
+//
+//        let chainX5 = chainedFuncReference5()
+//
+//        chainX5()()()()()
+//
+//        expect(funcSwitch && funcCount == 1 && chainCount == 5).toBe(true, "Failed to call first class chained function x5 returned from function: #funcSwitch, #funcCount, x#chainCount")
+//    }
+//
+//    [Test "Testing calling a chained function x6 returned by a function"]
+//    testCallingChainedFunctionX6() {
+//        funcCount = 0
+//        funcSwitch = false
+//        chainCount = 0
+//
+//        let chainX6 = chainedFuncReference6()
+//
+//        chainX6()()()()()()
+//
+//        expect(funcSwitch && funcCount == 1 && chainCount == 6).toBe(true, "Failed to call first class chained function x6 returned from function: #funcSwitch, #funcCount, x#chainCount")
+//    }
     
     refFunc() {
         funcSwitch = true
@@ -147,18 +147,18 @@ testable class FirstClassFunctionStability {
         array.add(refFunc)
     }
     
-    [Test "Testing calling a single function from Array"]
-    testCallingFunctionFromCollection() {
-        let array = new Array<func()>()
-        
-        array.add(refFunc)
-        
-        funcSwitch = false
-        
-        array.first()
-        
-        expect(funcSwitch).toBe(true, "Failed to call single function from collection")
-    }
+//    [Test "Testing calling a single function from Array"]
+//    testCallingFunctionFromCollection() {
+//        let array = new Array<func()>()
+//
+//        array.add(refFunc)
+//
+//        funcSwitch = false
+//
+//        array.first()
+//
+//        expect(funcSwitch).toBe(true, "Failed to call single function from collection")
+//    }
     
 //    [Test "Testing calling a single function with parameters from Array"]
 //    testCallingFunctionWithParametersFromCollection() {
